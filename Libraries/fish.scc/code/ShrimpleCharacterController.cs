@@ -242,7 +242,7 @@ public class ShrimpleCharacterController : Component
     /// <summary>
     /// The simulated target velocity for our MoveHelper (Units per second, we apply Time.Delta inside)
     /// </summary>
-    public Vector3 WishVelocity { get; set; }
+    [Sync] public Vector3 WishVelocity { get; set; }
 
     /// <summary>
     /// The resulting velocity after the simulation is done (Units per second)
@@ -296,7 +296,7 @@ public class ShrimpleCharacterController : Component
     /// <summary>
     /// The MoveHelper is stuck and we can't get it out
     /// </summary>
-    public bool IsStuck { get; private set; }
+    [Sync] public bool IsStuck { get; private set; }
 
     /// <summary>
     /// To avoid getting stuck due to imprecision we shrink the bounds before checking and compensate for it later
@@ -643,12 +643,12 @@ public class ShrimpleCharacterController : Component
     private Vector3 CalculateGoalVelocity(float delta)
     {
         bool shouldIgnoreZ = IgnoreZ || (IgnoreZWhenZero && WishVelocity.z.AlmostEqual(0f));
-
-        var wishVelocity = shouldIgnoreZ ? WishVelocity.WithZ(Velocity.z) : WishVelocity;
+        var wishVelocity = shouldIgnoreZ ? WishVelocity.WithZ(Velocity.z).Normal * WishVelocity.Length : WishVelocity;
         var isAccelerating = shouldIgnoreZ ? wishVelocity.WithZ(0f).Length >= Velocity.WithZ(0f).Length : wishVelocity.Length >= Velocity.Length;
 
         var goalSpeed = CalculateGoalSpeed(wishVelocity, Velocity, isAccelerating, delta);
         var goalVelocity = Velocity.MoveTowards(wishVelocity, goalSpeed);
+
         return goalVelocity;
     }
 

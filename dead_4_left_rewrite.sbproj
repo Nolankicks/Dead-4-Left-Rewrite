@@ -1,5 +1,5 @@
 {
-  "Title": "Dead_4_Left_Rewrite",
+  "Title": "Dead 4 Left Rewrite",
   "Type": "game",
   "Org": "nolankicks",
   "Ident": "dead_4_left_rewrite",
@@ -22,6 +22,7 @@
     "PerMapRanking": false,
     "LeaderboardType": "None",
     "CsProjName": "",
-    "StartupScene": "scenes/minimal.scene"
+    "StartupScene": "scenes/dead4leftmenurewrite.scene",
+    "LaunchMode": "Normal"
   }
 }

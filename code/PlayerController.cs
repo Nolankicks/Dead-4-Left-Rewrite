@@ -2,6 +2,8 @@ using System;
 using Sandbox;
 using Sandbox.Citizen;
 using Sandbox.Events;
+using Sandbox.Services;
+using Sandbox.Utility;
 
 public record DamageEvent( int Amount, GameObject Attacker, GameObject Player, Vector3 HitPos, SceneTraceResult tr = new SceneTraceResult() ) : IGameEvent;
 
@@ -26,7 +28,8 @@ public sealed class PlayerController : Component, IGameEventHandler<DamageEvent>
 
 	[Property, Sync, Category( "Stats" )] public int Health { get; set; } = 100;
 	[Property, Sync] public ModelRenderer HoldRenderer { get; set; } 
-	[Property, Sync] public Inventory Inventory { get; set; } 
+	[Property, Sync] public Inventory Inventory { get; set; }
+	[Property, Sync] public int Score { get; set; }
 
 	private static PlayerController _local;
 
@@ -114,7 +117,7 @@ public sealed class PlayerController : Component, IGameEventHandler<DamageEvent>
 		if ( IsCrouching )
 			return 100;
 
-		return Input.Down( "run" ) ? 500 : 300;
+		return Input.Down( "run" ) ? 450 : 300;
 	}
 
 	public void Move()
@@ -140,6 +143,15 @@ public sealed class PlayerController : Component, IGameEventHandler<DamageEvent>
 		shrimpleCharacterController.WishVelocity = WishVelocity;
 
 		shrimpleCharacterController.Move();
+	}
+
+	[Broadcast]
+	public void BroadcastJump()
+	{
+		if ( !AnimHelper.IsValid() )
+			return;
+
+		AnimHelper.TriggerJump();
 	}
 
 	public void Anims()
@@ -187,6 +199,15 @@ public sealed class PlayerController : Component, IGameEventHandler<DamageEvent>
 		Scene.Camera.Transform.Rotation = EyeAngles.ToRotation();
 	}
 
+	[Broadcast]
+	public void BroadcastAttack()
+	{
+		if ( !AnimHelper.IsValid() || !AnimHelper.Target.IsValid() )
+			return;
+
+		AnimHelper.Target.Set( "b_attack", true );
+	}
+
 	protected override void OnPreRender()
 	{
 		var renderType = IsProxy ? ModelRenderer.ShadowRenderType.On : ModelRenderer.ShadowRenderType.ShadowsOnly;
@@ -227,6 +248,19 @@ public sealed class PlayerController : Component, IGameEventHandler<DamageEvent>
 		{
 			Scene.Dispatch( new PlayerDeath( this ) );
 		}
+	}
+
+	[Authority]
+	public void AddScore( int amount )
+	{
+		if ( IsProxy )
+			return;
+
+		Score += amount;
+
+		Stats.SetValue( "zombieskilled", Score );
+
+		Log.Info( Stats.GetPlayerStats( Game.Ident, (long)Steam.SteamId )["zombieskilled"].Max );
 	}
 
 	void IGameEventHandler<PlayerReset>.OnGameEvent( PlayerReset eventArgs )

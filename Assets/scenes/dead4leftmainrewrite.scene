@@ -69,7 +69,7 @@
           "__guid": "5e3eaf0f-93e4-4f2c-983f-26a88c3269ee",
           "__version": 1,
           "EnableCollision": true,
-          "MapName": "facepunch.flatgrass",
+          "MapName": "apetavern.fw_easter",
           "NoOrigin": false,
           "OnMapLoaded": null,
           "OnMapUnloaded": null,
@@ -82,7 +82,6 @@
       "__guid": "370b46fc-d71f-4c32-985f-8e7c8de46441",
       "Flags": 0,
       "Name": "Manager",
-      "Position": "149.3263,149.3264,-211.1794",
       "Enabled": true,
       "NetworkMode": 1,
       "Components": [
@@ -107,7 +106,6 @@
       "__guid": "c14b0277-b3f8-4c93-9053-f40517c832f4",
       "Flags": 0,
       "Name": "NPC Spawner",
-      "Position": "291.3028,1838.441,290.5131",
       "Enabled": true,
       "NetworkMode": 1,
       "Components": [
@@ -139,8 +137,7 @@
         },
         {
           "__type": "HUD",
-          "__guid": "94e1ccd7-9b13-47da-8268-4c4f97416d5e",
-          "MyStringValue": "Hello World!"
+          "__guid": "94e1ccd7-9b13-47da-8268-4c4f97416d5e"
         }
       ]
     }

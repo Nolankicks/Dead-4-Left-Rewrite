@@ -1,0 +1,248 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System.Threading.Tasks;
+@using Sandbox.Network;
+@using System;
+@inherits PanelComponent
+
+<root>
+	<div class="buttons">
+
+		<div class="button" onclick=@( () =>
+		{
+			ChangeMenuState( MenuState.None );
+			Game.Overlay.ShowPackageSelector( "type:map", OnSelect );
+		})> Play </div>
+
+		<div class="button" onclick=@( () => ChangeMenuState( MenuState.Lobbies ))> Lobbies </div>
+		<div class="button" onclick=@( () => ChangeMenuState( MenuState.Leaderboards ))> Leaderboards</div>
+		<div class="button" onclick=@( () => Game.Overlay.ShowSettingsModal() )> Settings </div>
+		<div class="button" onclick=@( () => Game.Close() )> Exit </div>
+	</div>
+
+	<div class="title">
+		<div>DEAD</div>
+		<p style="color: red">4</p>
+		<div>LEFT</div>
+	</div>
+
+	@switch (CurrentState)
+	{
+		case MenuState.Lobbies:
+
+			<div class="lobbies">
+				<div class="header"> Lobbies </div>
+
+				<div class="lobby-holder">
+					@if (Fetching)
+					{
+						<div class="info">Fetching lobbies...</div>
+					}
+					else if (Lobbies.Count == 0)
+					{
+						<div class="info">No lobbies found</div>
+					}
+					else
+					{
+						foreach (var lobby in Lobbies)
+						{
+							<div class="lobby" onclick=@( () => JoinLobby( lobby ) )>
+								<div> @lobby.Map </div>
+								<div> @lobby.Members / @lobby.MaxMembers </div>
+							</div>
+						}
+					}
+				</div>
+			</div>
+
+			break;
+
+		case MenuState.Leaderboards:
+
+		@if (Leaderboard is not null && Leaderboard.Entries is not null )
+		{
+			<div class="leaderboard">
+				<div class="header"> Leaderboards </div>
+                 <div class="leaderboard-holder">
+                @if (FetchingLeaderboard)
+                {
+                    <div class="info">Fetching leaderboard...</div>
+                }
+                else
+                {
+               
+					@foreach ( var entry in Leaderboard.Entries )
+					{
+						<div class="entry @( IsMe(entry) ? "me" : "" ) ">
+							<div class="name"> @entry.Rank. @entry.DisplayName </div>
+							<div class="value"> @entry.Value </div>
+						</div>
+					}
+                }
+                </div>
+				<div class="sort">
+					<div class="button" onclick=@ChangeSortBy> @CurrentSortByString() </div>
+				</div>
+			</div>
+		}
+			break;
+	}
+</root>
+
+@code
+{
+	public enum MenuState
+	{
+		Lobbies,
+		Leaderboards,
+		None,
+	}
+
+	public MenuState CurrentState { get; set; } = MenuState.None;
+	public List<LobbyInformation> Lobbies { get; set; } = new();
+	public bool Fetching { get; set; }
+    public bool FetchingLeaderboard { get; set; }
+
+	[Property] public SceneFile MainScene { get; set; }
+
+	public Sandbox.Services.Leaderboards.Board2 Leaderboard { get; set; }
+	public SortBy CurrentSortBy { get; set; } = SortBy.AllTime;
+	public bool Country { get; set; }
+	public bool Friends { get; set; }
+
+	public enum SortBy
+	{
+		Day,
+		Week,
+		Month,
+		Year,
+		AllTime
+	}
+
+	public bool IsMe( Sandbox.Services.Leaderboards.Board2.Entry entry )
+	{
+		return entry.SteamId == (long)Sandbox.Utility.Steam.SteamId;
+	}
+
+	public async Task FetchLobbyInfo()
+	{
+		while (true)
+		{
+			Fetching = true;
+
+			Lobbies = await Networking.QueryLobbies();
+
+			Fetching = false;
+			await Task.DelayRealtimeSeconds( 5 );
+		}
+	}
+
+	public async void FetchLeaderboard( SortBy sortBy = SortBy.AllTime, bool country = false, bool friends = false )
+	{
+        FetchingLeaderboard = true;
+
+		Leaderboard = Sandbox.Services.Leaderboards.GetFromStat( "zombieskilled" );
+		
+		Leaderboard.MaxEntries = 100;
+
+		Leaderboard.SetAggregationMax();
+		Leaderboard.SetSortDescending();
+        Leaderboard.CenterOnMe();
+		
+		if ( country )
+			Leaderboard.SetCountryAuto();
+
+		Leaderboard.SetFriendsOnly( friends );
+
+		CurrentSortBy = sortBy;
+		Friends = friends;
+		Country = country;
+
+		switch ( sortBy )
+		{
+			case SortBy.Day:
+				Leaderboard.FilterByDay();
+				break;
+			case SortBy.Week:
+				Leaderboard.FilterByWeek();
+				break;
+			case SortBy.Month:
+				Leaderboard.FilterByMonth();
+				break;
+			case SortBy.Year:
+				Leaderboard.FilterByYear();
+				break;
+			case SortBy.AllTime:
+				break;
+		}
+
+        await Leaderboard.Refresh();
+
+        FetchingLeaderboard = false;
+	}
+
+	public void ChangeSortBy()
+	{
+    	var sortByValues = Enum.GetValues( typeof(SortBy) ).Cast<SortBy>().ToList();
+    	var currentIndex = sortByValues.IndexOf(CurrentSortBy);
+    	var nextIndex = (currentIndex + 1) % sortByValues.Count;
+    	var nextSortBy = sortByValues[nextIndex];
+
+    	FetchLeaderboard(nextSortBy, Country, Friends);
+	}
+
+	public string CurrentSortByString()
+	{
+		switch ( CurrentSortBy )
+		{
+			case SortBy.Day:
+				return "Day";
+			case SortBy.Week:
+				return "Week";
+			case SortBy.Month:
+				return "Month";
+			case SortBy.Year:
+				return "Year";
+			case SortBy.AllTime:
+				return "All Time";
+		}
+
+		return "All Time";
+	}
+
+	protected override void OnStart()
+	{
+		_ = FetchLobbyInfo();
+		FetchLeaderboard();
+	}
+
+	public bool IsSorted( SortBy sortBy )
+	{
+		return CurrentSortBy == sortBy;
+	}
+
+	public void OnSelect( Package package )
+	{
+		LaunchArguments.Map = package.FullIdent;
+
+		Game.ActiveScene?.Load( MainScene );
+	}
+
+	public void JoinLobby( LobbyInformation lobby )
+	{
+		GameNetworkSystem.Connect( lobby.LobbyId );
+	}
+
+	public void ChangeMenuState( MenuState state )
+	{
+		if ( CurrentState == state )
+			state = MenuState.None;
+
+		CurrentState = state;
+	}
+
+	/// <summary>
+	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+	/// </summary>
+	protected override int BuildHash() => System.HashCode.Combine(CurrentState, Fetching, Lobbies?.Count(), Leaderboard?.Entries?.Count(), FetchingLeaderboard, CurrentSortBy, Country, Friends);
+}

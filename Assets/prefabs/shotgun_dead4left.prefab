@@ -10,8 +10,9 @@
         "__guid": "db0a5184-ee6e-4bd0-a83a-a1c14ef7f60b",
         "Damage": 10,
         "FireRate": 1.5,
+        "FireSound": "sounds/toolgun/toolgun-fire.sound",
         "HoldType": "Shotgun",
-        "Offset": "6.363589,1.896658,-4.95884",
+        "Offset": "6.846531,0.005981312,-5.724832",
         "Range": 5000,
         "Renderer": {
           "_type": "component",
@@ -92,7 +93,8 @@
   "ResourceVersion": 1,
   "__references": [
     "facepunch.v_spaghellim4",
-    "facepunch.w_spaghellim4"
+    "facepunch.w_spaghellim4",
+    "mdlresrc.toolgunshoot"
   ],
   "__version": 1
 }

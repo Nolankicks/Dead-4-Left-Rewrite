@@ -34,7 +34,7 @@ HUD
             {
                 width: 100%;
                 height: 100%;
-                fill: hsl(0, 0%, 80%);
+                color: white;
             }
 
             &.active
@@ -43,4 +43,25 @@ HUD
             }
         }
     }
+
+    .score
+    {
+        position: absolute;
+        top: 32px;
+        left: 32px;
+
+        font-size: 42px;
+
+        color: white;
+    }
+
+    .crosshair {
+		position: absolute;
+		border-radius: 50%;
+		background-color: white;
+		opacity: 0.3;
+		transition: transform 0.05s ease-in-out;
+		width: 4px;
+		height: 4px;
+	}
 }

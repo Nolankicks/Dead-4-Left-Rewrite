@@ -32,6 +32,7 @@
           "go": "ffc524fc-1af0-45ea-b87a-9f2c1cd785d3",
           "component_type": "Inventory"
         },
+        "Score": 0,
         "shrimpleCharacterController": {
           "_type": "component",
           "component_id": "241f5e0c-d3e7-4544-a871-e723028901a0",
@@ -43,7 +44,7 @@
         "__type": "ShrimpleCharacterController.ShrimpleCharacterController",
         "__guid": "241f5e0c-d3e7-4544-a871-e723028901a0",
         "AirAcceleration": 300,
-        "AirDeceleration": 0,
+        "AirDeceleration": 800,
         "Gravity": -850,
         "GravityEnabled": true,
         "GroundAcceleration": 3000,
@@ -130,6 +131,16 @@
             "Radius": 20.300024,
             "Start": "0,0,9.913147",
             "Static": false
+          },
+          {
+            "__type": "Footsteps",
+            "__guid": "b59f687d-8010-4d6e-b10c-8b3592d3522d",
+            "Source": {
+              "_type": "component",
+              "component_id": "7fd470c3-ce11-4337-bfa8-3593410e4167",
+              "go": "49f1f3ac-8e71-44ff-a051-cafe539aeb40",
+              "component_type": "SkinnedModelRenderer"
+            }
           }
         ],
         "Children": [
@@ -997,6 +1008,35 @@
         "Name": "Eye",
         "Position": "0,0,64",
         "Enabled": true
+      },
+      {
+        "__guid": "9826cfe0-7ebe-4cfa-9f7d-f6b7f2e7be90",
+        "Flags": 0,
+        "Name": "NameTag",
+        "Position": "0,0,80.92068",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.WorldPanel",
+            "__guid": "f0cfc92d-663b-40f0-95df-2ad962eaedcc",
+            "HorizontalAlign": "Center",
+            "InteractionRange": 1000,
+            "LookAtCamera": true,
+            "PanelSize": "1000,512",
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
+            "RenderScale": 1,
+            "VerticalAlign": "Center"
+          },
+          {
+            "__type": "NameTag",
+            "__guid": "e570c6e5-f9ea-498a-87d0-099a0d0bf86c"
+          }
+        ]
       }
     ],
     "__variables": []

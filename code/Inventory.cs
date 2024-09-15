@@ -64,6 +64,8 @@ public sealed class Inventory : Component
 			Index = Items.Count() - 1;
 			ChangeItem( Index, Items );
 		}
+
+		KeyboardInputs();
 	}
 
 	public void AddItem( WeaponData item )
@@ -102,6 +104,8 @@ public sealed class Inventory : Component
 		if ( index < 0 || index >= items.Count() )
 			return;
 
+		Index = index;
+
 		var nextItem = items[index];
 
 		if ( !nextItem.IsValid() )
@@ -124,6 +128,54 @@ public sealed class Inventory : Component
 				continue;
 
 			BroadcastEnable( item, false );
+		}
+	}
+
+	public void KeyboardInputs()
+	{
+		if ( Input.Pressed( "slot1" ) )
+		{
+			ChangeItem( 0, Items );
+		}
+
+		if ( Input.Pressed( "slot2" ) )
+		{
+			ChangeItem( 1, Items );
+		}
+
+		if ( Input.Pressed( "slot3" ) )
+		{
+			ChangeItem( 2, Items );
+		}
+
+		if ( Input.Pressed( "slot4" ) )
+		{
+			ChangeItem( 3, Items );
+		}
+
+		if ( Input.Pressed( "slot5" ) )
+		{
+			ChangeItem( 4, Items );
+		}
+
+		if ( Input.Pressed( "slot6" ) )
+		{
+			ChangeItem( 5, Items );
+		}
+
+		if ( Input.Pressed( "slot7" ) )
+		{
+			ChangeItem( 6, Items );
+		}
+
+		if ( Input.Pressed( "slot8" ) )
+		{
+			ChangeItem( 7, Items );
+		}
+
+		if ( Input.Pressed( "slot9" ) )
+		{
+			ChangeItem( 8, Items );
 		}
 	}
 }

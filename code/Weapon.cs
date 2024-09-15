@@ -14,6 +14,7 @@ public sealed class Weapon : Component, IGameEventHandler<OnPlayerJoin>, IGameEv
 	[Property] public float Range { get; set; } = 5000;
 	[Property] public float Spread { get; set; } = 0.03f;
 	[Property] public int TraceTimes { get; set; } = 1;
+	[Property] public SoundEvent FireSound { get; set; }
 
 	protected override void OnEnabled()
 	{
@@ -27,7 +28,7 @@ public sealed class Weapon : Component, IGameEventHandler<OnPlayerJoin>, IGameEv
 	{
 		if ( IsProxy )
 			return;
-		
+
 		BroadcastEquip( PlayerController.Local );
 	}
 
@@ -46,30 +47,38 @@ public sealed class Weapon : Component, IGameEventHandler<OnPlayerJoin>, IGameEv
 			for ( var i = 0; i < TraceTimes; i++ )
 				Shoot();
 
+			var local = PlayerController.Local;
+
+			if ( local.IsValid() )
+			{
+				BroadcastFireSound( local.Eye.Transform.Position );
+
+				local.BroadcastAttack();
+			}
+
 			if ( Renderer.IsValid() )
 				Renderer.Set( "b_attack", true );
+				
 
 			lastFired = 0;
 		}
-	}
-
-	protected override void OnFixedUpdate()
-	{
-		if ( IsProxy )
-			return;
-
-
 	}
 
 	public void Shoot()
 	{
 		var local = PlayerController.Local;
 
-		if ( !local.IsValid() )
+		var cam = Scene.Camera;
+
+		if ( !local.IsValid() || !cam.IsValid() )
 			return;
 
-		var tr = Scene.Trace.Ray( local.Eye.Transform.Position, local.Eye.Transform.Position + ( local.Eye.Transform.Rotation.Forward + Vector3.Random * Spread ) * Range )
-			.IgnoreGameObject( local.GameObject )
+		var ray = cam.ScreenNormalToRay( 0.5f );
+
+		ray.Forward += Vector3.Random * Spread;
+
+		var tr = Scene.Trace.Ray( ray, Range )
+			.IgnoreGameObjectHierarchy( local.GameObject )
 			.Run();
 
 		local.EyeAngles += new Angles( Game.Random.Float( -1, 1 ), Game.Random.Float( -1, 1 ), 0 );
@@ -80,11 +89,15 @@ public sealed class Weapon : Component, IGameEventHandler<OnPlayerJoin>, IGameEv
 		if ( tr.GameObject.Components.TryGet<PlayerController>( out var player, FindMode.EverythingInSelfAndParent ) && GameSystem.PVP )
 		{
 			player.GameObject.Dispatch( new DamageEvent( Damage, local.GameObject, player.GameObject, tr.EndPosition, tr ) );
+
+			SpawnParticleEffect( Cloud.ParticleSystem( "bolt.impactflesh" ), tr.EndPosition );
 		}
 
 		if ( tr.GameObject.Components.TryGet<NPC>( out var npc, FindMode.EverythingInSelfAndParent ) )
 		{
 			npc.GameObject.Dispatch( new DamageEvent( Damage, local.GameObject, npc.GameObject, tr.EndPosition, tr ) );
+
+			SpawnParticleEffect( Cloud.ParticleSystem( "bolt.impactflesh" ), tr.EndPosition );
 		}
 
 		if ( tr.Body.IsValid() )
@@ -100,6 +113,20 @@ public sealed class Weapon : Component, IGameEventHandler<OnPlayerJoin>, IGameEv
 		{
 			damageable.OnDamage( damage );
 		}
+	}
+
+	[Broadcast]
+	public void BroadcastFireSound( Vector3 pos )
+	{
+		if ( FireSound is null )
+			return;
+
+		var sound = Sound.Play( FireSound, pos );
+
+		if ( !sound.IsValid() )
+			return;
+
+		sound.Volume *= 5f;
 	}
 
 	[Broadcast]
@@ -119,6 +146,21 @@ public sealed class Weapon : Component, IGameEventHandler<OnPlayerJoin>, IGameEv
 			return;
 
 		BroadcastEquip( PlayerController.Local );
+	}
+
+	public static void SpawnParticleEffect( ParticleSystem system, Vector3 pos )
+	{
+		var gb = new GameObject();
+
+		gb.Transform.Position = pos;
+
+		var particle = gb.Components.Create<LegacyParticleSystem>();
+
+		particle.Particles = system;
+
+		gb.Components.Create<Destoryer>();
+
+		gb.NetworkSpawn( null );
 	}
 }
 

@@ -28,6 +28,6 @@ public sealed class NPCSpawner : Component
 
 		clone.NetworkSpawn( null );
 
-		NextSpawn = 5;
+		NextSpawn = 3;
 	}
 }

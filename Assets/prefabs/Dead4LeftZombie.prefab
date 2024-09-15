@@ -8,284 +8,6 @@
     "NetworkMode": 1,
     "Components": [
       {
-        "__type": "Sandbox.States.StateMachineComponent",
-        "__guid": "8db3c767-bd24-4bf8-9660-f4dc33bc2efc",
-        "Serialized": {
-          "States": [
-            {
-              "Name": "Start",
-              "OnUpdateState": {
-                "__version": 7,
-                "__guid": "5c99fba9-9ed6-49cf-84d7-98776c50e713",
-                "UserData": {
-                  "Title": "Update",
-                  "ReferencedComponentTypes": [
-                    "NPC"
-                  ]
-                },
-                "Variables": [],
-                "Nodes": [
-                  {
-                    "Id": 0,
-                    "Type": "input"
-                  },
-                  {
-                    "Id": 24,
-                    "Type": "scene.get",
-                    "Properties": {
-                      "T": "NPC"
-                    },
-                    "UserData": {
-                      "Position": "0,96"
-                    }
-                  },
-                  {
-                    "Id": 25,
-                    "Type": "call",
-                    "Properties": {
-                      "_isStatic": false,
-                      "_name": "Wander",
-                      "_type": "NPC"
-                    },
-                    "UserData": {
-                      "Position": "224,0"
-                    }
-                  }
-                ],
-                "Links": [
-                  {
-                    "SrcId": 0,
-                    "SrcName": "_target",
-                    "DstId": 24,
-                    "DstName": "_this"
-                  },
-                  {
-                    "SrcId": 0,
-                    "SrcName": "_signal",
-                    "DstId": 25,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "SrcId": 24,
-                    "SrcName": "_result",
-                    "DstId": 25,
-                    "DstName": "_target"
-                  }
-                ]
-              },
-              "UserData": {
-                "Position": "-448,-32"
-              }
-            },
-            {
-              "Id": 1,
-              "Name": "Move to player",
-              "OnUpdateState": {
-                "__version": 7,
-                "__guid": "3ed621e0-242f-41ac-ba96-1d88041ad1a5",
-                "UserData": {
-                  "Title": "Update",
-                  "ReferencedComponentTypes": [
-                    "NPC"
-                  ]
-                },
-                "Variables": [],
-                "Nodes": [
-                  {
-                    "Id": 0,
-                    "Type": "input"
-                  },
-                  {
-                    "Id": 1,
-                    "Type": "scene.get",
-                    "Properties": {
-                      "T": "NPC"
-                    },
-                    "UserData": {
-                      "Position": "0,96",
-                      "Labels": {
-                        "_result": "NPC"
-                      }
-                    }
-                  },
-                  {
-                    "Id": 2,
-                    "Type": "call",
-                    "Properties": {
-                      "_isStatic": false,
-                      "_name": "MoveToPlayer",
-                      "_type": "NPC"
-                    },
-                    "UserData": {
-                      "Position": "208,0"
-                    }
-                  },
-                  {
-                    "Id": 3,
-                    "Type": "call",
-                    "Properties": {
-                      "_isStatic": false,
-                      "_name": "Attack",
-                      "_type": "NPC"
-                    },
-                    "UserData": {
-                      "Position": "528,-0"
-                    }
-                  }
-                ],
-                "Links": [
-                  {
-                    "SrcId": 0,
-                    "SrcName": "_target",
-                    "DstId": 1,
-                    "DstName": "_this"
-                  },
-                  {
-                    "SrcId": 0,
-                    "SrcName": "_signal",
-                    "DstId": 2,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "SrcId": 1,
-                    "SrcName": "_result",
-                    "DstId": 2,
-                    "DstName": "_target"
-                  },
-                  {
-                    "SrcId": 2,
-                    "SrcName": "_signal",
-                    "DstId": 3,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "SrcId": 1,
-                    "SrcName": "_result",
-                    "DstId": 3,
-                    "DstName": "_target"
-                  },
-                  {
-                    "Value": 2,
-                    "DstId": 3,
-                    "DstName": "fireRate"
-                  }
-                ]
-              },
-              "UserData": {
-                "Position": "-192,-288"
-              }
-            },
-            {
-              "Id": 10,
-              "Name": "Restart",
-              "UserData": {
-                "Position": "64,-32"
-              }
-            }
-          ],
-          "Transitions": [
-            {
-              "Id": 3,
-              "TargetId": 1,
-              "Condition": {
-                "__version": 7,
-                "__guid": "19171f0a-3ef9-4d09-a4c8-f6c89331920a",
-                "UserData": {
-                  "Title": "Condition",
-                  "ReferencedComponentTypes": [
-                    "NPC"
-                  ]
-                },
-                "Variables": [],
-                "Nodes": [
-                  {
-                    "Id": 0,
-                    "Type": "input"
-                  },
-                  {
-                    "Id": 1,
-                    "Type": "output",
-                    "UserData": {
-                      "Position": "416,0"
-                    }
-                  },
-                  {
-                    "Id": 2,
-                    "Type": "scene.get",
-                    "Properties": {
-                      "T": "NPC"
-                    },
-                    "UserData": {
-                      "Position": "0,112"
-                    }
-                  },
-                  {
-                    "Id": 3,
-                    "Type": "call",
-                    "Properties": {
-                      "_isStatic": false,
-                      "_name": "NearPlayer",
-                      "_type": "NPC"
-                    },
-                    "UserData": {
-                      "Position": "192,0"
-                    }
-                  }
-                ],
-                "Links": [
-                  {
-                    "SrcId": 3,
-                    "SrcName": "_result",
-                    "DstId": 1,
-                    "DstName": "_result"
-                  },
-                  {
-                    "SrcId": 3,
-                    "SrcName": "_signal",
-                    "DstId": 1,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "SrcId": 0,
-                    "SrcName": "_target",
-                    "DstId": 2,
-                    "DstName": "_this"
-                  },
-                  {
-                    "SrcId": 0,
-                    "SrcName": "_signal",
-                    "DstId": 3,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "SrcId": 2,
-                    "SrcName": "_result",
-                    "DstId": 3,
-                    "DstName": "_target"
-                  },
-                  {
-                    "Value": 2000,
-                    "DstId": 3,
-                    "DstName": "distance"
-                  }
-                ]
-              }
-            },
-            {
-              "Id": 11,
-              "SourceId": 1,
-              "TargetId": 10,
-              "Message": "restart"
-            },
-            {
-              "Id": 13,
-              "SourceId": 10
-            }
-          ],
-          "InitialStateId": 0
-        }
-      },
-      {
         "__type": "NPC",
         "__guid": "623549f1-c452-46e2-95cc-6b7ac6c72eb1",
         "Agent": {
@@ -314,6 +36,16 @@
         "Separation": 0.25,
         "UpdatePosition": true,
         "UpdateRotation": true
+      },
+      {
+        "__type": "Footsteps",
+        "__guid": "2b9e68e6-8668-4e28-9c01-7b8fb1c6abe6",
+        "Source": {
+          "_type": "component",
+          "component_id": "48236152-045d-4f84-9bde-be05a6e0dc08",
+          "go": "4536960e-0242-45f8-8980-7911cddb4cdb",
+          "component_type": "SkinnedModelRenderer"
+        }
       }
     ],
     "Children": [
@@ -417,6 +149,380 @@
             "Radius": 25,
             "Start": "0,0,16.44777",
             "Static": false
+          }
+        ]
+      },
+      {
+        "__guid": "d95a067c-6fe7-4db3-9012-50947d85640e",
+        "Flags": 0,
+        "Name": "State",
+        "Enabled": true,
+        "NetworkMode": 0,
+        "Components": [
+          {
+            "__type": "Sandbox.States.StateMachineComponent",
+            "__guid": "8db3c767-bd24-4bf8-9660-f4dc33bc2efc",
+            "Serialized": {
+              "States": [
+                {
+                  "Name": "Start",
+                  "OnUpdateState": {
+                    "__version": 7,
+                    "__guid": "5c99fba9-9ed6-49cf-84d7-98776c50e713",
+                    "UserData": {
+                      "Title": "Update",
+                      "ReferencedComponentTypes": []
+                    },
+                    "Variables": [],
+                    "Nodes": [
+                      {
+                        "Id": 0,
+                        "Type": "input"
+                      },
+                      {
+                        "Id": 25,
+                        "Type": "call",
+                        "Properties": {
+                          "_isStatic": false,
+                          "_name": "Wander",
+                          "_type": "NPC"
+                        },
+                        "UserData": {
+                          "Position": "480,0"
+                        }
+                      },
+                      {
+                        "Id": 26,
+                        "Type": "call",
+                        "Properties": {
+                          "T": "NPC",
+                          "_isStatic": false,
+                          "_name": "TryGet",
+                          "_type": "Sandbox.IComponentLister"
+                        },
+                        "UserData": {
+                          "Position": "-32,64",
+                          "Labels": {
+                            "component": "NPC"
+                          }
+                        }
+                      },
+                      {
+                        "Id": 28,
+                        "Type": "if",
+                        "UserData": {
+                          "Position": "224,0"
+                        }
+                      }
+                    ],
+                    "Links": [
+                      {
+                        "SrcId": 28,
+                        "SrcName": "true",
+                        "DstId": 25,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 26,
+                        "SrcName": "component",
+                        "DstId": 25,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "_target",
+                        "DstId": 26,
+                        "DstName": "_target"
+                      },
+                      {
+                        "Value": "EnabledInSelf, InParent",
+                        "DstId": 26,
+                        "DstName": "search"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "_signal",
+                        "DstId": 28,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 26,
+                        "SrcName": "_result",
+                        "DstId": 28,
+                        "DstName": "condition"
+                      }
+                    ]
+                  },
+                  "UserData": {
+                    "Position": "-448,-32"
+                  }
+                },
+                {
+                  "Id": 1,
+                  "Name": "Move to player",
+                  "OnUpdateState": {
+                    "__version": 7,
+                    "__guid": "3ed621e0-242f-41ac-ba96-1d88041ad1a5",
+                    "UserData": {
+                      "Title": "Update",
+                      "ReferencedComponentTypes": []
+                    },
+                    "Variables": [],
+                    "Nodes": [
+                      {
+                        "Id": 0,
+                        "Type": "input",
+                        "UserData": {
+                          "Position": "-240,-0"
+                        }
+                      },
+                      {
+                        "Id": 2,
+                        "Type": "call",
+                        "Properties": {
+                          "_isStatic": false,
+                          "_name": "MoveToPlayer",
+                          "_type": "NPC"
+                        },
+                        "UserData": {
+                          "Position": "288,0"
+                        }
+                      },
+                      {
+                        "Id": 3,
+                        "Type": "call",
+                        "Properties": {
+                          "_isStatic": false,
+                          "_name": "Attack",
+                          "_type": "NPC"
+                        },
+                        "UserData": {
+                          "Position": "528,-0"
+                        }
+                      },
+                      {
+                        "Id": 5,
+                        "Type": "call",
+                        "Properties": {
+                          "T": "NPC",
+                          "_isStatic": false,
+                          "_name": "TryGet",
+                          "_type": "Sandbox.IComponentLister"
+                        },
+                        "UserData": {
+                          "Position": "-240,64",
+                          "Labels": {
+                            "component": "NPC"
+                          }
+                        }
+                      },
+                      {
+                        "Id": 6,
+                        "Type": "if",
+                        "UserData": {
+                          "Position": "16,0"
+                        }
+                      }
+                    ],
+                    "Links": [
+                      {
+                        "SrcId": 6,
+                        "SrcName": "true",
+                        "DstId": 2,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 5,
+                        "SrcName": "component",
+                        "DstId": 2,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 2,
+                        "SrcName": "_signal",
+                        "DstId": 3,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 5,
+                        "SrcName": "component",
+                        "DstId": 3,
+                        "DstName": "_target"
+                      },
+                      {
+                        "Value": 2,
+                        "DstId": 3,
+                        "DstName": "fireRate"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "_target",
+                        "DstId": 5,
+                        "DstName": "_target"
+                      },
+                      {
+                        "Value": "EnabledInSelf, InParent",
+                        "DstId": 5,
+                        "DstName": "search"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "_signal",
+                        "DstId": 6,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 5,
+                        "SrcName": "_result",
+                        "DstId": 6,
+                        "DstName": "condition"
+                      }
+                    ]
+                  },
+                  "UserData": {
+                    "Position": "-192,-288"
+                  }
+                },
+                {
+                  "Id": 14,
+                  "Name": "Restart",
+                  "UserData": {
+                    "Position": "32,-32"
+                  }
+                }
+              ],
+              "Transitions": [
+                {
+                  "Id": 3,
+                  "TargetId": 1,
+                  "Condition": {
+                    "__version": 7,
+                    "__guid": "19171f0a-3ef9-4d09-a4c8-f6c89331920a",
+                    "UserData": {
+                      "Title": "Condition",
+                      "ReferencedComponentTypes": []
+                    },
+                    "Variables": [],
+                    "Nodes": [
+                      {
+                        "Id": 0,
+                        "Type": "input",
+                        "UserData": {
+                          "Position": "-112,-0"
+                        }
+                      },
+                      {
+                        "Id": 1,
+                        "Type": "output",
+                        "UserData": {
+                          "Position": "608,-0"
+                        }
+                      },
+                      {
+                        "Id": 3,
+                        "Type": "call",
+                        "Properties": {
+                          "_isStatic": false,
+                          "_name": "NearPlayer",
+                          "_type": "NPC"
+                        },
+                        "UserData": {
+                          "Position": "336,-0"
+                        }
+                      },
+                      {
+                        "Id": 5,
+                        "Type": "call",
+                        "Properties": {
+                          "T": "NPC",
+                          "_isStatic": false,
+                          "_name": "TryGet",
+                          "_type": "Sandbox.IComponentLister"
+                        },
+                        "UserData": {
+                          "Position": "-128,128",
+                          "Labels": {
+                            "component": "NPC"
+                          }
+                        }
+                      },
+                      {
+                        "Id": 6,
+                        "Type": "if",
+                        "UserData": {
+                          "Position": "112,0"
+                        }
+                      }
+                    ],
+                    "Links": [
+                      {
+                        "SrcId": 3,
+                        "SrcName": "_result",
+                        "DstId": 1,
+                        "DstName": "_result"
+                      },
+                      {
+                        "SrcId": 3,
+                        "SrcName": "_signal",
+                        "DstId": 1,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 6,
+                        "SrcName": "true",
+                        "DstId": 3,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 5,
+                        "SrcName": "component",
+                        "DstId": 3,
+                        "DstName": "_target"
+                      },
+                      {
+                        "Value": 2000,
+                        "DstId": 3,
+                        "DstName": "distance"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "_target",
+                        "DstId": 5,
+                        "DstName": "_target"
+                      },
+                      {
+                        "Value": "EnabledInSelf, InParent",
+                        "DstId": 5,
+                        "DstName": "search"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "_signal",
+                        "DstId": 6,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 5,
+                        "SrcName": "_result",
+                        "DstId": 6,
+                        "DstName": "condition"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Id": 15,
+                  "SourceId": 1,
+                  "TargetId": 14,
+                  "Message": "restart"
+                },
+                {
+                  "Id": 16,
+                  "SourceId": 14
+                }
+              ],
+              "InitialStateId": 0
+            }
           }
         ]
       }

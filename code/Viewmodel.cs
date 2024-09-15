@@ -71,6 +71,9 @@ public sealed class Viewmodel : Component, IGameEventHandler<JumpEvent>
 
 	void IGameEventHandler<JumpEvent>.OnGameEvent( JumpEvent eventArgs )
 	{
+		if ( GameObject.Parent.IsProxy )
+			return;
+
 		if ( Renderer.IsValid() )
 			Renderer.Set( "b_jump", true );
 	}

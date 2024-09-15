@@ -128,8 +128,6 @@ public sealed class NPC : Component, IGameEventHandler<PlayerDeath>, IGameEventH
 			return;
 
 		MoveTo( randomPoint );
-
-		Log.Info( $"NPC is wandering to {randomPoint}" );
 	}
 
 	public TimeSince lastFired { get; set; } = 0;
@@ -162,7 +160,7 @@ public sealed class NPC : Component, IGameEventHandler<PlayerDeath>, IGameEventH
 		if ( NearestPlayer() == eventArgs.Player )
 			ClearDestination();
 
-		if ( Components.TryGet<StateMachineComponent>( out var state ) )
+		if ( Components.TryGet<StateMachineComponent>( out var state, FindMode.EverythingInSelfAndDescendants ) && Networking.IsHost )
 		{
 			state.SendMessage( "restart" );
 		}
@@ -170,7 +168,15 @@ public sealed class NPC : Component, IGameEventHandler<PlayerDeath>, IGameEventH
 
 	void IGameEventHandler<DamageEvent>.OnGameEvent( DamageEvent eventArgs )
 	{
-		BroadcastDeath( eventArgs.Amount, eventArgs.tr.Normal );	
+		if ( IsDead )
+			return;
+
+		if ( eventArgs.Attacker.Components.TryGet<PlayerController>( out var player ) && eventArgs.Attacker.IsValid() )
+		{
+			player.AddScore( 5 );
+		}
+
+		BroadcastDeath( eventArgs.Amount, eventArgs.tr.Normal );
 	}
 
 	[Broadcast]
@@ -192,7 +198,7 @@ public sealed class NPC : Component, IGameEventHandler<PlayerDeath>, IGameEventH
 
 		Health = health;
 
-		if ( Components.TryGet<StateMachineComponent>( out var state ) )
+		if ( Components.TryGet<StateMachineComponent>( out var state, FindMode.EverythingInSelfAndDescendants ) )
 			state.Destroy();
 
 		if ( Components.TryGet<ModelPhysics>( out var physics, FindMode.EnabledInSelfAndDescendants ) )

@@ -43,6 +43,7 @@
         "__guid": "4ed6a63a-4d64-4b12-b540-69664f44f101",
         "Damage": 50,
         "FireRate": 0.1,
+        "FireSound": "sounds/toolgun/toolgun-fire.sound",
         "HoldType": "Rifle",
         "Offset": "2.012506,-1.151374,-4.363367",
         "Range": 5000,
@@ -91,7 +92,8 @@
   "MenuIcon": null,
   "ResourceVersion": 1,
   "__references": [
-    "based.guerrilla"
+    "based.guerrilla",
+    "mdlresrc.toolgunshoot"
   ],
   "__version": 1
 }
