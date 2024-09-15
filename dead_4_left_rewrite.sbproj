@@ -1,8 +1,8 @@
 {
-  "Title": "Dead 4 Left Rewrite",
+  "Title": "Dead 4 Left",
   "Type": "game",
   "Org": "nolankicks",
-  "Ident": "dead_4_left_rewrite",
+  "Ident": "dead4left",
   "Schema": 1,
   "IncludeSourceFiles": false,
   "Resources": null,

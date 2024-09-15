@@ -49,9 +49,10 @@ public sealed class PlayerController : Component, IGameEventHandler<DamageEvent>
 	protected override void OnFixedUpdate()
 	{
 		if ( !IsProxy )
-			Move();
-
-		Crouch();
+        {
+            Crouch();
+            Move();
+        }
 
 		Anims();
 
@@ -258,9 +259,7 @@ public sealed class PlayerController : Component, IGameEventHandler<DamageEvent>
 
 		Score += amount;
 
-		Stats.SetValue( "zombieskilled", Score );
-
-		Log.Info( Stats.GetPlayerStats( Game.Ident, (long)Steam.SteamId )["zombieskilled"].Max );
+		Stats.Increment( "zombieskilled", Score );
 	}
 
 	void IGameEventHandler<PlayerReset>.OnGameEvent( PlayerReset eventArgs )
@@ -269,6 +268,7 @@ public sealed class PlayerController : Component, IGameEventHandler<DamageEvent>
 			return;
 
 		Health = 100;
+		Score = 0;
 	}
 
 	[Authority]
@@ -277,5 +277,18 @@ public sealed class PlayerController : Component, IGameEventHandler<DamageEvent>
 		EyeAngles = transform.Rotation.Angles();
 
 		Transform.World = transform;
+	}
+
+	[ConCmd( "kill" )]
+	public static void KillPlayer()
+	{
+		if( !Local.IsValid() )
+			return;
+
+		if ( Local.IsProxy )
+			return;
+
+		if ( Local.IsValid() )
+			Local.TakeDamage( 100, Local.GameObject, Local.Transform.Position );
 	}
 }

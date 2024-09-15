@@ -64,4 +64,13 @@ HUD
 		width: 4px;
 		height: 4px;
 	}
+
+    .health
+    {
+        position: absolute;
+        right: 32px;
+        bottom: 32px;
+        font-size: 42px;
+        color: white;
+    }
 }

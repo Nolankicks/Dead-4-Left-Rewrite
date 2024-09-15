@@ -146,10 +146,17 @@ public sealed class NPC : Component, IGameEventHandler<PlayerDeath>, IGameEventH
 			player.GameObject.Dispatch( new DamageEvent( damage, GameObject, player.GameObject, tr.EndPosition ) );
 		}
 
-		if ( AnimationHelper?.Target.IsValid() ?? false )
-			AnimationHelper.Target.Set( "b_attack", true );
+		if ( Networking.IsHost )
+			BroadcastAttack();
 
 		lastFired = 0;
+	}
+
+	[Broadcast]
+	public void BroadcastAttack()
+	{
+		if ( AnimationHelper?.Target.IsValid() ?? false )
+			AnimationHelper.Target.Set( "b_attack", true );
 	}
 
 	void IGameEventHandler<PlayerDeath>.OnGameEvent( PlayerDeath eventArgs )

@@ -5,7 +5,8 @@
       "__guid": "0e9966b0-db00-4497-b185-6fc9dbbebe34",
       "Flags": 0,
       "Name": "Camera",
-      "Position": "-1301.635,0,228.2776",
+      "Position": "-848.9972,-840.764,306.8735",
+      "Rotation": "-0.0499502,0.1205905,0.3794095,0.9159757",
       "Tags": "maincamera",
       "Enabled": true,
       "Components": [

@@ -34,6 +34,8 @@
 	<div class="crosshair"></div>
 
 	<div class="score">Score: @player.Score</div>
+
+	<div class="health">Health: @player.Health</div>
 </root>
 
 @code
@@ -44,6 +46,6 @@
 	/// </summary>
 	protected override int BuildHash()
 	{
-		return System.HashCode.Combine( PlayerController.Local?.Inventory?.CurrentItem, PlayerController.Local?.Inventory?.Items?.Count(), PlayerController.Local?.Score );
+		return System.HashCode.Combine( PlayerController.Local?.Inventory?.CurrentItem, PlayerController.Local?.Inventory?.Items?.Count(), PlayerController.Local?.Score, PlayerController.Local?.Health );
 	}
 }

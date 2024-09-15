@@ -184,8 +184,8 @@
                         "Type": "call",
                         "Properties": {
                           "_isStatic": false,
-                          "_name": "Wander",
-                          "_type": "NPC"
+                          "_type": "NPC",
+                          "_name": "Wander"
                         },
                         "UserData": {
                           "Position": "480,0"
@@ -197,8 +197,8 @@
                         "Properties": {
                           "T": "NPC",
                           "_isStatic": false,
-                          "_name": "TryGet",
-                          "_type": "Sandbox.IComponentLister"
+                          "_type": "Sandbox.IComponentLister",
+                          "_name": "TryGet"
                         },
                         "UserData": {
                           "Position": "-32,64",
@@ -281,8 +281,8 @@
                         "Type": "call",
                         "Properties": {
                           "_isStatic": false,
-                          "_name": "MoveToPlayer",
-                          "_type": "NPC"
+                          "_type": "NPC",
+                          "_name": "MoveToPlayer"
                         },
                         "UserData": {
                           "Position": "288,0"
@@ -293,8 +293,8 @@
                         "Type": "call",
                         "Properties": {
                           "_isStatic": false,
-                          "_name": "Attack",
-                          "_type": "NPC"
+                          "_type": "NPC",
+                          "_name": "Attack"
                         },
                         "UserData": {
                           "Position": "528,-0"
@@ -306,8 +306,8 @@
                         "Properties": {
                           "T": "NPC",
                           "_isStatic": false,
-                          "_name": "TryGet",
-                          "_type": "Sandbox.IComponentLister"
+                          "_type": "Sandbox.IComponentLister",
+                          "_name": "TryGet"
                         },
                         "UserData": {
                           "Position": "-240,64",
@@ -423,8 +423,8 @@
                         "Type": "call",
                         "Properties": {
                           "_isStatic": false,
-                          "_name": "NearPlayer",
-                          "_type": "NPC"
+                          "_type": "NPC",
+                          "_name": "NearPlayer"
                         },
                         "UserData": {
                           "Position": "336,-0"
@@ -436,8 +436,8 @@
                         "Properties": {
                           "T": "NPC",
                           "_isStatic": false,
-                          "_name": "TryGet",
-                          "_type": "Sandbox.IComponentLister"
+                          "_type": "Sandbox.IComponentLister",
+                          "_name": "TryGet"
                         },
                         "UserData": {
                           "Position": "-128,128",
