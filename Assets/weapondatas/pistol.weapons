@@ -1,0 +1,10 @@
+{
+  "Name": "Pistol",
+  "Icon": "textures/w_usp.vmdl_c.vtex",
+  "WeaponPrefab": {
+    "_type": "gameobject",
+    "prefab": "prefabs/pistol_dead4left.prefab"
+  },
+  "__references": [],
+  "__version": 0
+}

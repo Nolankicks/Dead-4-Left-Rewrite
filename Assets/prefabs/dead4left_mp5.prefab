@@ -1,0 +1,97 @@
+{
+  "RootObject": {
+    "__guid": "d6cb651b-100f-4e47-9cef-629f07e941eb",
+    "Flags": 0,
+    "Name": "dead4left_mp5",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Viewmodel",
+        "__guid": "fb6d4f07-1994-43d5-bb43-64fdea1cea19",
+        "Renderer": {
+          "_type": "component",
+          "component_id": "89dbbad1-2aec-42c3-9713-98c5072ab6d4",
+          "go": "24d1d70a-cc96-40ab-9782-15552669c94b",
+          "component_type": "SkinnedModelRenderer"
+        }
+      },
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "29c9339a-4366-4b3a-8f6b-61ef72075493",
+        "BodyGroups": 21,
+        "BoneMergeTarget": {
+          "_type": "component",
+          "component_id": "89dbbad1-2aec-42c3-9713-98c5072ab6d4",
+          "go": "24d1d70a-cc96-40ab-9782-15552669c94b",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "CreateBoneObjects": false,
+        "Model": "models/first_person/first_person_arms.vmdl",
+        "Morphs": {},
+        "RenderOptions": {
+          "GameLayer": false,
+          "OverlayLayer": true,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
+        "RenderType": "Off",
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
+      },
+      {
+        "__type": "Weapon",
+        "__guid": "4ed6a63a-4d64-4b12-b540-69664f44f101",
+        "Damage": 50,
+        "FireRate": 0.1,
+        "HoldType": "Rifle",
+        "Offset": "2.012506,-1.151374,-4.363367",
+        "Range": 5000,
+        "Renderer": {
+          "_type": "component",
+          "component_id": "89dbbad1-2aec-42c3-9713-98c5072ab6d4",
+          "go": "24d1d70a-cc96-40ab-9782-15552669c94b",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Spread": 0.1,
+        "TraceTimes": 1,
+        "WorldModel": "models/weapons/sbox_smg_mp5/v_mp5.vmdl"
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "24d1d70a-cc96-40ab-9782-15552669c94b",
+        "Flags": 0,
+        "Name": "gun",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.SkinnedModelRenderer",
+            "__guid": "89dbbad1-2aec-42c3-9713-98c5072ab6d4",
+            "BodyGroups": 147,
+            "CreateBoneObjects": false,
+            "Model": "models/weapons/sbox_smg_mp5/v_mp5.vmdl",
+            "Morphs": {},
+            "RenderOptions": {
+              "GameLayer": false,
+              "OverlayLayer": true,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
+            "RenderType": "Off",
+            "Tint": "1,1,1,1",
+            "UseAnimGraph": true
+          }
+        ]
+      }
+    ],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [
+    "based.guerrilla"
+  ],
+  "__version": 1
+}

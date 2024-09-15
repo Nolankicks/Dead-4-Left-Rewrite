@@ -1,0 +1,10 @@
+{
+  "Name": "MP5",
+  "Icon": "textures/mp5.vtex",
+  "WeaponPrefab": {
+    "_type": "gameobject",
+    "prefab": "prefabs/dead4left_mp5.prefab"
+  },
+  "__references": [],
+  "__version": 0
+}

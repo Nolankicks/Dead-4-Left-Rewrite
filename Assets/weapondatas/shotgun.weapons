@@ -1,0 +1,10 @@
+{
+  "Name": "Shotgun",
+  "Icon": "textures/shotgun.vtex",
+  "WeaponPrefab": {
+    "_type": "gameobject",
+    "prefab": "prefabs/shotgun_dead4left.prefab"
+  },
+  "__references": [],
+  "__version": 0
+}

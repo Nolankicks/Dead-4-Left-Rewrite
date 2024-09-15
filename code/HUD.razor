@@ -1,0 +1,45 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+
+<root>
+	@{
+		var player = PlayerController.Local;
+
+		if ( !player.IsValid() ) return;
+
+		if ( !player.Inventory.IsValid() )
+			return;
+	}
+
+	<div class="items">
+		@for ( int i = 0; i < player.Inventory.ItemsData.Count(); i++ )
+		{
+			var index = i;
+
+			if ( player.Inventory.ItemsData.Count() <= index )
+				continue;
+			
+			var item = player.Inventory.ItemsData.ElementAt( index );
+
+			if ( item is null )
+				continue;
+
+			<div class="item @( index == player.Inventory.Index ? "active" : "" )">
+				<img class="icon" texture=@item.Icon.ResourcePath />
+			</div>
+		}
+	</div>
+</root>
+
+@code
+{
+
+	/// <summary>
+	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+	/// </summary>
+	protected override int BuildHash()
+	{
+		return System.HashCode.Combine( PlayerController.Local?.Inventory?.CurrentItem, PlayerController.Local?.Inventory?.Items?.Count() );
+	}
+}

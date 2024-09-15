@@ -1,0 +1,432 @@
+{
+  "RootObject": {
+    "__guid": "2a999b52-d283-4c71-b1b1-b24a4920212c",
+    "Flags": 0,
+    "Name": "dead4leftzombie",
+    "Tags": "npc",
+    "Enabled": true,
+    "NetworkMode": 1,
+    "Components": [
+      {
+        "__type": "Sandbox.States.StateMachineComponent",
+        "__guid": "8db3c767-bd24-4bf8-9660-f4dc33bc2efc",
+        "Serialized": {
+          "States": [
+            {
+              "Name": "Start",
+              "OnUpdateState": {
+                "__version": 7,
+                "__guid": "5c99fba9-9ed6-49cf-84d7-98776c50e713",
+                "UserData": {
+                  "Title": "Update",
+                  "ReferencedComponentTypes": [
+                    "NPC"
+                  ]
+                },
+                "Variables": [],
+                "Nodes": [
+                  {
+                    "Id": 0,
+                    "Type": "input"
+                  },
+                  {
+                    "Id": 24,
+                    "Type": "scene.get",
+                    "Properties": {
+                      "T": "NPC"
+                    },
+                    "UserData": {
+                      "Position": "0,96"
+                    }
+                  },
+                  {
+                    "Id": 25,
+                    "Type": "call",
+                    "Properties": {
+                      "_isStatic": false,
+                      "_name": "Wander",
+                      "_type": "NPC"
+                    },
+                    "UserData": {
+                      "Position": "224,0"
+                    }
+                  }
+                ],
+                "Links": [
+                  {
+                    "SrcId": 0,
+                    "SrcName": "_target",
+                    "DstId": 24,
+                    "DstName": "_this"
+                  },
+                  {
+                    "SrcId": 0,
+                    "SrcName": "_signal",
+                    "DstId": 25,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 24,
+                    "SrcName": "_result",
+                    "DstId": 25,
+                    "DstName": "_target"
+                  }
+                ]
+              },
+              "UserData": {
+                "Position": "-448,-32"
+              }
+            },
+            {
+              "Id": 1,
+              "Name": "Move to player",
+              "OnUpdateState": {
+                "__version": 7,
+                "__guid": "3ed621e0-242f-41ac-ba96-1d88041ad1a5",
+                "UserData": {
+                  "Title": "Update",
+                  "ReferencedComponentTypes": [
+                    "NPC"
+                  ]
+                },
+                "Variables": [],
+                "Nodes": [
+                  {
+                    "Id": 0,
+                    "Type": "input"
+                  },
+                  {
+                    "Id": 1,
+                    "Type": "scene.get",
+                    "Properties": {
+                      "T": "NPC"
+                    },
+                    "UserData": {
+                      "Position": "0,96",
+                      "Labels": {
+                        "_result": "NPC"
+                      }
+                    }
+                  },
+                  {
+                    "Id": 2,
+                    "Type": "call",
+                    "Properties": {
+                      "_isStatic": false,
+                      "_name": "MoveToPlayer",
+                      "_type": "NPC"
+                    },
+                    "UserData": {
+                      "Position": "208,0"
+                    }
+                  },
+                  {
+                    "Id": 3,
+                    "Type": "call",
+                    "Properties": {
+                      "_isStatic": false,
+                      "_name": "Attack",
+                      "_type": "NPC"
+                    },
+                    "UserData": {
+                      "Position": "528,-0"
+                    }
+                  }
+                ],
+                "Links": [
+                  {
+                    "SrcId": 0,
+                    "SrcName": "_target",
+                    "DstId": 1,
+                    "DstName": "_this"
+                  },
+                  {
+                    "SrcId": 0,
+                    "SrcName": "_signal",
+                    "DstId": 2,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 1,
+                    "SrcName": "_result",
+                    "DstId": 2,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 2,
+                    "SrcName": "_signal",
+                    "DstId": 3,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 1,
+                    "SrcName": "_result",
+                    "DstId": 3,
+                    "DstName": "_target"
+                  },
+                  {
+                    "Value": 2,
+                    "DstId": 3,
+                    "DstName": "fireRate"
+                  }
+                ]
+              },
+              "UserData": {
+                "Position": "-192,-288"
+              }
+            },
+            {
+              "Id": 10,
+              "Name": "Restart",
+              "UserData": {
+                "Position": "64,-32"
+              }
+            }
+          ],
+          "Transitions": [
+            {
+              "Id": 3,
+              "TargetId": 1,
+              "Condition": {
+                "__version": 7,
+                "__guid": "19171f0a-3ef9-4d09-a4c8-f6c89331920a",
+                "UserData": {
+                  "Title": "Condition",
+                  "ReferencedComponentTypes": [
+                    "NPC"
+                  ]
+                },
+                "Variables": [],
+                "Nodes": [
+                  {
+                    "Id": 0,
+                    "Type": "input"
+                  },
+                  {
+                    "Id": 1,
+                    "Type": "output",
+                    "UserData": {
+                      "Position": "416,0"
+                    }
+                  },
+                  {
+                    "Id": 2,
+                    "Type": "scene.get",
+                    "Properties": {
+                      "T": "NPC"
+                    },
+                    "UserData": {
+                      "Position": "0,112"
+                    }
+                  },
+                  {
+                    "Id": 3,
+                    "Type": "call",
+                    "Properties": {
+                      "_isStatic": false,
+                      "_name": "NearPlayer",
+                      "_type": "NPC"
+                    },
+                    "UserData": {
+                      "Position": "192,0"
+                    }
+                  }
+                ],
+                "Links": [
+                  {
+                    "SrcId": 3,
+                    "SrcName": "_result",
+                    "DstId": 1,
+                    "DstName": "_result"
+                  },
+                  {
+                    "SrcId": 3,
+                    "SrcName": "_signal",
+                    "DstId": 1,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 0,
+                    "SrcName": "_target",
+                    "DstId": 2,
+                    "DstName": "_this"
+                  },
+                  {
+                    "SrcId": 0,
+                    "SrcName": "_signal",
+                    "DstId": 3,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 2,
+                    "SrcName": "_result",
+                    "DstId": 3,
+                    "DstName": "_target"
+                  },
+                  {
+                    "Value": 2000,
+                    "DstId": 3,
+                    "DstName": "distance"
+                  }
+                ]
+              }
+            },
+            {
+              "Id": 11,
+              "SourceId": 1,
+              "TargetId": 10,
+              "Message": "restart"
+            },
+            {
+              "Id": 13,
+              "SourceId": 10
+            }
+          ],
+          "InitialStateId": 0
+        }
+      },
+      {
+        "__type": "NPC",
+        "__guid": "623549f1-c452-46e2-95cc-6b7ac6c72eb1",
+        "Agent": {
+          "_type": "component",
+          "component_id": "9d4d3b3e-0cf5-4a56-a7b6-bf3e4a82b35c",
+          "go": "2a999b52-d283-4c71-b1b1-b24a4920212c",
+          "component_type": "NavMeshAgent"
+        },
+        "AnimationHelper": {
+          "_type": "component",
+          "component_id": "e4817fb4-bb0f-48fd-a7dc-920e43b21726",
+          "go": "4536960e-0242-45f8-8980-7911cddb4cdb",
+          "component_type": "CitizenAnimationHelper"
+        },
+        "HasHealth": false,
+        "HoldType": "Punch",
+        "Stop": false
+      },
+      {
+        "__type": "Sandbox.NavMeshAgent",
+        "__guid": "9d4d3b3e-0cf5-4a56-a7b6-bf3e4a82b35c",
+        "Acceleration": 1000,
+        "Height": 64,
+        "MaxSpeed": 200,
+        "Radius": 16,
+        "Separation": 0.25,
+        "UpdatePosition": true,
+        "UpdateRotation": true
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "4536960e-0242-45f8-8980-7911cddb4cdb",
+        "Flags": 0,
+        "Name": "Body",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.SkinnedModelRenderer",
+            "__guid": "48236152-045d-4f84-9bde-be05a6e0dc08",
+            "BodyGroups": 0,
+            "CreateBoneObjects": false,
+            "Model": "models/citizen/citizen.vmdl",
+            "Morphs": {},
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
+            "RenderType": "On",
+            "Tint": "1,1,1,1",
+            "UseAnimGraph": true
+          },
+          {
+            "__type": "Sandbox.Citizen.CitizenAnimationHelper",
+            "__guid": "e4817fb4-bb0f-48fd-a7dc-920e43b21726",
+            "BodyWeight": 1,
+            "EyesWeight": 1,
+            "HeadWeight": 1,
+            "LookAtEnabled": false,
+            "Target": {
+              "_type": "component",
+              "component_id": "48236152-045d-4f84-9bde-be05a6e0dc08",
+              "go": "4536960e-0242-45f8-8980-7911cddb4cdb",
+              "component_type": "SkinnedModelRenderer"
+            }
+          },
+          {
+            "__type": "Sandbox.ModelPhysics",
+            "__guid": "9218afec-e518-49b3-afb9-c0c080d44a2c",
+            "Locking": {},
+            "Model": "models/citizen/citizen.vmdl",
+            "MotionEnabled": false,
+            "Renderer": {
+              "_type": "component",
+              "component_id": "48236152-045d-4f84-9bde-be05a6e0dc08",
+              "go": "4536960e-0242-45f8-8980-7911cddb4cdb",
+              "component_type": "SkinnedModelRenderer"
+            },
+            "RigidbodyFlags": 0
+          }
+        ],
+        "Children": [
+          {
+            "__guid": "18bb1a31-15b9-401b-b8b5-ee5036c8df62",
+            "Flags": 0,
+            "Name": "Zombie",
+            "Enabled": true,
+            "Components": [
+              {
+                "__type": "Sandbox.SkinnedModelRenderer",
+                "__guid": "327b70c2-92fd-4dc0-8f01-c0141ca605df",
+                "BodyGroups": 18446744073709551615,
+                "BoneMergeTarget": {
+                  "_type": "component",
+                  "component_id": "48236152-045d-4f84-9bde-be05a6e0dc08",
+                  "go": "4536960e-0242-45f8-8980-7911cddb4cdb",
+                  "component_type": "SkinnedModelRenderer"
+                },
+                "CreateBoneObjects": false,
+                "Model": "models/citizen/heads/head_zombie_01/models/head_zombie_01.vmdl",
+                "Morphs": {},
+                "RenderOptions": {
+                  "GameLayer": true,
+                  "OverlayLayer": false,
+                  "BloomLayer": false,
+                  "AfterUILayer": false
+                },
+                "RenderType": "On",
+                "Tint": "1,1,1,1",
+                "UseAnimGraph": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "__guid": "f01e8952-0b9f-44cc-ad97-0ef29982aaff",
+        "Flags": 0,
+        "Name": "Collider",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.CapsuleCollider",
+            "__guid": "ecf05abb-ca06-42a3-84cc-6e529424f41b",
+            "End": "0,0,57.60004",
+            "IsTrigger": false,
+            "Radius": 25,
+            "Start": "0,0,16.44777",
+            "Static": false
+          }
+        ]
+      }
+    ],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

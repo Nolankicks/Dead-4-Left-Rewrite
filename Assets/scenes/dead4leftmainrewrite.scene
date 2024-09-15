@@ -1,0 +1,174 @@
+{
+  "__guid": "b65f69f3-7160-4e97-ba27-739bb04b2798",
+  "GameObjects": [
+    {
+      "__guid": "9f999039-4bf8-4945-82dd-6a7bf02c0a5c",
+      "Flags": 0,
+      "Name": "Camera",
+      "Position": "-203.3618,-203.3618,287.478",
+      "Tags": "maincamera",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.CameraComponent",
+          "__guid": "2ced20cc-e333-4d4f-b22a-a902e02d9d9b",
+          "BackgroundColor": "0.33333,0.46275,0.52157,1",
+          "ClearFlags": "All",
+          "FieldOfView": 90,
+          "IsMainCamera": true,
+          "Orthographic": false,
+          "OrthographicHeight": 1204,
+          "Priority": 1,
+          "RenderExcludeTags": "",
+          "RenderTags": "",
+          "TargetEye": "None",
+          "Viewport": "0,0,1,1",
+          "ZFar": 10000,
+          "ZNear": 5
+        },
+        {
+          "__type": "Sandbox.Bloom",
+          "__guid": "26b899ea-47a8-44f3-a7a8-9ed32f9053cd",
+          "BloomColor": {
+            "color": [
+              {
+                "c": "1,1,1,1"
+              },
+              {
+                "t": 1,
+                "c": "1,1,1,1"
+              }
+            ],
+            "alpha": []
+          },
+          "BloomCurve": [
+            {
+              "y": 0.5
+            },
+            {
+              "x": 1,
+              "y": 1
+            }
+          ],
+          "Mode": "Blur",
+          "Strength": 0.2,
+          "Threshold": 0.5,
+          "ThresholdWidth": 0
+        }
+      ]
+    },
+    {
+      "__guid": "e95e801b-6e87-407e-a7cd-826ecf917f0a",
+      "Flags": 0,
+      "Name": "Map",
+      "Position": "-203.3618,-203.3618,287.478",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.MapInstance",
+          "__guid": "5e3eaf0f-93e4-4f2c-983f-26a88c3269ee",
+          "__version": 1,
+          "EnableCollision": true,
+          "MapName": "facepunch.flatgrass",
+          "NoOrigin": false,
+          "OnMapLoaded": null,
+          "OnMapUnloaded": null,
+          "UseMapFromLaunch": true
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "370b46fc-d71f-4c32-985f-8e7c8de46441",
+      "Flags": 0,
+      "Name": "Manager",
+      "Position": "149.3263,149.3264,-211.1794",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "Components": [
+        {
+          "__type": "GameSystem",
+          "__guid": "636af314-35f2-4a97-9dbb-bd94e367aece",
+          "PlayerPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/playerdead4left.prefab"
+          }
+        }
+      ]
+    },
+    {
+      "__guid": "064f2237-013b-46c5-8288-21ed6c65a4bc",
+      "Flags": 0,
+      "Name": "dotted_dress",
+      "Position": "-290.7982,-561.3375,306.4133",
+      "Enabled": true
+    },
+    {
+      "__guid": "c14b0277-b3f8-4c93-9053-f40517c832f4",
+      "Flags": 0,
+      "Name": "NPC Spawner",
+      "Position": "291.3028,1838.441,290.5131",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "Components": [
+        {
+          "__type": "NPCSpawner",
+          "__guid": "9e6616e8-afef-4b9f-8e3e-33774a591e30",
+          "NPCPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/dead4leftzombie.prefab"
+          }
+        }
+      ]
+    },
+    {
+      "__guid": "59feaca6-fc52-4c39-84f2-7869b77b59da",
+      "Flags": 0,
+      "Name": "Screen",
+      "Position": "-5794.305,3832.64,2715.171",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ScreenPanel",
+          "__guid": "8fa73357-1e8f-42ea-99ea-b96efa93f021",
+          "AutoScreenScale": true,
+          "Opacity": 1,
+          "Scale": 1,
+          "ScaleStrategy": "ConsistentHeight",
+          "ZIndex": 100
+        },
+        {
+          "__type": "HUD",
+          "__guid": "94e1ccd7-9b13-47da-8268-4c4f97416d5e",
+          "MyStringValue": "Hello World!"
+        }
+      ]
+    }
+  ],
+  "SceneProperties": {
+    "FixedUpdateFrequency": 50,
+    "MaxFixedUpdates": 5,
+    "NetworkFrequency": 30,
+    "NetworkInterpolation": true,
+    "ThreadedAnimation": true,
+    "TimeScale": 1,
+    "UseFixedUpdate": true,
+    "NavMesh": {
+      "Enabled": true,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": true,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": ""
+    }
+  },
+  "Title": "dead4leftmainrewrite",
+  "Description": "",
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

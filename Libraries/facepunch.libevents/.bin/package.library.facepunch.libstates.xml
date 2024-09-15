@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>package.library.facepunch.libstates</name>
+    </assembly>
+    <members>
+        <member name="P:Sandbox.States.State.Id">
+            <summary>
+            Unique ID of this state in its containing <see cref="T:Sandbox.States.StateMachineComponent"/>.
+            </summary>
+        </member>
+        <member name="P:Sandbox.States.State.Name">
+            <summary>
+            Helpful name of this state.
+            </summary>
+        </member>
+        <member name="P:Sandbox.States.State.OnEnterState">
+            <summary>
+            Event dispatched on the owner when this state is entered.
+            </summary>
+        </member>
+        <member name="P:Sandbox.States.State.OnUpdateState">
+            <summary>
+            Event dispatched on the owner while this state is active.
+            </summary>
+        </member>
+        <member name="P:Sandbox.States.State.OnLeaveState">
+            <summary>
+            Event dispatched on the owner when this state is exited.
+            </summary>
+        </member>
+        <member name="F:Sandbox.States.StateMachineComponent.MaxInstantTransitions">
+            <summary>
+            How many instant state transitions in a row until we throw an error?
+            </summary>
+        </member>
+        <member name="P:Sandbox.States.StateMachineComponent.States">
+            <summary>
+            All states in this machine.
+            </summary>
+        </member>
+        <member name="P:Sandbox.States.StateMachineComponent.Transitions">
+            <summary>
+            All transitions between states in this machine.
+            </summary>
+        </member>
+        <member name="P:Sandbox.States.StateMachineComponent.InitialState">
+            <summary>
+            Which state becomes active when the machine starts?
+            </summary>
+        </member>
+        <member name="P:Sandbox.States.StateMachineComponent.CurrentState">
+            <summary>
+            Which state is currently active?
+            </summary>
+        </member>
+        <member name="P:Sandbox.States.Transition.StateMachine">
+            <summary>
+            The state machine containing this transition.
+            </summary>
+        </member>
+        <member name="P:Sandbox.States.Transition.Id">
+            <summary>
+            Unique ID of this transition in the <see cref="T:Sandbox.States.StateMachineComponent"/>.
+            </summary>
+        </member>
+        <member name="P:Sandbox.States.Transition.Source">
+            <summary>
+            The state this transition originates from.
+            </summary>
+        </member>
+        <member name="P:Sandbox.States.Transition.Target">
+            <summary>
+            The destination of this transition.
+            </summary>
+        </member>
+        <member name="P:Sandbox.States.Transition.IsValid">
+            <summary>
+            Does this transition still belong to a state.
+            </summary>
+        </member>
+        <member name="P:Sandbox.States.Transition.Delay">
+            <summary>
+            Optional delay before this transition is taken.
+            If null, this transition can be taken at any time.
+            </summary>
+        </member>
+        <member name="P:Sandbox.States.Transition.Condition">
+            <summary>
+            Optional condition to evaluate.
+            </summary>
+        </member>
+        <member name="P:Sandbox.States.Transition.OnTransition">
+            <summary>
+            Action performed when this transition is taken.
+            </summary>
+        </member>
+    </members>
+</doc>
