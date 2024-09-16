@@ -248,6 +248,9 @@ public sealed class PlayerController : Component, IGameEventHandler<DamageEvent>
 		if ( Health <= 0 )
 		{
 			Scene.Dispatch( new PlayerDeath( this ) );
+
+			if ( !IsProxy )
+				Stats.Flush();
 		}
 	}
 

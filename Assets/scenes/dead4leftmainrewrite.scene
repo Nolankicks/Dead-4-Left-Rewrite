@@ -69,7 +69,7 @@
           "__guid": "5e3eaf0f-93e4-4f2c-983f-26a88c3269ee",
           "__version": 1,
           "EnableCollision": true,
-          "MapName": "apetavern.fw_easter",
+          "MapName": "maps/dev/preview_flat.vmap",
           "NoOrigin": false,
           "OnMapLoaded": null,
           "OnMapUnloaded": null,
@@ -77,6 +77,26 @@
         }
       ],
       "Children": []
+    },
+    {
+      "__guid": "8acd25a2-6620-41b4-984a-c11ce96ed7eb",
+      "Flags": 0,
+      "Name": "Map Loader",
+      "Position": "1228,-64,64",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "Components": [
+        {
+          "__type": "MapChanger",
+          "__guid": "3a4bee1f-c2f1-45bf-9a14-13aa0417116b",
+          "Map": {
+            "_type": "component",
+            "component_id": "5e3eaf0f-93e4-4f2c-983f-26a88c3269ee",
+            "go": "e95e801b-6e87-407e-a7cd-826ecf917f0a",
+            "component_type": "MapInstance"
+          }
+        }
+      ]
     },
     {
       "__guid": "370b46fc-d71f-4c32-985f-8e7c8de46441",
@@ -138,6 +158,21 @@
         {
           "__type": "HUD",
           "__guid": "94e1ccd7-9b13-47da-8268-4c4f97416d5e"
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "1f5c7aa6-9d46-481e-b0c1-bc3986bb0faa",
+          "Flags": 0,
+          "Name": "Chat",
+          "Enabled": true,
+          "NetworkMode": 1,
+          "Components": [
+            {
+              "__type": "Chat",
+              "__guid": "6755efce-72f9-42a8-89af-1e5183e054c6"
+            }
+          ]
         }
       ]
     }

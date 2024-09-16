@@ -142,12 +142,11 @@
         FetchingLeaderboard = true;
 
 		Leaderboard = Sandbox.Services.Leaderboards.GetFromStat( "zombieskilled" );
-		
-		Leaderboard.MaxEntries = 100;
 
 		Leaderboard.SetAggregationMax();
 		Leaderboard.SetSortDescending();
-        Leaderboard.CenterOnMe();
+		Leaderboard.CenterOnMe();
+		Leaderboard.MaxEntries = 100;
 		
 		if ( country )
 			Leaderboard.SetCountryAuto();
