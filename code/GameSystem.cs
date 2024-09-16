@@ -1,18 +1,21 @@
 using System.Threading.Tasks;
 using Sandbox;
 using Sandbox.Citizen;
+using Sandbox.Sdf;
 using Sandbox.Events;
 using Sandbox.Network;
 
 public sealed class GameSystem : Component, Component.INetworkListener, IGameEventHandler<PlayerDeath>
 {
 	[Property] public GameObject PlayerPrefab { get; set; }
+	[Property] public bool StartServer { get; set; } = true;
+	[Property] public bool ShouldSpawnPlayer { get; set; } = true;
 
 	public static bool PVP { get; set; } = false;
 
 	protected override async Task OnLoad()
 	{
-		if ( Networking.IsHost && !GameNetworkSystem.IsActive )
+		if ( Networking.IsHost && !GameNetworkSystem.IsActive && StartServer )
 		{
 			LoadingScreen.Title = "Creating Lobby...";
 			await Task.DelaySeconds( 0.1f );
@@ -20,25 +23,24 @@ public sealed class GameSystem : Component, Component.INetworkListener, IGameEve
 		}
 	}
 
+	protected override void OnStart()
+	{
+		if ( !Networking.IsHost && !StartServer )
+			return;
+	
+		SpawnPlayer( GetSpawnTransform() );
+	}
+
 	public void OnActive( Connection connection )
 	{
 		connection.CanRefreshObjects = true;
 
-		if ( !PlayerPrefab.IsValid() )
+		SpawnPlayer( GetSpawnTransform(), connection );
+	}
+	public void SpawnPlayer( Transform SpawnTransform, Connection connection = null )
+	{
+		if ( !PlayerPrefab.IsValid() || !ShouldSpawnPlayer )
 			return;
-
-		var spawns = Scene.GetAllComponents<SpawnPoint>().ToList();
-
-		Transform SpawnTransform = new();
-
-		if ( spawns.Count() > 0 )
-		{
-			SpawnTransform = Game.Random.FromList( spawns ).Transform.World;
-		}
-		else
-		{
-			SpawnTransform = Transform.World;
-		}
 
 		var player = PlayerPrefab.Clone( SpawnTransform );
 
@@ -46,13 +48,31 @@ public sealed class GameSystem : Component, Component.INetworkListener, IGameEve
 		{
 			var clothing = new ClothingContainer();
 
-			clothing.Deserialize( connection.GetUserData( "avatar" ) );
+			var clothingConnection = connection ?? Connection.Local;
+
+			clothing.Deserialize( clothingConnection.GetUserData( "avatar" ) );
+			
 			clothing.Apply( animHelper.Target );
 		}
 
-		player.NetworkSpawn( connection );
+		if ( connection is not null )
+			player.NetworkSpawn( connection );
 
 		Scene.Dispatch( new OnPlayerJoin() );
+	}
+
+	public Transform GetSpawnTransform()
+	{
+		var spawns = Scene.GetAllComponents<SpawnPoint>().ToList();
+
+		if ( spawns.Count() > 0 )
+		{
+			return Game.Random.FromList( spawns ).Transform.World;
+		}
+		else
+		{
+			return Transform.World;
+		}
 	}
 
 	void IGameEventHandler<PlayerDeath>.OnGameEvent( PlayerDeath eventArgs )
@@ -62,16 +82,7 @@ public sealed class GameSystem : Component, Component.INetworkListener, IGameEve
 		if ( !player.IsValid() )
 			return;
 
-		var spawns = Scene.GetAllComponents<SpawnPoint>()?.ToList();
-
-		if ( spawns.Count() > 0 )
-		{
-			player.SetWorld( Game.Random.FromList( spawns ).Transform.World );
-		}
-		else
-		{
-			eventArgs.Player.Transform.World = Transform.World;
-		}
+		player.SetWorld( GetSpawnTransform() );
 
 		player.GameObject.Dispatch( new PlayerReset() );
 	}

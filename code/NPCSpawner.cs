@@ -20,11 +20,14 @@ public sealed class NPCSpawner : Component
 		if ( !NPCPrefab.IsValid() )
 			return;
 
-		var randomPoint = Scene.NavMesh.GetRandomPoint().GetValueOrDefault();
+		var randomPoint = Scene.NavMesh.GetRandomPoint();
+
+		if ( randomPoint is null )
+			return;
 
 		var clone = NPCPrefab.Clone();
 
-		clone.Transform.Position = randomPoint;
+		clone.Transform.Position = randomPoint.Value;
 
 		clone.NetworkSpawn( null );
 

@@ -10,6 +10,7 @@ public sealed class WorldGen : Component
     [Property] public Sdf3DVolume Volume { get; set; }
     [Property] public WorldParameters Parameters { get; set; }
     [Property] public string Seed { get; set; }
+	[Property] public GameObject PlayerPrefab { get; set; }
 
     protected override void OnStart()
     {
@@ -30,12 +31,12 @@ public sealed class WorldGen : Component
 
         _ = Generate();
     }
-
     
     public async Task Generate()
     {
         if ( !World.IsValid() || Volume is null || Parameters is null || Parameters.Ground is null || Transform is null )
             return;
+
 
         await World.ClearAsync();
 
@@ -53,6 +54,15 @@ public sealed class WorldGen : Component
 
         await Task.MainThread();
         await World.AddAsync( finalSdf, Parameters.Ground );
+
+		if ( !PlayerPrefab.IsValid() || Scene.IsEditor )
+			return;
+
+		var player = PlayerPrefab.Clone( Transform.World );
+
+		player.Transform.Position = new Vector3( 2500f, 2500f, 5000f );
+
+		Scene?.NavMesh?.SetDirty();
     }
 }
 

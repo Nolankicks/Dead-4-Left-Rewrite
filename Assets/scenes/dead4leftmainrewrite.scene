@@ -91,16 +91,11 @@
           "PlayerPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/playerdead4left.prefab"
-          }
+          },
+          "ShouldSpawnPlayer": true,
+          "StartServer": true
         }
       ]
-    },
-    {
-      "__guid": "064f2237-013b-46c5-8288-21ed6c65a4bc",
-      "Flags": 0,
-      "Name": "dotted_dress",
-      "Position": "-290.7982,-561.3375,306.4133",
-      "Enabled": true
     },
     {
       "__guid": "c14b0277-b3f8-4c93-9053-f40517c832f4",

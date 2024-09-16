@@ -2,19 +2,19 @@
   "__guid": "e8555c61-b902-4b2c-8390-0e3bda93413d",
   "GameObjects": [
     {
-      "__guid": "b423b9bf-17db-4015-bdb8-c572cf5d520e",
+      "__guid": "d3a1b453-33c3-40a9-9453-1a547b5bd1af",
       "Flags": 0,
       "Name": "Camera",
-      "Position": "-609.4769,0,0",
+      "Position": "-203.3618,-203.3618,287.478",
       "Tags": "maincamera",
       "Enabled": true,
       "Components": [
         {
           "__type": "Sandbox.CameraComponent",
-          "__guid": "0e022944-7011-4d57-bb09-1f8c010467c6",
+          "__guid": "82ebdf75-1bf8-4865-85b4-dad076da1add",
           "BackgroundColor": "0.33333,0.46275,0.52157,1",
           "ClearFlags": "All",
-          "FieldOfView": 60,
+          "FieldOfView": 90,
           "IsMainCamera": true,
           "Orthographic": false,
           "OrthographicHeight": 1204,
@@ -24,7 +24,36 @@
           "TargetEye": "None",
           "Viewport": "0,0,1,1",
           "ZFar": 10000,
-          "ZNear": 10
+          "ZNear": 5
+        },
+        {
+          "__type": "Sandbox.Bloom",
+          "__guid": "9584cb6a-81ec-48a6-a8b8-729e822b35af",
+          "BloomColor": {
+            "color": [
+              {
+                "c": "1,1,1,1"
+              },
+              {
+                "t": 1,
+                "c": "1,1,1,1"
+              }
+            ],
+            "alpha": []
+          },
+          "BloomCurve": [
+            {
+              "y": 0.5
+            },
+            {
+              "x": 1,
+              "y": 1
+            }
+          ],
+          "Mode": "Blur",
+          "Strength": 0.2,
+          "Threshold": 0.5,
+          "ThresholdWidth": 0
         }
       ]
     },
@@ -59,7 +88,7 @@
         {
           "__type": "Sandbox.SkyBox2D",
           "__guid": "1e79fba3-9c67-4e86-9990-4f25e01181b2",
-          "SkyMaterial": "materials/skybox/light_test_sky_sunny02.vmat",
+          "SkyMaterial": "materials/skybox/skybox_day_01.vmat",
           "Tint": "1,1,1,1"
         }
       ]
@@ -68,7 +97,6 @@
       "__guid": "57942364-6905-4fea-b2e5-ce435da00c64",
       "Flags": 0,
       "Name": "SDF World",
-      "Scale": "5,5,5",
       "Enabled": true,
       "Components": [
         {
@@ -76,13 +104,17 @@
           "__guid": "98aa5276-de34-46aa-8977-84e1e8df5248",
           "HasPhysics": true,
           "IsFinite": true,
-          "Size": "5000,5000,800000"
+          "Size": "5000,5000,5000"
         },
         {
           "__type": "WorldGen",
           "__guid": "80b7518f-d3f3-4850-a423-c128e10e3fe6",
           "Parameters": "sdf/world.world",
-          "Seed": "aa2a455c088ec1a4",
+          "PlayerPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/playerdead4left.prefab"
+          },
+          "Seed": "56b5f6bd82c0a992",
           "Volume": "sdf/grass.sdfvol",
           "World": {
             "_type": "component",
@@ -94,14 +126,105 @@
       ]
     },
     {
-      "__guid": "04b08438-b1f9-4114-aed8-1d6e21ab0fb1",
+      "__guid": "27386f4f-f721-45ed-ac85-19c3341ca0ca",
       "Flags": 0,
-      "Name": "playerdead4left",
-      "Position": "393.6057,1498.039,2145.358",
-      "Tags": "player",
+      "Name": "GameSystem",
+      "Position": "2629.894,2539.397,3767.866",
       "Enabled": true,
-      "__Prefab": "prefabs/playerdead4left.prefab",
-      "__PrefabVariables": {}
+      "Components": [
+        {
+          "__type": "GameSystem",
+          "__guid": "5e3d49c6-b16c-4602-9a6c-5aaca436154e",
+          "PlayerPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/playerdead4left.prefab"
+          },
+          "ShouldSpawnPlayer": false,
+          "StartServer": false
+        }
+      ]
+    },
+    {
+      "__guid": "20d7b78c-0efb-402a-b4e4-53e6fcff3d07",
+      "Flags": 0,
+      "Name": "NPC Spawner",
+      "Position": "3564.769,-245.8868,1210.356",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "NPCSpawner",
+          "__guid": "2973f9a5-df9a-4c80-bf83-6c857b68f95a",
+          "NPCPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/dead4leftzombie.prefab"
+          }
+        }
+      ]
+    },
+    {
+      "__guid": "855f7020-250b-4c13-91a6-0ded4dbc2266",
+      "Flags": 0,
+      "Name": "Screen",
+      "Position": "-5794.305,3832.64,2715.171",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ScreenPanel",
+          "__guid": "f3a5b2cc-bb2c-4d6b-9ddd-7fa9dad268ba",
+          "AutoScreenScale": true,
+          "Opacity": 1,
+          "Scale": 1,
+          "ScaleStrategy": "ConsistentHeight",
+          "ZIndex": 100
+        },
+        {
+          "__type": "HUD",
+          "__guid": "994ed457-0cc7-4835-893b-c6bd4042864b"
+        },
+        {
+          "__type": "PauseMenu",
+          "__guid": "551cf72b-6602-4390-b6f0-2c4a8de704ac",
+          "MenuScene": "scenes/dead4leftmenurewrite.scene"
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "b48624f5-0827-4881-a934-79e0b1094ac1",
+          "Flags": 0,
+          "Name": "Chat",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "NetworkMode": 1,
+          "Components": [
+            {
+              "__type": "Chat",
+              "__guid": "c661e32c-4844-4a7f-bc06-7e89f9096f1c"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "__guid": "d7cafbb6-999b-4ee9-a36b-71ad9651feb4",
+      "Flags": 0,
+      "Name": "Death Trigger",
+      "Position": "0,0,-814.278",
+      "Tags": "trigger",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "DeathTrigger",
+          "__guid": "16a2fd82-7d9d-428e-aacb-73cfc88585d5"
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "fc496b83-69f2-4afd-9a08-15aa8aa5218e",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "50000,50000,50",
+          "Static": false
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -113,7 +236,7 @@
     "TimeScale": 1,
     "UseFixedUpdate": true,
     "NavMesh": {
-      "Enabled": false,
+      "Enabled": true,
       "IncludeStaticBodies": true,
       "IncludeKeyframedBodies": true,
       "EditorAutoUpdate": true,
@@ -121,15 +244,13 @@
       "AgentRadius": 16,
       "AgentStepSize": 18,
       "AgentMaxSlope": 40,
-      "ExcludedBodies": "",
+      "ExcludedBodies": "trigger",
       "IncludedBodies": ""
     }
   },
   "Title": "sdfworld",
   "Description": "",
   "ResourceVersion": 1,
-  "__references": [
-    "nolankicks.platformertest"
-  ],
+  "__references": [],
   "__version": 1
 }
