@@ -101,7 +101,7 @@ public sealed class WorldParameters : GameResource
             Noise.SimplexField( new Noise.FractalParameters( seed, Frequency: 1f / HeightNoiseScale, Octaves: 8 ) ),
             IslandBias,
             TerrainBias,
-            PlainsCurve,
+            //PlainsCurve,
             MountainsCurve,
             transform,
             1f / (1 << level) );
@@ -113,7 +113,7 @@ public sealed class WorldParameters : GameResource
         INoiseField HeightField,
         Curve IslandBias,
         Curve TerrainBias,
-        Curve PlainsCurve,
+        //Curve PlainsCurve,
         Curve MountainsCurve,
         Transform Transform,
         float Scale ) : INoiseField
@@ -134,10 +134,11 @@ public sealed class WorldParameters : GameResource
             island = IslandBias.Evaluate( island );
             terrain = TerrainBias.Evaluate( terrain );
 
-            var plainsHeight = PlainsCurve.Evaluate( height );
+            //var plainsHeight = PlainsCurve.Evaluate( height );
             var mountainsHeight = MountainsCurve.Evaluate( height );
             var oceanHeight = 512f + height * 128f;
-            var landHeight = plainsHeight + terrain * (mountainsHeight - plainsHeight);
+            //var landHeight = plainsHeight + terrain * (mountainsHeight - plainsHeight);
+			var landHeight = terrain * mountainsHeight;
 
             height = oceanHeight + island * (landHeight - oceanHeight);
 

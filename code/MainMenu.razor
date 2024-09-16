@@ -8,11 +8,7 @@
 <root>
 	<div class="buttons">
 
-		<div class="button" onclick=@( () =>
-		{
-			ChangeMenuState( MenuState.None );
-			Game.Overlay.ShowPackageSelector( "type:map", OnSelect );
-		})> Play </div>
+		<div class="button" onclick=@( () => ChangeMenuState( MenuState.Play ) )> Play </div>
 
 		<div class="button" onclick=@( () => ChangeMenuState( MenuState.Lobbies ))> Lobbies </div>
 		<div class="button" onclick=@( () => ChangeMenuState( MenuState.Leaderboards ))> Leaderboards</div>
@@ -86,6 +82,19 @@
 			</div>
 		}
 			break;
+
+		case MenuState.Play:
+			<div class="play">
+				<div class="button" onclick=@( () => {
+					ChangeMenuState( MenuState.None );
+					Game.Overlay.ShowPackageSelector( "type:map", OnSelect );
+				})>
+				Map Select
+				</div>
+				<div class="button" onclick=@( () => Scene.Load( SDFScene ) )>Procedural World</div>
+			</div>
+
+			break;
 	}
 </root>
 
@@ -95,6 +104,7 @@
 	{
 		Lobbies,
 		Leaderboards,
+		Play,
 		None,
 	}
 
@@ -104,6 +114,7 @@
     public bool FetchingLeaderboard { get; set; }
 
 	[Property] public SceneFile MainScene { get; set; }
+	[Property] public SceneFile SDFScene { get; set; }
 
 	public Sandbox.Services.Leaderboards.Board2 Leaderboard { get; set; }
 	public SortBy CurrentSortBy { get; set; } = SortBy.AllTime;
