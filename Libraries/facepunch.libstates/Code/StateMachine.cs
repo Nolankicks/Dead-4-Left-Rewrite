@@ -139,11 +139,14 @@ public sealed class StateMachineComponent : Component
 
 	private void DoTransitionInternal( Transition transition )
 	{
-		var current = CurrentState!;
+		var current = CurrentState;
 
-		Assert.AreEqual( current, transition.Source );
+		if ( current != null && current != transition.Source )
+		{
+			Log.Warning( $"Expected to transition from {transition.Source}, but we're in state {current}!" );
+		}
 
-		InvokeSafe( current.OnLeaveState );
+		InvokeSafe( current?.OnLeaveState );
 		InvokeSafe( transition.OnTransition );
 
 		transition.LastTransitioned = 0f;

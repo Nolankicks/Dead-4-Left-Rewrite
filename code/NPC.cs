@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using System.Threading;
 using Sandbox;
 using Sandbox.Citizen;
@@ -167,11 +168,17 @@ public sealed class NPC : Component, IGameEventHandler<PlayerDeath>, IGameEventH
 		if ( NearestPlayer() == eventArgs.Player )
 			ClearDestination();
 
-		if ( Components.TryGet<StateMachineComponent>( out var state, FindMode.EverythingInSelfAndDescendants ) && Networking.IsHost )
+        BroadcastMessage();
+	}
+
+    [Broadcast]
+    public void BroadcastMessage()
+    {
+        if ( Components.TryGet<StateMachineComponent>( out var state, FindMode.EverythingInSelfAndDescendants ) && Networking.IsHost )
 		{
 			state.SendMessage( "restart" );
 		}
-	}
+    }
 
 	void IGameEventHandler<DamageEvent>.OnGameEvent( DamageEvent eventArgs )
 	{

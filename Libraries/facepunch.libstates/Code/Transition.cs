@@ -181,4 +181,8 @@ public sealed class Transition : IComparable<Transition>, IValid
 	{
 		Deserialize( other.Serialize() );
 	}
+	public override string ToString()
+	{
+		return $"{{ Id = {Id}, Source = {Source}, Target = {Target} }}";
+	}
 }

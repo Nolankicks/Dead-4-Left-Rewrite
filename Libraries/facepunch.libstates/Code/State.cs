@@ -215,4 +215,9 @@ public sealed class State : IValid
 
 		EditorPosition = model.UserData?.Position ?? Vector2.Zero;
 	}
+
+	public override string ToString()
+	{
+		return $"{{ Id = {Id}, Name = {Name} }}";
+	}
 }
