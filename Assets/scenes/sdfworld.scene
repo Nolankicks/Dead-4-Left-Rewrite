@@ -1,0 +1,135 @@
+{
+  "__guid": "e8555c61-b902-4b2c-8390-0e3bda93413d",
+  "GameObjects": [
+    {
+      "__guid": "b423b9bf-17db-4015-bdb8-c572cf5d520e",
+      "Flags": 0,
+      "Name": "Camera",
+      "Position": "-609.4769,0,0",
+      "Tags": "maincamera",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.CameraComponent",
+          "__guid": "0e022944-7011-4d57-bb09-1f8c010467c6",
+          "BackgroundColor": "0.33333,0.46275,0.52157,1",
+          "ClearFlags": "All",
+          "FieldOfView": 60,
+          "IsMainCamera": true,
+          "Orthographic": false,
+          "OrthographicHeight": 1204,
+          "Priority": 1,
+          "RenderExcludeTags": "",
+          "RenderTags": "",
+          "TargetEye": "None",
+          "Viewport": "0,0,1,1",
+          "ZFar": 10000,
+          "ZNear": 10
+        }
+      ]
+    },
+    {
+      "__guid": "ee5d1cd3-459a-4007-80c8-f3d8df58369f",
+      "Flags": 0,
+      "Name": "Sun",
+      "Position": "149.3263,149.3264,-211.1794",
+      "Rotation": "0,0.3826834,0,0.9238796",
+      "Tags": "light_directional,light",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.DirectionalLight",
+          "__guid": "9f422e5f-ed9d-4041-924c-ec808507ef86",
+          "FogMode": "Enabled",
+          "FogStrength": 1,
+          "LightColor": "0.91373,0.98039,1,1",
+          "Shadows": true,
+          "SkyColor": "0,0,0,0"
+        }
+      ]
+    },
+    {
+      "__guid": "a00a9862-af07-4132-8872-eb13aa15d51d",
+      "Flags": 0,
+      "Name": "2D Skybox",
+      "Position": "277.7221,277.7221,-392.7584",
+      "Tags": "skybox",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SkyBox2D",
+          "__guid": "1e79fba3-9c67-4e86-9990-4f25e01181b2",
+          "SkyMaterial": "materials/skybox/light_test_sky_sunny02.vmat",
+          "Tint": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "__guid": "57942364-6905-4fea-b2e5-ce435da00c64",
+      "Flags": 0,
+      "Name": "SDF World",
+      "Scale": "5,5,5",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Sdf.Sdf3DWorld",
+          "__guid": "98aa5276-de34-46aa-8977-84e1e8df5248",
+          "HasPhysics": true,
+          "IsFinite": true,
+          "Size": "5000,5000,800000"
+        },
+        {
+          "__type": "WorldGen",
+          "__guid": "80b7518f-d3f3-4850-a423-c128e10e3fe6",
+          "Parameters": "sdf/world.world",
+          "Seed": "aa2a455c088ec1a4",
+          "Volume": "sdf/grass.sdfvol",
+          "World": {
+            "_type": "component",
+            "component_id": "98aa5276-de34-46aa-8977-84e1e8df5248",
+            "go": "57942364-6905-4fea-b2e5-ce435da00c64",
+            "component_type": "Sdf3DWorld"
+          }
+        }
+      ]
+    },
+    {
+      "__guid": "04b08438-b1f9-4114-aed8-1d6e21ab0fb1",
+      "Flags": 0,
+      "Name": "playerdead4left",
+      "Position": "393.6057,1498.039,2145.358",
+      "Tags": "player",
+      "Enabled": true,
+      "__Prefab": "prefabs/playerdead4left.prefab",
+      "__PrefabVariables": {}
+    }
+  ],
+  "SceneProperties": {
+    "FixedUpdateFrequency": 50,
+    "MaxFixedUpdates": 5,
+    "NetworkFrequency": 30,
+    "NetworkInterpolation": true,
+    "ThreadedAnimation": true,
+    "TimeScale": 1,
+    "UseFixedUpdate": true,
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": true,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": ""
+    }
+  },
+  "Title": "sdfworld",
+  "Description": "",
+  "ResourceVersion": 1,
+  "__references": [
+    "nolankicks.platformertest"
+  ],
+  "__version": 1
+}
