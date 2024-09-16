@@ -250,7 +250,10 @@ public sealed class PlayerController : Component, IGameEventHandler<DamageEvent>
 			Scene.Dispatch( new PlayerDeath( this ) );
 
 			if ( !IsProxy )
-				Stats.Flush();
+            {
+                Stats.Increment( "deaths", 1 );
+                Stats.Flush();
+            }
 		}
 	}
 

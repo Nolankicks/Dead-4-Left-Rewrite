@@ -1,0 +1,73 @@
+PauseMenu
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: hsl(0, 0%, 5%, 0.9);
+	justify-content: flex-start;
+	align-items: center;
+	font-weight: bold;
+    flex-direction: column;
+    pointer-events: all;
+
+    transition: opacity 0.2s;
+
+    z-index: 1000;
+
+	.title
+    {
+        height: 200px;
+        align-items: center;
+        justify-content: center;
+
+        font-family: Poppins;
+        color: white;
+        gap: 16px;
+        font-size: 72px;
+    }
+
+    .buttons
+    {
+        height: 100%;
+        width: 500px;
+        align-items: center;
+        justify-content: center;
+
+        color: white;
+        font-family: Poppins;
+
+        flex-direction: column;
+
+        gap: 12px;
+
+        .button
+        {
+            width: 100%;
+            font-size: 42px;
+            height: 100px;
+
+
+            background-color: hsl(0, 0%, 11%);
+            border-color: hsl(0, 0%, 15%);
+            border-width: 6;
+            align-items: center;
+            justify-content: center;
+
+            &:hover
+            {
+                background-color: hsl(0, 0%, 20%);
+                sound-in: ui.button.over;
+                cursor: pointer;
+            }
+
+            &:active
+            {
+                background-color: hsl(0, 0%, 15%);
+                sound-in: ui.button.press;
+                cursor: pointer;
+            }
+        }
+    }
+}

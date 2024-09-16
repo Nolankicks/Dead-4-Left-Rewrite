@@ -1,0 +1,50 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using Sandbox.Network;
+@inherits PanelComponent
+
+<root style="opacity: @( Visible ? "1" : "0");">
+	<div class="title">
+		<div>DEAD</div>
+		<p style="color: red">4</p>
+		<div>LEFT</div>
+	</div>
+
+	<div class="buttons">
+		<div class="button" onclick=@( () => Visible = false )> Resume </div>
+		<div class="button" onclick=@( () => Game.Overlay.ShowServerList( new Sandbox.Modals.ServerListConfig( Game.Ident ) ) )> Servers </div>
+		<div class="button" onclick=@( () => Game.Overlay.ShowReviewModal( Package.Fetch( Game.Ident, false )?.Result ) )> Review </div>
+		<div class="button" onclick=@Game.Overlay.ShowSettingsModal> Settings </div>
+		<div class="button" onclick=@BackToMenu> Back to Menu </div>
+		<div class="button" onclick=@Game.Close> Exit </div>
+	</div>
+</root>
+
+@code
+{
+	public bool Visible { get; set; } = false;
+	[Property] public SceneFile MenuScene { get; set; }
+
+	protected override void OnUpdate()
+	{
+		if ( Input.EscapePressed )
+		{
+			Visible = !Visible;
+
+			//Can't convince me this is not dumb
+			Input.EscapePressed = false;
+		}
+	}
+
+	public void BackToMenu()
+	{
+		GameNetworkSystem.Disconnect();
+
+		Game.ActiveScene.Load( MenuScene );
+	}
+
+	/// <summary>
+	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+	/// </summary>
+	protected override int BuildHash() => System.HashCode.Combine( Input.EscapePressed, Visible );
+}
