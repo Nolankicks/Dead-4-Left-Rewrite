@@ -92,7 +92,7 @@
             "_type": "gameobject",
             "prefab": "prefabs/playerdead4left.prefab"
           },
-          "ShouldSpawnPlayer": true,
+          "SpawnPlayer": true,
           "StartServer": true
         }
       ]
