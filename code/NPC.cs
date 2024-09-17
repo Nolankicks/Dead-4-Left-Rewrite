@@ -118,8 +118,11 @@ public sealed class NPC : Component, IGameEventHandler<PlayerDeath>, IGameEventH
 		AnimationHelper.HoldType = HoldType;
 	}
 
-	public void Wander()
+	public void Wander( bool start )
 	{
+		if ( start )
+			Stop = false;
+
 		if ( IsMoving || !Agent.IsValid() || WishMove || Stop )
 			return;
 
@@ -139,6 +142,7 @@ public sealed class NPC : Component, IGameEventHandler<PlayerDeath>, IGameEventH
 			return;
 
 		var tr = Scene.Trace.Ray( Transform.Position, Transform.Position + Transform.Rotation.Forward * length )
+			.WithoutTags( "zombie" )
 			.IgnoreGameObject( GameObject )
 			.Run();
 
@@ -166,9 +170,11 @@ public sealed class NPC : Component, IGameEventHandler<PlayerDeath>, IGameEventH
 			return;
 
 		if ( NearestPlayer() == eventArgs.Player )
+		{
 			ClearDestination();
+			BroadcastMessage();
+		}
 
-        BroadcastMessage();
 	}
 
     [Broadcast]
