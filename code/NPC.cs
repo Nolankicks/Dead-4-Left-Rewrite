@@ -41,8 +41,12 @@ public sealed class NPC : Component, IGameEventHandler<PlayerDeath>, IGameEventH
 		WishMove = true;
 	}
 
+	[Broadcast]
 	public void ClearDestination()
 	{
+		if ( !Networking.IsHost )
+			return;
+
 		Destination = Vector3.Zero;
 		IsMoving = false;
 		WishMove = false;
