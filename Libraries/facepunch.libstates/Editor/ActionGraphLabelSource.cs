@@ -3,6 +3,7 @@ using Facepunch.ActionGraphs;
 using System;
 using System.Linq;
 using System.Text;
+using Sandbox.ActionGraphs;
 
 namespace Sandbox.States.Editor;
 
@@ -119,6 +120,7 @@ public abstract record ActionGraphLabelSource<T> : ILabelSource
 		var inner = (ActionGraph)graph;
 
 		inner.Title = title;
+		inner.SourceLocation = new SourceLocation( StateMachine.GameObject.Scene.Source );
 		inner.SetParameters(
 			inner.Inputs.Values.Concat( InputDefinition.Target( typeof( GameObject ), StateMachine.GameObject ) ),
 			inner.Outputs.Values.ToArray() );
