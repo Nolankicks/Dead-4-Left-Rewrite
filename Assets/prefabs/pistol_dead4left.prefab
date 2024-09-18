@@ -19,8 +19,8 @@
         "Model": "models/first_person/first_person_arms.vmdl",
         "Morphs": {},
         "RenderOptions": {
-          "GameLayer": true,
-          "OverlayLayer": false,
+          "GameLayer": false,
+          "OverlayLayer": true,
           "BloomLayer": false,
           "AfterUILayer": false
         },
@@ -73,8 +73,8 @@
             "Model": "models/weapons/sbox_pistol_usp/v_usp.vmdl",
             "Morphs": {},
             "RenderOptions": {
-              "GameLayer": true,
-              "OverlayLayer": false,
+              "GameLayer": false,
+              "OverlayLayer": true,
               "BloomLayer": false,
               "AfterUILayer": false
             },

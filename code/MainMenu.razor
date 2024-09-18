@@ -121,6 +121,8 @@
 	public bool Country { get; set; }
 	public bool Friends { get; set; }
 
+    [Property, MapAssetPath] public string MapIndent { get; set; }
+
 	public enum SortBy
 	{
 		Day,
@@ -134,6 +136,17 @@
 	{
 		return entry.SteamId == (long)Sandbox.Utility.Steam.SteamId;
 	}
+
+    [Button]
+    public void LoadMap()
+    {
+        if ( string.IsNullOrEmpty( MapIndent ) || Scene.IsEditor )
+            return;
+
+        LaunchArguments.Map = MapIndent;
+
+        Game.ActiveScene?.Load( MainScene );
+    }
 
 	public async Task FetchLobbyInfo()
 	{

@@ -17,13 +17,16 @@ public sealed class NPCSpawner : Component
 
 	public void Spawn()
 	{
-		if ( !NPCPrefab.IsValid() )
+		if ( !NPCPrefab.IsValid() || !Scene.IsValid() )
 			return;
+
+        if ( Scene.NavMesh is null )
+            return;
 
 		var randomPoint = Scene.NavMesh.GetRandomPoint();
 
-		if ( randomPoint is null )
-			return;
+        if ( randomPoint is null )
+            return;
 
 		var clone = NPCPrefab.Clone();
 
