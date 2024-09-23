@@ -16,11 +16,11 @@ public sealed class GameSystem : Component, Component.INetworkListener, IGameEve
 
 	protected override async Task OnLoad()
 	{
-		if ( Networking.IsHost && !GameNetworkSystem.IsActive && StartServer && !Scene.IsEditor )
+		if ( Networking.IsHost && !Networking.IsActive && StartServer && !Scene.IsEditor )
 		{
 			LoadingScreen.Title = "Creating Lobby...";
 			await Task.DelaySeconds( 0.1f );
-			GameNetworkSystem.CreateLobby();
+			Networking.CreateLobby();
 		}
 	}
 

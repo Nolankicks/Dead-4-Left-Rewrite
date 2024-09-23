@@ -5,7 +5,7 @@ public sealed class NPCSpawner : Component
 {
 	[Property] public GameObject NPCPrefab { get; set; }
 
-	public TimeUntil NextSpawn { get; set; } = 0;	
+	public TimeUntil NextSpawn { get; set; } = 0;
 
 	protected override void OnUpdate()
 	{
@@ -20,13 +20,13 @@ public sealed class NPCSpawner : Component
 		if ( !NPCPrefab.IsValid() || !Scene.IsValid() )
 			return;
 
-        if ( Scene.NavMesh is null )
-            return;
+		if ( Scene.NavMesh is null )
+			return;
 
 		var randomPoint = Scene.NavMesh.GetRandomPoint();
 
-        if ( randomPoint is null )
-            return;
+		if ( randomPoint is null )
+			return;
 
 		var clone = NPCPrefab.Clone();
 

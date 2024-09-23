@@ -82,21 +82,12 @@ public sealed class Inventory : Component
 
 		clone.Parent = local.Eye;
 
-		clone.NetworkSpawn();
+		clone.Enabled = false;
+
+		clone.NetworkSpawn( false, Network.Owner );
 
 		Items.Add( clone );
 		ItemsData.Add( item );
-
-		BroadcastEnable( clone, false );
-	}
-
-	[Broadcast]
-	public void BroadcastEnable( GameObject gb, bool enable )
-	{
-		if ( !gb.IsValid() )
-			return;
-
-		gb.Enabled = enable;
 	}
 
 	public void ChangeItem( int index, List<GameObject> items )
@@ -105,6 +96,9 @@ public sealed class Inventory : Component
 			return;
 
 		Index = index;
+
+		if ( CurrentItem.IsValid() )
+			CurrentItem.Enabled = false;
 
 		var nextItem = items[index];
 
@@ -118,17 +112,9 @@ public sealed class Inventory : Component
 		if ( !CurrentItem.IsValid() )
 			return;
 
-		BroadcastEnable( CurrentItem, true );
+		CurrentItem.Enabled = true;
 
 		CurrentItem.Dispatch( new OnItemEquipped() );
-
-		foreach ( var item in items )
-		{
-			if ( item == CurrentItem )
-				continue;
-
-			BroadcastEnable( item, false );
-		}
 	}
 
 	public void KeyboardInputs()

@@ -1,5 +1,5 @@
 {
-  "__guid": "b65f69f3-7160-4e97-ba27-739bb04b2798",
+  "__guid": "6462cb3d-1e47-48c0-980f-7868a845d1f5",
   "GameObjects": [
     {
       "__guid": "9f999039-4bf8-4945-82dd-6a7bf02c0a5c",
@@ -183,5 +183,6 @@
   "Description": "",
   "ResourceVersion": 1,
   "__references": [],
+  "IsValid": true,
   "__version": 1
 }

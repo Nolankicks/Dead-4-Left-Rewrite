@@ -3,7 +3,7 @@
     "__guid": "2a999b52-d283-4c71-b1b1-b24a4920212c",
     "Flags": 0,
     "Name": "dead4leftzombie",
-    "Tags": "npc,zombie",
+    "Tags": "zombie,npc",
     "Enabled": true,
     "NetworkMode": 1,
     "Components": [
@@ -55,8 +55,9 @@
             {
               "Name": "Start",
               "OnUpdateState": {
-                "__version": 7,
+                "__version": 8,
                 "__guid": "5c99fba9-9ed6-49cf-84d7-98776c50e713",
+                "__changeId": 0,
                 "UserData": {
                   "Title": "Update",
                   "ReferencedComponentTypes": []
@@ -117,6 +118,7 @@
                     "DstName": "_target"
                   },
                   {
+                    "Id": 33,
                     "Value": true,
                     "DstId": 25,
                     "DstName": "start"
@@ -128,6 +130,7 @@
                     "DstName": "_target"
                   },
                   {
+                    "Id": 34,
                     "Value": "EnabledInSelf, InParent",
                     "DstId": 26,
                     "DstName": "search"
@@ -154,8 +157,9 @@
               "Id": 1,
               "Name": "Move to player",
               "OnUpdateState": {
-                "__version": 7,
+                "__version": 8,
                 "__guid": "3ed621e0-242f-41ac-ba96-1d88041ad1a5",
+                "__changeId": 0,
                 "UserData": {
                   "Title": "Update",
                   "ReferencedComponentTypes": []
@@ -243,6 +247,7 @@
                     "DstName": "_target"
                   },
                   {
+                    "Id": 11,
                     "Value": 2,
                     "DstId": 3,
                     "DstName": "fireRate"
@@ -254,6 +259,7 @@
                     "DstName": "_target"
                   },
                   {
+                    "Id": 12,
                     "Value": "EnabledInSelf, InParent",
                     "DstId": 5,
                     "DstName": "search"
@@ -289,8 +295,9 @@
               "Id": 3,
               "TargetId": 1,
               "Condition": {
-                "__version": 7,
+                "__version": 8,
                 "__guid": "19171f0a-3ef9-4d09-a4c8-f6c89331920a",
+                "__changeId": 0,
                 "UserData": {
                   "Title": "Condition",
                   "ReferencedComponentTypes": []
@@ -373,6 +380,7 @@
                     "DstName": "_target"
                   },
                   {
+                    "Id": 11,
                     "Value": 2000,
                     "DstId": 3,
                     "DstName": "distance"
@@ -384,6 +392,7 @@
                     "DstName": "_target"
                   },
                   {
+                    "Id": 12,
                     "Value": "EnabledInSelf, InParent",
                     "DstId": 5,
                     "DstName": "search"
@@ -528,6 +537,7 @@
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1
