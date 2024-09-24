@@ -29,10 +29,27 @@ public sealed class Inventory : Component
 		ChangeItem( Index, Items );
 	}
 
+	[Button]
+	public void SwapItemsButton()
+	{
+		SwapItems( 2, 1 );
+
+		var hud = Scene.GetAll<HUD>()?.FirstOrDefault();
+
+		if ( hud.IsValid() )
+			hud.StateHasChanged();
+	}
+
 	public void SwapItems( int index1, int index2 )
 	{
-		if ( index1 < 0 || index1 >= Items.Count() || index2 < 0 || index2 >= Items.Count() )
+		if ( Items?.Count() == 0 || Items is null )
 			return;
+
+		if ( index1 < 0 || index1 >= Items.Count() || index2 < 0 || index2 >= Items.Count() )
+		{
+			Log.Warning( "Invalid index" );
+			return;
+		}
 
 		var temp = Items[index1];
 		Items[index1] = Items[index2];
@@ -46,6 +63,21 @@ public sealed class Inventory : Component
 			Index = index2;
 		else if ( Index == index2 )
 			Index = index1;
+	}
+
+	[Description("Swaps the items in the inventory, please null check the GameObjects before calling this method.")]
+	public void SwapItems( GameObject gb1, GameObject gb2 )
+	{
+		if ( !gb1.IsValid() || !gb2.IsValid() )
+			return;
+
+		var index1 = Items.IndexOf( gb1 );
+		var index2 = Items.IndexOf( gb2 );
+
+		if ( index1 == -1 || index2 == -1 )
+			return;
+
+		SwapItems( index1, index2  );
 	}
 
 	protected override void OnUpdate()
@@ -92,7 +124,7 @@ public sealed class Inventory : Component
 
 	public void ChangeItem( int index, List<GameObject> items )
 	{
-		if ( index < 0 || index >= items.Count() )
+		if ( index < 0 || index >= items?.Count() || items is null || Index == index )
 			return;
 
 		Index = index;
@@ -100,7 +132,7 @@ public sealed class Inventory : Component
 		if ( CurrentItem.IsValid() )
 			CurrentItem.Enabled = false;
 
-		var nextItem = items[index];
+		var nextItem = items?[index];
 
 		if ( !nextItem.IsValid() )
 			return;
