@@ -118,7 +118,6 @@
       "__guid": "59feaca6-fc52-4c39-84f2-7869b77b59da",
       "Flags": 0,
       "Name": "Screen",
-      "Position": "-5794.305,3832.64,2715.171",
       "Enabled": true,
       "Components": [
         {
@@ -145,7 +144,6 @@
           "__guid": "1f5c7aa6-9d46-481e-b0c1-bc3986bb0faa",
           "Flags": 0,
           "Name": "Chat",
-          "Position": "0,0,0",
           "Enabled": true,
           "NetworkMode": 1,
           "Components": [

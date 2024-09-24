@@ -124,7 +124,7 @@ public sealed class Inventory : Component
 
 	public void ChangeItem( int index, List<GameObject> items )
 	{
-		if ( index < 0 || index >= items?.Count() || items is null || Index == index )
+		if ( index < 0 || index >= items?.Count() || items is null )
 			return;
 
 		Index = index;
