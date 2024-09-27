@@ -1,6 +1,8 @@
 @using Sandbox;
 @using Sandbox.UI;
+@using Sandbox.Events;
 @inherits PanelComponent
+@implements IGameEventHandler<PlayerDeath>
 @implements Component.INetworkListener
 
 <root>
@@ -101,5 +103,12 @@
 		if ( IsProxy ) return;
 
 		AddSystemText( $"{channel.DisplayName} has left the game", "❌" );
+	}
+
+	void IGameEventHandler<PlayerDeath>.OnGameEvent(PlayerDeath eventArgs)
+	{
+		if ( IsProxy ) return;
+
+		AddSystemText( $"{eventArgs.Player.Network.Owner.DisplayName} was killed", "💀" );
 	}
 }

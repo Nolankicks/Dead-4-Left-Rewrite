@@ -1,6 +1,8 @@
 @using Sandbox;
 @using Sandbox.UI;
+@using Sandbox.Events;
 @inherits PanelComponent
+@implements IGameEventHandler<PlayerDamage>
 
 <root>
 	@{
@@ -40,6 +42,11 @@
 
 @code
 {
+	void IGameEventHandler<PlayerDamage>.OnGameEvent( PlayerDamage eventArgs )
+	{
+		Panel.FlashClass( "damage", 1f );
+	}
+
 
 	/// <summary>
 	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt

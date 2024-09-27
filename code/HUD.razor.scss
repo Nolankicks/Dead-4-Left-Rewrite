@@ -9,6 +9,7 @@ HUD
 	align-items: center;
 	font-weight: bolder;
 	font-family: Poppins;
+    transition: all 0.1s linear;
 
 	.items
     {
@@ -60,7 +61,6 @@ HUD
 		border-radius: 50%;
 		background-color: white;
 		opacity: 0.3;
-		transition: transform 0.05s ease-in-out;
 		width: 4px;
 		height: 4px;
 	}
@@ -72,5 +72,11 @@ HUD
         bottom: 32px;
         font-size: 42px;
         color: white;
+    }
+
+    &.damage
+    {
+        background-color: #9435;
+        transform: translateY( 5px ) scale( 1.01 );
     }
 }

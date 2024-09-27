@@ -8,6 +8,8 @@ using Sandbox.Utility;
 
 public record PlayerDeath( PlayerController Player ) : IGameEvent;
 
+public record PlayerDamage( PlayerController Player, DamageEvent DamageEvent ) : IGameEvent;
+
 public record PlayerReset() : IGameEvent;
 
 public record JumpEvent() : IGameEvent;
@@ -229,6 +231,8 @@ public sealed class PlayerController : Component, IGameEventHandler<DamageEvent>
 	void IGameEventHandler<DamageEvent>.OnGameEvent( DamageEvent eventArgs )
 	{
 		TakeDamage();
+
+		Scene.Dispatch( new PlayerDamage( this, eventArgs ) );
 	}
 
 	[Broadcast]
