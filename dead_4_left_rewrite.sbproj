@@ -23,6 +23,7 @@
     "LeaderboardType": "None",
     "CsProjName": "",
     "StartupScene": "scenes/dead4leftmenurewrite.scene",
-    "LaunchMode": "Normal"
+    "LaunchMode": "Normal",
+    "MapStartupScene": "scenes/dead4leftmainrewrite.scene"
   }
 }
