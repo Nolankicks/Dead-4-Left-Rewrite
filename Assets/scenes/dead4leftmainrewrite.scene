@@ -69,7 +69,7 @@
           "__guid": "5e3eaf0f-93e4-4f2c-983f-26a88c3269ee",
           "__version": 1,
           "EnableCollision": true,
-          "MapName": "maps/dev/preview_flat.vmap",
+          "MapName": "facepunch.flatgrass",
           "NoOrigin": false,
           "OnMapLoaded": null,
           "OnMapUnloaded": null,

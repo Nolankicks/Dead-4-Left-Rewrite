@@ -83,6 +83,13 @@
           "weapondatas/pistol.weapons",
           "weapondatas/shotgun.weapons"
         ]
+      },
+      {
+        "__type": "HealthComponent",
+        "__guid": "227d6733-02bc-46fd-889d-f3865f20e591",
+        "Health": 100,
+        "IsDead": false,
+        "MaxHealth": 100
       }
     ],
     "Children": [
@@ -1044,9 +1051,11 @@
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [
     "vidya.model-none"
   ],
+  "IsValid": true,
   "__version": 1
 }

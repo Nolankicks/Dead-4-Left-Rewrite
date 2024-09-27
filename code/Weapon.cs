@@ -86,16 +86,12 @@ public sealed class Weapon : Component, IGameEventHandler<OnPlayerJoin>, IGameEv
 		if ( !tr.Hit )
 			return;
 
-		if ( tr.GameObject.Components.TryGet<PlayerController>( out var player, FindMode.EverythingInSelfAndParent ) && GameSystem.PVP )
+		if ( tr.GameObject.Components.TryGet<HealthComponent>( out var health, FindMode.EverythingInSelfAndParent ) )
 		{
-			player.GameObject.Dispatch( new DamageEvent( Damage, local.GameObject, player.GameObject, tr.EndPosition, tr ) );
+			if ( tr.GameObject.Components.TryGet<PlayerController>( out var player, FindMode.EverythingInSelfAndParent ) && !GameSystem.PVP )
+				return;
 
-			SpawnParticleEffect( Cloud.ParticleSystem( "bolt.impactflesh" ), tr.EndPosition );
-		}
-
-		if ( tr.GameObject.Components.TryGet<NPC>( out var npc, FindMode.EverythingInSelfAndParent ) )
-		{
-			npc.GameObject.Dispatch( new DamageEvent( Damage, local.GameObject, npc.GameObject, tr.EndPosition, tr ) );
+			health.TakeDamage( local.GameObject, Damage, tr.EndPosition, tr.Normal );
 
 			SpawnParticleEffect( Cloud.ParticleSystem( "bolt.impactflesh" ), tr.EndPosition );
 		}

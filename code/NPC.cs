@@ -6,7 +6,7 @@ using Sandbox.Events;
 using Sandbox.Navigation;
 using Sandbox.States;
 
-public sealed class NPC : Component, IGameEventHandler<PlayerDeath>, IGameEventHandler<DamageEvent>
+public sealed class NPC : Component, IGameEventHandler<PlayerDeath>, IGameEventHandler<DeathEvent>
 {
 	[Sync] public Vector3 Destination { get; set; }
 	[Property] public NavMeshAgent Agent { get; set; }
@@ -15,11 +15,9 @@ public sealed class NPC : Component, IGameEventHandler<PlayerDeath>, IGameEventH
 	[Property] public CitizenAnimationHelper AnimationHelper { get; set; }
 	[Sync, Property] public bool Stop { get; set; } = false;
 	[Property] public CitizenAnimationHelper.HoldTypes HoldType { get; set; } = CitizenAnimationHelper.HoldTypes.None;
-	[Sync] public int Health { get; set; } = 100;
-	[Sync] public bool IsDead { get; set; } = false;
-	[Property] public bool HasHealth { get; set; } = false;
 	[Sync] public Vector3 Velocity { get; set; }
 	[Sync] public Vector3 WishVelocity { get; set; }
+	[RequireComponent] public HealthComponent HealthComponent { get; set; }
 
 	public bool NearPlayer( float distance )
 	{
@@ -150,9 +148,9 @@ public sealed class NPC : Component, IGameEventHandler<PlayerDeath>, IGameEventH
 			.IgnoreGameObject( GameObject )
 			.Run();
 
-		if ( tr.Hit && tr.GameObject.Components.TryGet<PlayerController>( out var player, FindMode.EverythingInSelfAndParent ) )
+		if ( tr.Hit && tr.GameObject.Components.TryGet<HealthComponent>( out var healthComponent, FindMode.EverythingInSelfAndParent ) )
 		{
-			player.GameObject.Dispatch( new DamageEvent( damage, GameObject, player.GameObject, tr.EndPosition ) );
+			healthComponent.TakeDamage( GameObject, damage, tr.EndPosition, tr.Normal );
 		}
 
 		if ( Networking.IsHost )
@@ -190,37 +188,24 @@ public sealed class NPC : Component, IGameEventHandler<PlayerDeath>, IGameEventH
 		}
     }
 
-	void IGameEventHandler<DamageEvent>.OnGameEvent( DamageEvent eventArgs )
+	void IGameEventHandler<DeathEvent>.OnGameEvent( DeathEvent eventArgs )
 	{
-		if ( IsDead )
-			return;
-
 		if ( eventArgs.Attacker.Components.TryGet<PlayerController>( out var player ) && eventArgs.Attacker.IsValid() )
-		{
 			player.AddScore( 5 );
-		}
 
-		BroadcastDeath( eventArgs.Amount, eventArgs.tr.Normal );
+		BroadcastDeath( eventArgs.damageNormal );
 	}
 
 	[Broadcast]
-	public void BroadcastDeath( int amount, Vector3 normal )
+	public void BroadcastDeath( Vector3 normal )
 	{
-		var health = Health - amount;
-
-		if ( IsDead )
+		if ( !HealthComponent.IsValid() )
 			return;
 
-		if ( health <= 0 )
+		if ( HealthComponent.Health <= 0 )
 		{
-			Health = 0;
-
 			ClearDestination();
-
-			IsDead = true;
 		}
-
-		Health = health;
 
 		if ( Components.TryGet<StateMachineComponent>( out var state, FindMode.EverythingInSelfAndDescendants ) )
 			state.Destroy();

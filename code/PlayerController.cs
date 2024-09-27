@@ -5,7 +5,6 @@ using Sandbox.Events;
 using Sandbox.Services;
 using Sandbox.Utility;
 
-public record DamageEvent( int Amount, GameObject Attacker, GameObject Player, Vector3 HitPos, SceneTraceResult tr = new SceneTraceResult() ) : IGameEvent;
 
 public record PlayerDeath( PlayerController Player ) : IGameEvent;
 
@@ -26,10 +25,10 @@ public sealed class PlayerController : Component, IGameEventHandler<DamageEvent>
 
 	[Property, Category( "Refrences" )] public GameObject Eye { get; set; }
 
-	[Property, Sync, Category( "Stats" )] public int Health { get; set; } = 100;
-	[Property, Sync] public ModelRenderer HoldRenderer { get; set; } 
+	[Property, Sync] public ModelRenderer HoldRenderer { get; set; }
 	[Property, Sync] public Inventory Inventory { get; set; }
 	[Property, Sync] public int Score { get; set; }
+	[RequireComponent, Sync] public HealthComponent HealthComponent { get; set; }
 
 	private static PlayerController _local;
 
@@ -49,10 +48,10 @@ public sealed class PlayerController : Component, IGameEventHandler<DamageEvent>
 	protected override void OnFixedUpdate()
 	{
 		if ( !IsProxy )
-        {
-            Crouch();
-            Move();
-        }
+		{
+			Crouch();
+			Move();
+		}
 
 		Anims();
 
@@ -229,31 +228,24 @@ public sealed class PlayerController : Component, IGameEventHandler<DamageEvent>
 
 	void IGameEventHandler<DamageEvent>.OnGameEvent( DamageEvent eventArgs )
 	{
-		TakeDamage( eventArgs.Amount, eventArgs.Attacker, eventArgs.HitPos );
+		TakeDamage();
 	}
 
 	[Broadcast]
-	public void TakeDamage( int amount, GameObject attacker, Vector3 hitPos )
+	public void TakeDamage()
 	{
-		if ( !IsProxy )
-		{
-			var health = Health - amount;
+		if ( !HealthComponent.IsValid() )
+			return;
 
-			if ( health <= 0 )
-				Health = 0;
-			else
-				Health = health;
-		}
-
-		if ( Health <= 0 )
+		if ( HealthComponent.Health <= 0 )
 		{
 			Scene.Dispatch( new PlayerDeath( this ) );
 
 			if ( !IsProxy )
-            {
-                Stats.Increment( "deaths", 1 );
-                Stats.Flush();
-            }
+			{
+				Stats.Increment( "deaths", 1 );
+				Stats.Flush();
+			}
 		}
 	}
 
@@ -273,7 +265,9 @@ public sealed class PlayerController : Component, IGameEventHandler<DamageEvent>
 		if ( IsProxy )
 			return;
 
-		Health = 100;
+		if ( HealthComponent.IsValid() )
+			HealthComponent.ResetHealth();
+
 		Score = 0;
 	}
 
@@ -288,13 +282,13 @@ public sealed class PlayerController : Component, IGameEventHandler<DamageEvent>
 	[ConCmd( "kill" )]
 	public static void KillPlayer()
 	{
-		if( !Local.IsValid() )
+		if ( !Local.IsValid() )
 			return;
 
 		if ( Local.IsProxy )
 			return;
 
 		if ( Local.IsValid() )
-			Local.TakeDamage( 100, Local.GameObject, Local.Transform.Position );
+			Local.HealthComponent.TakeDamage( Local.GameObject, 100 );
 	}
 }

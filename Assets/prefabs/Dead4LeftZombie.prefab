@@ -84,10 +84,10 @@
                     "Id": 26,
                     "Type": "call",
                     "Properties": {
-                      "T": "NPC",
                       "_isStatic": false,
+                      "_name": "TryGet",
                       "_type": "Sandbox.IComponentLister",
-                      "_name": "TryGet"
+                      "T": "NPC"
                     },
                     "UserData": {
                       "Position": "-32,64",
@@ -118,7 +118,7 @@
                     "DstName": "_target"
                   },
                   {
-                    "Id": 33,
+                    "Id": 31,
                     "Value": true,
                     "DstId": 25,
                     "DstName": "start"
@@ -130,7 +130,7 @@
                     "DstName": "_target"
                   },
                   {
-                    "Id": 34,
+                    "Id": 32,
                     "Value": "EnabledInSelf, InParent",
                     "DstId": 26,
                     "DstName": "search"
@@ -178,11 +178,11 @@
                     "Type": "call",
                     "Properties": {
                       "_isStatic": false,
-                      "_type": "NPC",
-                      "_name": "MoveToPlayer"
+                      "_name": "MoveToPlayer",
+                      "_type": "NPC"
                     },
                     "UserData": {
-                      "Position": "288,0"
+                      "Position": "288,-12"
                     }
                   },
                   {
@@ -190,24 +190,24 @@
                     "Type": "call",
                     "Properties": {
                       "_isStatic": false,
-                      "_type": "NPC",
-                      "_name": "Attack"
+                      "_name": "Attack",
+                      "_type": "NPC"
                     },
                     "UserData": {
-                      "Position": "528,-0"
+                      "Position": "528,-12"
                     }
                   },
                   {
                     "Id": 5,
                     "Type": "call",
                     "Properties": {
-                      "T": "NPC",
                       "_isStatic": false,
+                      "_name": "TryGet",
                       "_type": "Sandbox.IComponentLister",
-                      "_name": "TryGet"
+                      "T": "NPC"
                     },
                     "UserData": {
-                      "Position": "-240,64",
+                      "Position": "-240,60",
                       "Labels": {
                         "component": "NPC"
                       }
@@ -217,7 +217,7 @@
                     "Id": 6,
                     "Type": "if",
                     "UserData": {
-                      "Position": "16,0"
+                      "Position": "12,0"
                     }
                   }
                 ],
@@ -247,7 +247,7 @@
                     "DstName": "_target"
                   },
                   {
-                    "Id": 11,
+                    "Id": 9,
                     "Value": 2,
                     "DstId": 3,
                     "DstName": "fireRate"
@@ -259,7 +259,7 @@
                     "DstName": "_target"
                   },
                   {
-                    "Id": 12,
+                    "Id": 10,
                     "Value": "EnabledInSelf, InParent",
                     "DstId": 5,
                     "DstName": "search"
@@ -323,8 +323,8 @@
                     "Type": "call",
                     "Properties": {
                       "_isStatic": false,
-                      "_type": "NPC",
-                      "_name": "NearPlayer"
+                      "_name": "NearPlayer",
+                      "_type": "NPC"
                     },
                     "UserData": {
                       "Position": "336,-0"
@@ -334,10 +334,10 @@
                     "Id": 5,
                     "Type": "call",
                     "Properties": {
-                      "T": "NPC",
                       "_isStatic": false,
+                      "_name": "TryGet",
                       "_type": "Sandbox.IComponentLister",
-                      "_name": "TryGet"
+                      "T": "NPC"
                     },
                     "UserData": {
                       "Position": "-128,128",
@@ -380,7 +380,7 @@
                     "DstName": "_target"
                   },
                   {
-                    "Id": 11,
+                    "Id": 9,
                     "Value": 2000,
                     "DstId": 3,
                     "DstName": "distance"
@@ -392,7 +392,7 @@
                     "DstName": "_target"
                   },
                   {
-                    "Id": 12,
+                    "Id": 10,
                     "Value": "EnabledInSelf, InParent",
                     "DstId": 5,
                     "DstName": "search"
@@ -425,6 +425,13 @@
           ],
           "InitialStateId": 0
         }
+      },
+      {
+        "__type": "HealthComponent",
+        "__guid": "8ab9edd7-d823-4ec4-a820-54ef7046ca75",
+        "Health": 100,
+        "IsDead": false,
+        "MaxHealth": 100
       }
     ],
     "Children": [
@@ -540,5 +547,6 @@
   "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [],
+  "IsValid": true,
   "__version": 1
 }
