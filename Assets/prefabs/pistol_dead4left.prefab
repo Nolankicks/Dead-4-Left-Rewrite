@@ -41,7 +41,7 @@
       {
         "__type": "Weapon",
         "__guid": "c70f2e72-21da-4b83-9aa2-15f71bdde72f",
-        "Damage": 25,
+        "Damage": 50,
         "FireRate": 1,
         "FireSound": "sounds/toolgun/toolgun-fire.sound",
         "HoldType": "Pistol",
@@ -90,11 +90,13 @@
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [
     "facepunch.v_usp",
     "facepunch.w_usp",
     "mdlresrc.toolgunshoot"
   ],
+  "IsValid": true,
   "__version": 1
 }

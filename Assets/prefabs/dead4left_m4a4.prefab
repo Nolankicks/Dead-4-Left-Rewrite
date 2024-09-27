@@ -1,37 +1,48 @@
 {
   "RootObject": {
-    "__guid": "5096944a-1cf3-4bf4-8d11-f867d8c9ebec",
+    "__guid": "88dac86d-8c58-4629-b04d-5ed6bf7d8028",
     "Flags": 0,
-    "Name": "shotgun_dead4left",
+    "Name": "dead4left_m4a4",
+    "Tags": "skybox",
     "Enabled": true,
     "Components": [
       {
         "__type": "Weapon",
-        "__guid": "db0a5184-ee6e-4bd0-a83a-a1c14ef7f60b",
-        "Damage": 15,
-        "FireRate": 1.5,
+        "__guid": "4ed6a63a-4d64-4b12-b540-69664f44f101",
+        "Damage": 50,
+        "FireRate": 0.4,
         "FireSound": "sounds/toolgun/toolgun-fire.sound",
-        "HoldType": "Shotgun",
-        "Offset": "6.846531,0.005981312,-5.724832",
-        "Range": 3000,
+        "HoldType": "Rifle",
+        "Offset": "2.883967,0.1033601,-4.295026",
+        "Range": 5000,
         "Renderer": {
           "_type": "component",
-          "component_id": "a7cf544d-a931-468c-942a-5a8e51373720",
-          "go": "05010af5-08de-47a8-baaf-c91149b77d70",
+          "component_id": "20cad830-998a-47a0-8071-c0ea20413f2d",
+          "go": "3ea46653-5563-4dc0-bd2a-adc0e16da330",
           "component_type": "SkinnedModelRenderer"
         },
-        "Spread": 0.03,
-        "TraceTimes": 4,
-        "WorldModel": "models/weapons/sbox_shotgun_spaghellim4/w_spaghellim4.vmdl"
+        "Spread": 0.1,
+        "TraceTimes": 1,
+        "WorldModel": "models/weapons/sbox_assault_m4a1/w_m4a1.vmdl"
+      },
+      {
+        "__type": "Viewmodel",
+        "__guid": "02a5e8c5-70df-4150-ac0f-87ff6a8f9662",
+        "Renderer": {
+          "_type": "component",
+          "component_id": "20cad830-998a-47a0-8071-c0ea20413f2d",
+          "go": "3ea46653-5563-4dc0-bd2a-adc0e16da330",
+          "component_type": "SkinnedModelRenderer"
+        }
       },
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "a440fa7f-a5a5-4d46-92cc-d0149e82d9ca",
+        "__guid": "335b412a-c6fb-400e-b6bd-792db2a63447",
         "BodyGroups": 21,
         "BoneMergeTarget": {
           "_type": "component",
-          "component_id": "a7cf544d-a931-468c-942a-5a8e51373720",
-          "go": "05010af5-08de-47a8-baaf-c91149b77d70",
+          "component_id": "20cad830-998a-47a0-8071-c0ea20413f2d",
+          "go": "3ea46653-5563-4dc0-bd2a-adc0e16da330",
           "component_type": "SkinnedModelRenderer"
         },
         "CreateBoneObjects": false,
@@ -46,31 +57,21 @@
         "RenderType": "Off",
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
-      },
-      {
-        "__type": "Viewmodel",
-        "__guid": "5e2b8a6b-2343-431e-807a-3da650ea1a0a",
-        "Renderer": {
-          "_type": "component",
-          "component_id": "a7cf544d-a931-468c-942a-5a8e51373720",
-          "go": "05010af5-08de-47a8-baaf-c91149b77d70",
-          "component_type": "SkinnedModelRenderer"
-        }
       }
     ],
     "Children": [
       {
-        "__guid": "05010af5-08de-47a8-baaf-c91149b77d70",
+        "__guid": "3ea46653-5563-4dc0-bd2a-adc0e16da330",
         "Flags": 0,
-        "Name": "Gun",
+        "Name": "gun",
         "Enabled": true,
         "Components": [
           {
             "__type": "Sandbox.SkinnedModelRenderer",
-            "__guid": "a7cf544d-a931-468c-942a-5a8e51373720",
-            "BodyGroups": 75,
+            "__guid": "20cad830-998a-47a0-8071-c0ea20413f2d",
+            "BodyGroups": 42259,
             "CreateBoneObjects": false,
-            "Model": "models/weapons/sbox_shotgun_spaghellim4/v_spaghellim4.vmdl",
+            "Model": "models/weapons/sbox_assault_m4a1/v_m4a1.vmdl",
             "Morphs": {},
             "RenderOptions": {
               "GameLayer": false,
@@ -93,8 +94,8 @@
   "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [
-    "facepunch.v_spaghellim4",
-    "facepunch.w_spaghellim4",
+    "facepunch.v_m4a1",
+    "facepunch.w_m4a1",
     "mdlresrc.toolgunshoot"
   ],
   "IsValid": true,

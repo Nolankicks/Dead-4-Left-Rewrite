@@ -1,0 +1,11 @@
+{
+  "Name": "M4A4",
+  "Icon": "textures/m4a4.vtex",
+  "WeaponPrefab": {
+    "_type": "gameobject",
+    "prefab": "prefabs/dead4left_m4a4.prefab"
+  },
+  "__references": [],
+  "IsValid": true,
+  "__version": 0
+}

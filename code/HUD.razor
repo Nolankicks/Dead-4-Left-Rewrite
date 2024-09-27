@@ -28,7 +28,7 @@
 				continue;
 
 			<div class="item @( index == player.Inventory.Index ? "active" : "" )">
-				<img class="icon" texture=@item.Icon.ResourcePath />
+				<img class="icon" texture=@item.Icon?.ResourcePath />
 			</div>
 		}
 	</div>

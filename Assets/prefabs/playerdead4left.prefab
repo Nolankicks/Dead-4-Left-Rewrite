@@ -19,7 +19,6 @@
           "_type": "gameobject",
           "go": "cde4a732-2215-4a57-9ac0-bc036f75ee80"
         },
-        "Health": 100,
         "HoldRenderer": {
           "_type": "component",
           "component_id": "2b45f2bc-8bfc-43e4-8a15-936f86a3b4ad",
@@ -80,6 +79,7 @@
         "ItemsData": [],
         "StartingWeapons": [
           "weapondatas/mp5.weapons",
+          "weapondatas/m4a4.weapons",
           "weapondatas/pistol.weapons",
           "weapondatas/shotgun.weapons"
         ]
