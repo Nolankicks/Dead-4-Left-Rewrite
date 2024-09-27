@@ -217,15 +217,15 @@ public sealed class PlayerController : Component, IGameEventHandler<DamageEvent>
 		var target = AnimHelper.Target;
 
 		if ( target.IsValid() )
-			//target.RenderType = renderType;
+			target.RenderType = renderType;
 
 		foreach ( var model in Components.GetAll<ModelRenderer>().Where( x => x.Tags.Has( "clothing" ) ) )
 		{
-			//model.RenderType = renderType;
+			model.RenderType = renderType;
 		}
 
-		if ( HoldRenderer.IsValid() );
-			//HoldRenderer.RenderType = renderType;
+		if ( HoldRenderer.IsValid() )
+			HoldRenderer.RenderType = renderType;
 	}
 
 	void IGameEventHandler<DamageEvent>.OnGameEvent( DamageEvent eventArgs )
