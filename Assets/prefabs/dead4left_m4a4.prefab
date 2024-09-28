@@ -69,7 +69,7 @@
           {
             "__type": "Sandbox.SkinnedModelRenderer",
             "__guid": "20cad830-998a-47a0-8071-c0ea20413f2d",
-            "BodyGroups": 42259,
+            "BodyGroups": 107811,
             "CreateBoneObjects": false,
             "Model": "models/weapons/sbox_assault_m4a1/v_m4a1.vmdl",
             "Morphs": {},

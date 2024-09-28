@@ -22,7 +22,6 @@
           "go": "4536960e-0242-45f8-8980-7911cddb4cdb",
           "component_type": "CitizenAnimationHelper"
         },
-        "HasHealth": false,
         "HoldType": "Punch",
         "Stop": false
       },
@@ -57,7 +56,7 @@
               "OnUpdateState": {
                 "__version": 8,
                 "__guid": "5c99fba9-9ed6-49cf-84d7-98776c50e713",
-                "__changeId": 0,
+                "__changeId": 42,
                 "UserData": {
                   "Title": "Update",
                   "ReferencedComponentTypes": []
@@ -66,7 +65,10 @@
                 "Nodes": [
                   {
                     "Id": 0,
-                    "Type": "input"
+                    "Type": "input",
+                    "UserData": {
+                      "Position": "-36,-0"
+                    }
                   },
                   {
                     "Id": 25,
@@ -77,7 +79,7 @@
                       "_type": "NPC"
                     },
                     "UserData": {
-                      "Position": "480,0"
+                      "Position": "468,-0"
                     }
                   },
                   {
@@ -90,7 +92,7 @@
                       "T": "NPC"
                     },
                     "UserData": {
-                      "Position": "-32,64",
+                      "Position": "-36,60",
                       "Labels": {
                         "component": "NPC"
                       }
@@ -100,7 +102,7 @@
                     "Id": 28,
                     "Type": "if",
                     "UserData": {
-                      "Position": "224,0"
+                      "Position": "228,0"
                     }
                   }
                 ],
@@ -118,7 +120,7 @@
                     "DstName": "_target"
                   },
                   {
-                    "Id": 31,
+                    "Id": 29,
                     "Value": true,
                     "DstId": 25,
                     "DstName": "start"
@@ -130,7 +132,7 @@
                     "DstName": "_target"
                   },
                   {
-                    "Id": 32,
+                    "Id": 30,
                     "Value": "EnabledInSelf, InParent",
                     "DstId": 26,
                     "DstName": "search"
@@ -150,7 +152,7 @@
                 ]
               },
               "UserData": {
-                "Position": "-512,-64"
+                "Position": "-704,-160"
               }
             },
             {
@@ -159,7 +161,7 @@
               "OnUpdateState": {
                 "__version": 8,
                 "__guid": "3ed621e0-242f-41ac-ba96-1d88041ad1a5",
-                "__changeId": 0,
+                "__changeId": 60,
                 "UserData": {
                   "Title": "Update",
                   "ReferencedComponentTypes": []
@@ -182,7 +184,7 @@
                       "_type": "NPC"
                     },
                     "UserData": {
-                      "Position": "288,-12"
+                      "Position": "252,-0"
                     }
                   },
                   {
@@ -194,7 +196,7 @@
                       "_type": "NPC"
                     },
                     "UserData": {
-                      "Position": "528,-12"
+                      "Position": "528,-0"
                     }
                   },
                   {
@@ -247,7 +249,7 @@
                     "DstName": "_target"
                   },
                   {
-                    "Id": 9,
+                    "Id": 7,
                     "Value": 2,
                     "DstId": 3,
                     "DstName": "fireRate"
@@ -259,7 +261,7 @@
                     "DstName": "_target"
                   },
                   {
-                    "Id": 10,
+                    "Id": 8,
                     "Value": "EnabledInSelf, InParent",
                     "DstId": 5,
                     "DstName": "search"
@@ -279,14 +281,14 @@
                 ]
               },
               "UserData": {
-                "Position": "-256,-320"
+                "Position": "-352,-384"
               }
             },
             {
               "Id": 14,
               "Name": "Restart",
               "UserData": {
-                "Position": "-32,-64"
+                "Position": "0,-160"
               }
             }
           ],
@@ -308,14 +310,14 @@
                     "Id": 0,
                     "Type": "input",
                     "UserData": {
-                      "Position": "-112,-0"
+                      "Position": "-108,-0"
                     }
                   },
                   {
                     "Id": 1,
                     "Type": "output",
                     "UserData": {
-                      "Position": "608,-0"
+                      "Position": "612,-0"
                     }
                   },
                   {
@@ -340,7 +342,7 @@
                       "T": "NPC"
                     },
                     "UserData": {
-                      "Position": "-128,128",
+                      "Position": "-132,132",
                       "Labels": {
                         "component": "NPC"
                       }
@@ -350,7 +352,7 @@
                     "Id": 6,
                     "Type": "if",
                     "UserData": {
-                      "Position": "112,0"
+                      "Position": "108,0"
                     }
                   }
                 ],
@@ -380,7 +382,7 @@
                     "DstName": "_target"
                   },
                   {
-                    "Id": 9,
+                    "Id": 7,
                     "Value": 2000,
                     "DstId": 3,
                     "DstName": "distance"
@@ -392,7 +394,7 @@
                     "DstName": "_target"
                   },
                   {
-                    "Id": 10,
+                    "Id": 8,
                     "Value": "EnabledInSelf, InParent",
                     "DstId": 5,
                     "DstName": "search"
@@ -413,13 +415,13 @@
               }
             },
             {
-              "Id": 15,
+              "Id": 17,
               "SourceId": 1,
               "TargetId": 14,
               "Message": "restart"
             },
             {
-              "Id": 16,
+              "Id": 18,
               "SourceId": 14
             }
           ],

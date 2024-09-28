@@ -192,7 +192,6 @@
           "__guid": "b48624f5-0827-4881-a934-79e0b1094ac1",
           "Flags": 0,
           "Name": "Chat",
-          "Position": "0,0,0",
           "Enabled": true,
           "NetworkMode": 1,
           "Components": [
@@ -225,6 +224,35 @@
           "Static": false
         }
       ]
+    },
+    {
+      "__guid": "713a50d0-f6c2-4b48-aabf-360dfbb7af1e",
+      "Flags": 0,
+      "Name": "Envmap Probe",
+      "Position": "2500,2500,2909.015",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.EnvmapProbe",
+          "__guid": "aa0bf86b-d4c7-4c73-a414-345afe95a16d",
+          "Texture": "textures/cubemaps/default2.vtex",
+          "Bounds": {
+            "Mins": "-5000,-5000,-5000",
+            "Maxs": "5000,5000,5000"
+          },
+          "DelayBetweenUpdates": 0.1,
+          "Feathering": 0.02,
+          "FrameInterval": 16,
+          "MaxDistance": 512,
+          "MultiBounce": true,
+          "Projection": "Box",
+          "RenderDynamically": true,
+          "TintColor": "1,1,1,1",
+          "UpdateStrategy": "FrameInterval",
+          "ZFar": 4096,
+          "ZNear": 16
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -252,5 +280,6 @@
   "Description": "",
   "ResourceVersion": 1,
   "__references": [],
+  "IsValid": true,
   "__version": 1
 }

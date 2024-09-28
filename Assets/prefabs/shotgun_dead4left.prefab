@@ -68,7 +68,7 @@
           {
             "__type": "Sandbox.SkinnedModelRenderer",
             "__guid": "a7cf544d-a931-468c-942a-5a8e51373720",
-            "BodyGroups": 75,
+            "BodyGroups": 95,
             "CreateBoneObjects": false,
             "Model": "models/weapons/sbox_shotgun_spaghellim4/v_spaghellim4.vmdl",
             "Morphs": {},

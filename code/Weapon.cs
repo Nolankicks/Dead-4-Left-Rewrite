@@ -5,157 +5,165 @@ using Sandbox.Events;
 
 public class Item : Component, IGameEventHandler<OnItemEquipped>
 {
-	[Property, Sync] public CitizenAnimationHelper.HoldTypes HoldType { get; set; }
-	[Property] public Model WorldModel { get; set; }
-	[Property, Sync] public Vector3 Offset { get; set; }
+    [Property, Sync] public CitizenAnimationHelper.HoldTypes HoldType { get; set; }
+    [Property] public Model WorldModel { get; set; }
+    [Property, Sync] public Vector3 Offset { get; set; }
 
-	void IGameEventHandler<OnItemEquipped>.OnGameEvent( OnItemEquipped eventArgs )
-	{
-		var player = PlayerController.Local;
+    public virtual void OnEquip( OnItemEquipped onItemEquipped ) { }
 
-		if ( IsProxy || !player.IsValid() )
-			return;
+    void IGameEventHandler<OnItemEquipped>.OnGameEvent( OnItemEquipped eventArgs )
+    {
+        OnEquip( eventArgs );
 
-		player.HoldType = HoldType;
+        var player = PlayerController.Local;
 
-		BroadcastEquip( player );
-	}
+        if ( IsProxy || !player.IsValid() )
+            return;
 
-	[Broadcast]
-	public void BroadcastEquip( PlayerController local )
-	{
-		if ( !local.IsValid() )
-			return;
+        player.HoldType = HoldType;
 
-		local.HoldRenderer.Model = WorldModel;
-		local.HoldRenderer.Transform.LocalPosition = Offset;
-	}
+        BroadcastEquip( player );
+    }
+
+    [Broadcast]
+    public void BroadcastEquip( PlayerController local )
+    {
+        if ( !local.IsValid() )
+            return;
+
+        local.HoldRenderer.Model = WorldModel;
+        local.HoldRenderer.Transform.LocalPosition = Offset;
+    }
 }
 
 public sealed class Weapon : Item
 {
-	[Property] public float FireRate { get; set; } = 0.1f;
-	[Property] public int Damage { get; set; } = 10;
-	TimeSince lastFired { get; set; }
-	[Property, Sync] public SkinnedModelRenderer Renderer { get; set; }
-	[Property] public float Range { get; set; } = 5000;
-	[Property] public float Spread { get; set; } = 0.03f;
-	[Property] public int TraceTimes { get; set; } = 1;
-	[Property] public SoundEvent FireSound { get; set; }
+    [Property] public float FireRate { get; set; } = 0.1f;
+    [Property] public int Damage { get; set; } = 10;
+    TimeSince lastFired { get; set; }
+    TimeSince EquipTime { get; set; }
+    [Property, Sync] public SkinnedModelRenderer Renderer { get; set; }
+    [Property] public float Range { get; set; } = 5000;
+    [Property] public float Spread { get; set; } = 0.03f;
+    [Property] public int TraceTimes { get; set; } = 1;
+    [Property] public SoundEvent FireSound { get; set; }
 
-	protected override void OnEnabled()
-	{
-		if ( !IsProxy )
-		{
-			lastFired = FireRate;
-		}
-	}
+    public override void OnEquip( OnItemEquipped onItemEquipped )
+    {
+        if ( IsProxy )
+            return;
 
-	protected override void OnUpdate()
-	{
-		if ( Input.Down( "attack1" ) && !IsProxy && lastFired > FireRate )
-		{
-			for ( var i = 0; i < TraceTimes; i++ )
-				Shoot();
+        EquipTime = 0;
+        lastFired = FireRate;
+    }
 
-			var local = PlayerController.Local;
+    protected override void OnUpdate()
+    {
+        if ( IsProxy || EquipTime < 0.2f )
+            return;
 
-			if ( local.IsValid() )
-			{
-				BroadcastFireSound( local.Eye.Transform.Position );
+        if ( Input.Down( "attack1" ) && lastFired > FireRate )
+        {
+            for ( var i = 0; i < TraceTimes; i++ )
+                Shoot();
 
-				local.BroadcastAttack();
-			}
+            var local = PlayerController.Local;
 
-			if ( Renderer.IsValid() )
-				Renderer.Set( "b_attack", true );
+            if ( local.IsValid() )
+            {
+                BroadcastFireSound( local.Eye.Transform.Position );
 
+                local.BroadcastAttack();
+            }
 
-			lastFired = 0;
-		}
-	}
+            if ( Renderer.IsValid() )
+                Renderer.Set( "b_attack", true );
 
-	public void Shoot()
-	{
-		var local = PlayerController.Local;
+            lastFired = 0;
+        }
+    }
 
-		var cam = Scene.Camera;
+    public void Shoot()
+    {
+        var local = PlayerController.Local;
 
-		if ( !local.IsValid() || !cam.IsValid() )
-			return;
+        var cam = Scene.Camera;
 
-		var ray = cam.ScreenNormalToRay( 0.5f );
+        if ( !local.IsValid() || !cam.IsValid() )
+            return;
 
-		ray.Forward += Vector3.Random * Spread;
+        var ray = cam.ScreenNormalToRay( 0.5f );
 
-		var tr = Scene.Trace.Ray( ray, Range )
-			.IgnoreGameObjectHierarchy( local.GameObject )
-			.Run();
+        ray.Forward += Vector3.Random * Spread;
 
-		local.EyeAngles += new Angles( Game.Random.Float( -1, 1 ), Game.Random.Float( -1, 1 ), 0 );
+        var tr = Scene.Trace.Ray( ray, Range )
+            .IgnoreGameObjectHierarchy( local.GameObject )
+            .Run();
 
-		if ( !tr.Hit )
-			return;
+        local.EyeAngles += new Angles( Game.Random.Float( -1, 1 ), Game.Random.Float( -1, 1 ), 0 );
 
-		if ( tr.GameObject.Components.TryGet<HealthComponent>( out var health, FindMode.EverythingInSelfAndParent ) )
-		{
-			if ( tr.GameObject.Components.TryGet<PlayerController>( out var player, FindMode.EverythingInSelfAndParent ) && !GameSystem.PVP )
-				return;
+        if ( !tr.Hit )
+            return;
 
-			health.TakeDamage( local.GameObject, Damage, tr.EndPosition, tr.Normal );
+        if ( tr.GameObject.Components.TryGet<HealthComponent>( out var health, FindMode.EverythingInSelfAndParent ) )
+        {
+            if ( tr.GameObject.Components.TryGet<PlayerController>( out var player, FindMode.EverythingInSelfAndParent ) && !GameSystem.PVP )
+                return;
 
-			SpawnParticleEffect( Cloud.ParticleSystem( "bolt.impactflesh" ), tr.EndPosition );
-		}
+            health.TakeDamage( local.GameObject, Damage, tr.EndPosition, tr.Normal );
 
-		if ( tr.Body.IsValid() )
-		{
-			tr.Body.ApplyImpulseAt( tr.HitPosition, tr.Direction * 200.0f * tr.Body.Mass.Clamp( 0, 200 ) );
-		}
+            SpawnParticleEffect( Cloud.ParticleSystem( "bolt.impactflesh" ), tr.EndPosition );
+        }
 
-		var damage = new DamageInfo( Damage, GameObject, GameObject, tr.Hitbox );
-		damage.Position = tr.HitPosition;
-		damage.Shape = tr.Shape;
+        if ( tr.Body.IsValid() )
+        {
+            tr.Body.ApplyImpulseAt( tr.HitPosition, tr.Direction * 200.0f * tr.Body.Mass.Clamp( 0, 200 ) );
+        }
 
-		foreach ( var damageable in tr.GameObject.Components.GetAll<IDamageable>() )
-		{
-			damageable.OnDamage( damage );
-		}
-	}
+        var damage = new DamageInfo( Damage, GameObject, GameObject, tr.Hitbox );
+        damage.Position = tr.HitPosition;
+        damage.Shape = tr.Shape;
 
-	[Broadcast]
-	public void BroadcastFireSound( Vector3 pos )
-	{
-		if ( FireSound is null )
-			return;
+        foreach ( var damageable in tr.GameObject.Components.GetAll<IDamageable>() )
+        {
+            damageable.OnDamage( damage );
+        }
+    }
 
-		var sound = Sound.Play( FireSound, pos );
+    [Broadcast]
+    public void BroadcastFireSound( Vector3 pos )
+    {
+        if ( FireSound is null )
+            return;
 
-		if ( !sound.IsValid() )
-			return;
+        var sound = Sound.Play( FireSound, pos );
 
-		sound.Volume *= 5f;
-	}
+        if ( !sound.IsValid() )
+            return;
 
-	public static void SpawnParticleEffect( ParticleSystem system, Vector3 pos )
-	{
-		var gb = new GameObject();
+        sound.Volume *= 5f;
+    }
 
-		gb.Transform.Position = pos;
+    public static void SpawnParticleEffect( ParticleSystem system, Vector3 pos )
+    {
+        var gb = new GameObject();
 
-		var particle = gb.Components.Create<LegacyParticleSystem>();
+        gb.Transform.Position = pos;
 
-		particle.Particles = system;
+        var particle = gb.Components.Create<LegacyParticleSystem>();
 
-		gb.Components.Create<Destoryer>();
+        particle.Particles = system;
 
-		gb.NetworkSpawn( null );
-	}
+        gb.Components.Create<Destoryer>();
+
+        gb.NetworkSpawn( null );
+    }
 }
 
 [GameResource( "Weapon Data", "weapons", "Data for a weapon" )]
 public sealed class WeaponData : GameResource
 {
-	public string Name { get; set; }
-	public Texture Icon { get; set; }
-	public GameObject WeaponPrefab { get; set; }
+    public string Name { get; set; }
+    public Texture Icon { get; set; }
+    public GameObject WeaponPrefab { get; set; }
 }

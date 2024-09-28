@@ -51,9 +51,17 @@
             }
           ],
           "Mode": "Blur",
-          "Strength": 0.2,
+          "Strength": 0.15,
           "Threshold": 0.5,
           "ThresholdWidth": 0
+        },
+        {
+          "__type": "Sandbox.AmbientOcclusion",
+          "__guid": "1c089b08-3b0b-47b1-b023-815dcd493aac",
+          "FalloffDistance": 1,
+          "Intensity": 8,
+          "Quality": "High",
+          "Radius": 32
         }
       ]
     },

@@ -68,7 +68,7 @@
           {
             "__type": "Sandbox.SkinnedModelRenderer",
             "__guid": "1a81f4ed-1fb9-44fc-913a-ee66506273c1",
-            "BodyGroups": 17815,
+            "BodyGroups": 17703,
             "CreateBoneObjects": false,
             "Model": "models/weapons/sbox_pistol_usp/v_usp.vmdl",
             "Morphs": {},
