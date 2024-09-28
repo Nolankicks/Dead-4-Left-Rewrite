@@ -20,13 +20,10 @@ public sealed class PlayerController : Component, IGameEventHandler<DamageEvent>
 {
 	[Property, Category( "Refrences" )] public ShrimpleCharacterController.ShrimpleCharacterController shrimpleCharacterController { get; set; }
 	[Property, Category( "Refrences" ), Sync] public CitizenAnimationHelper AnimHelper { get; set; }
-
 	public Vector3 WishVelocity { get; set; }
-
 	[Sync] public Angles EyeAngles { get; set; }
-
 	[Property, Category( "Refrences" )] public GameObject Eye { get; set; }
-
+	[Sync, Change( nameof( OnHoldTypeChanged ) )] public CitizenAnimationHelper.HoldTypes HoldType { get; set; }
 	[Property, Sync] public ModelRenderer HoldRenderer { get; set; }
 	[Property, Sync] public Inventory Inventory { get; set; }
 	[Property, Sync] public int Score { get; set; }
@@ -46,6 +43,22 @@ public sealed class PlayerController : Component, IGameEventHandler<DamageEvent>
 	}
 
 	TimeSince lastUngrounded;
+
+	protected override void OnStart()
+	{
+		if ( !AnimHelper.IsValid() )
+			return;
+
+		AnimHelper.HoldType = HoldType;
+	}
+
+	private void OnHoldTypeChanged( CitizenAnimationHelper.HoldTypes oldValue, CitizenAnimationHelper.HoldTypes newValue )
+	{
+		if ( !AnimHelper.IsValid() )
+			return;
+
+		AnimHelper.HoldType = newValue;
+	}
 
 	protected override void OnFixedUpdate()
 	{

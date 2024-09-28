@@ -2,15 +2,42 @@ using Sandbox;
 using Sandbox.Citizen;
 using Sandbox.Events;
 
-public sealed class Weapon : Component, IGameEventHandler<OnPlayerJoin>, IGameEventHandler<OnItemEquipped>
+
+public class Item : Component, IGameEventHandler<OnItemEquipped>
+{
+	[Property, Sync] public CitizenAnimationHelper.HoldTypes HoldType { get; set; }
+	[Property] public Model WorldModel { get; set; }
+	[Property, Sync] public Vector3 Offset { get; set; }
+
+	void IGameEventHandler<OnItemEquipped>.OnGameEvent( OnItemEquipped eventArgs )
+	{
+		var player = PlayerController.Local;
+
+		if ( IsProxy || !player.IsValid() )
+			return;
+
+		player.HoldType = HoldType;
+
+		BroadcastEquip( player );
+	}
+
+	[Broadcast]
+	public void BroadcastEquip( PlayerController local )
+	{
+		if ( !local.IsValid() )
+			return;
+
+		local.HoldRenderer.Model = WorldModel;
+		local.HoldRenderer.Transform.LocalPosition = Offset;
+	}
+}
+
+public sealed class Weapon : Item
 {
 	[Property] public float FireRate { get; set; } = 0.1f;
 	[Property] public int Damage { get; set; } = 10;
 	TimeSince lastFired { get; set; }
 	[Property, Sync] public SkinnedModelRenderer Renderer { get; set; }
-	[Property] public Model WorldModel { get; set; }
-	[Property, Sync] public CitizenAnimationHelper.HoldTypes HoldType { get; set; }
-	[Property, Sync] public Vector3 Offset { get; set; }
 	[Property] public float Range { get; set; } = 5000;
 	[Property] public float Spread { get; set; } = 0.03f;
 	[Property] public int TraceTimes { get; set; } = 1;
@@ -22,22 +49,6 @@ public sealed class Weapon : Component, IGameEventHandler<OnPlayerJoin>, IGameEv
 		{
 			lastFired = FireRate;
 		}
-	}
-
-	protected override void OnStart()
-	{
-		if ( IsProxy )
-			return;
-
-		BroadcastEquip( PlayerController.Local );
-	}
-
-	void IGameEventHandler<OnPlayerJoin>.OnGameEvent( OnPlayerJoin eventArgs )
-	{
-		if ( IsProxy || !GameObject.Enabled )
-			return;
-
-		BroadcastEquip( PlayerController.Local );
 	}
 
 	protected override void OnUpdate()
@@ -58,7 +69,7 @@ public sealed class Weapon : Component, IGameEventHandler<OnPlayerJoin>, IGameEv
 
 			if ( Renderer.IsValid() )
 				Renderer.Set( "b_attack", true );
-				
+
 
 			lastFired = 0;
 		}
@@ -123,25 +134,6 @@ public sealed class Weapon : Component, IGameEventHandler<OnPlayerJoin>, IGameEv
 			return;
 
 		sound.Volume *= 5f;
-	}
-
-	[Broadcast]
-	public void BroadcastEquip( PlayerController local )
-	{
-		if ( !local.IsValid() )
-			return;
-
-		local.HoldRenderer.Model = WorldModel;
-		local.AnimHelper.HoldType = HoldType;
-		local.HoldRenderer.Transform.LocalPosition = Offset;
-	}
-
-	void IGameEventHandler<OnItemEquipped>.OnGameEvent( OnItemEquipped eventArgs )
-	{
-		if ( IsProxy )
-			return;
-
-		BroadcastEquip( PlayerController.Local );
 	}
 
 	public static void SpawnParticleEffect( ParticleSystem system, Vector3 pos )
