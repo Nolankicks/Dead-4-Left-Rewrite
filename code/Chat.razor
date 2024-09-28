@@ -93,22 +93,28 @@
 
 	void Component.INetworkListener.OnConnected(Connection channel)
 	{
-		if ( IsProxy ) return;
+		if ( IsProxy )
+			return;
 
 		AddSystemText( $"{channel.DisplayName} has joined the game", "✔️" );
 	}
 
 	void Component.INetworkListener.OnDisconnected(Connection channel)
 	{
-		if ( IsProxy ) return;
+		if ( IsProxy )
+			return;
 
 		AddSystemText( $"{channel.DisplayName} has left the game", "❌" );
 	}
 
 	void IGameEventHandler<PlayerDeath>.OnGameEvent(PlayerDeath eventArgs)
 	{
-		if ( IsProxy ) return;
+		if ( IsProxy || !eventArgs.Player.IsValid() )
+			return;
 
-		AddSystemText( $"{eventArgs.Player.Network.Owner.DisplayName} was killed", "💀" );
+		if ( eventArgs.Player.Network.Owner is null )
+			return;
+
+		AddSystemText( $"{eventArgs.Player.Network.Owner?.DisplayName} was killed", "💀" );
 	}
 }
