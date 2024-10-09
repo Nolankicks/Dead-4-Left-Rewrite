@@ -5,8 +5,8 @@
       "__guid": "0e9966b0-db00-4497-b185-6fc9dbbebe34",
       "Flags": 0,
       "Name": "Camera",
-      "Position": "-848.9972,-840.764,306.8735",
-      "Rotation": "-0.0499502,0.1205905,0.3794095,0.9159757",
+      "Position": "-80.07189,37.08244,55.99995",
+      "Rotation": "0,0,-0.1305262,0.9914449",
       "Tags": "maincamera",
       "Enabled": true,
       "Components": [
@@ -26,6 +26,35 @@
           "Viewport": "0,0,1,1",
           "ZFar": 25000,
           "ZNear": 10
+        },
+        {
+          "__type": "Sandbox.DepthOfField",
+          "__guid": "4703d84b-56d7-47fa-905a-bcd40f1efe23",
+          "BackBlur": true,
+          "BlurSize": 200,
+          "FocalDistance": 86.5,
+          "FrontBlur": false
+        },
+        {
+          "__type": "Sandbox.AmbientOcclusion",
+          "__guid": "726fb2c3-09e9-483f-84d6-71a404e20e68",
+          "FalloffDistance": 1,
+          "Intensity": 8,
+          "Quality": "High",
+          "Radius": 32
+        },
+        {
+          "__type": "Sandbox.Tonemapping",
+          "__guid": "64d1795e-f280-4594-9678-9f9029ccc381",
+          "__version": 1,
+          "AutoExposureEnabled": true,
+          "ExposureBias": 2,
+          "ExposureCompensation": 0,
+          "ExposureMethod": "RGB",
+          "MaximumExposure": 3,
+          "MinimumExposure": 1,
+          "Mode": "Legacy",
+          "Rate": 1
         }
       ]
     },
@@ -53,24 +82,148 @@
       ]
     },
     {
-      "__guid": "f2aecc7c-b742-472f-ab93-39922aa77022",
+      "__guid": "24484a6d-eecf-4668-9820-e638ae9df7eb",
       "Flags": 0,
-      "Name": "Map",
+      "Name": "citizen",
+      "Position": "0,0,0.03531461",
+      "Rotation": "0,0,1,0.0000001947072",
       "Enabled": true,
       "Components": [
         {
-          "__type": "Sandbox.MapInstance",
-          "__guid": "0c5adb45-2667-4261-a3b5-de030b6087c6",
-          "__version": 1,
-          "EnableCollision": true,
-          "MapName": "facepunch.flatgrass",
-          "NoOrigin": false,
-          "OnMapLoaded": null,
-          "OnMapUnloaded": null,
-          "UseMapFromLaunch": false
+          "__type": "Sandbox.SkinnedModelRenderer",
+          "__guid": "403e88cc-df60-4986-abc9-747f073e32ea",
+          "BodyGroups": 0,
+          "CreateBoneObjects": false,
+          "Model": "models/citizen/citizen.vmdl",
+          "Morphs": {},
+          "Parameters": {
+            "bools": {},
+            "ints": {
+              "holdtype": 5
+            },
+            "floats": {},
+            "vectors": {},
+            "rotations": {}
+          },
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1",
+          "UseAnimGraph": true
         }
       ],
-      "Children": []
+      "Children": [
+        {
+          "__guid": "8aac93ca-5762-40e7-beb8-1b42c0dd9e17",
+          "Flags": 0,
+          "Name": "zombie",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.SkinnedModelRenderer",
+              "__guid": "67491fd0-410e-46a4-8fae-f9060318c61f",
+              "BodyGroups": 18446744073709551615,
+              "BoneMergeTarget": {
+                "_type": "component",
+                "component_id": "403e88cc-df60-4986-abc9-747f073e32ea",
+                "go": "24484a6d-eecf-4668-9820-e638ae9df7eb",
+                "component_type": "SkinnedModelRenderer"
+              },
+              "CreateBoneObjects": false,
+              "Model": "models/citizen/heads/head_zombie_01/models/head_zombie_01.vmdl",
+              "Morphs": {},
+              "Parameters": {
+                "bools": {},
+                "ints": {},
+                "floats": {},
+                "vectors": {},
+                "rotations": {}
+              },
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1",
+              "UseAnimGraph": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "__guid": "d708dda9-4d29-45e1-ac13-1afd39635f07",
+      "Flags": 0,
+      "Name": "2D Skybox",
+      "Position": "-6548.938,12188.26,328.1247",
+      "Tags": "skybox",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SkyBox2D",
+          "__guid": "18c39c0c-55f7-4731-b4c1-2d1682fb51f4",
+          "SkyIndirectLighting": true,
+          "SkyMaterial": "materials/skybox/skybox_day_01.vmat",
+          "Tint": "0.32093,0.13733,0.13733,1"
+        }
+      ]
+    },
+    {
+      "__guid": "b37a217d-daef-4442-a313-0d1110ee9711",
+      "Flags": 0,
+      "Name": "Point Light",
+      "Position": "-64,-0.000003081991,96",
+      "Tags": "light_spot,light_point,light",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SpotLight",
+          "__guid": "1be2213c-be41-480a-83ec-df2454e1e630",
+          "Attenuation": 1,
+          "ConeInner": 15,
+          "ConeOuter": 45,
+          "FogMode": "Enabled",
+          "FogStrength": 1,
+          "LightColor": "0.95686,0.6,0.6,1",
+          "Radius": 500,
+          "Shadows": true
+        },
+        {
+          "__type": "Sandbox.PointLight",
+          "__guid": "22334771-b2ee-418a-b5a5-6ce94b03a2d8",
+          "Attenuation": 1,
+          "FogMode": "Enabled",
+          "FogStrength": 1,
+          "LightColor": "0.95349,0.5987,0.5987,1",
+          "Radius": 400,
+          "Shadows": true
+        }
+      ]
+    },
+    {
+      "__guid": "fb59b55a-01a6-4406-83df-0e634d18996b",
+      "Flags": 0,
+      "Name": "Volumetric Fog",
+      "Position": "0,0,0.006509352",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.VolumetricFogVolume",
+          "__guid": "8971e12d-70f7-4f4b-924b-c1009977c79d",
+          "Bounds": {
+            "Mins": "-1500,-1500,-1500",
+            "Maxs": "1500,1500,1500"
+          },
+          "FalloffExponent": 1,
+          "Strength": 1
+        }
+      ]
     }
   ],
   "SceneProperties": {
