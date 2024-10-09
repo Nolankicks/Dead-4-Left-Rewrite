@@ -168,7 +168,7 @@ public sealed class State : IValid
 			}
 			catch ( Exception e )
 			{
-				Log.Error( e );
+				Log.Warning( e );
 			}
 		}
 
