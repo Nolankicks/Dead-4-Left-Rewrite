@@ -117,16 +117,16 @@ public sealed class Weapon : Item
 
         if ( tr.Body.IsValid() )
         {
-            tr.Body.ApplyImpulseAt( tr.HitPosition, tr.Direction * 200.0f * tr.Body.Mass.Clamp( 0, 200 ) );
+            tr.Body?.ApplyImpulseAt( tr.HitPosition, tr.Direction * 200.0f * tr.Body.Mass.Clamp( 0, 200 ) );
         }
 
         var damage = new DamageInfo( Damage, GameObject, GameObject, tr.Hitbox );
         damage.Position = tr.HitPosition;
         damage.Shape = tr.Shape;
 
-        foreach ( var damageable in tr.GameObject.Components.GetAll<IDamageable>() )
+        foreach ( var damageable in tr.GameObject?.Components.GetAll<IDamageable>() )
         {
-            damageable.OnDamage( damage );
+            damageable?.OnDamage( damage );
         }
     }
 

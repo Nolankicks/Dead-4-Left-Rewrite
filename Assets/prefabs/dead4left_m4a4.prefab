@@ -94,9 +94,9 @@
   "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [
-    "facepunch.v_m4a1",
-    "facepunch.w_m4a1",
-    "mdlresrc.toolgunshoot"
+    "facepunch.v_m4a1#68031",
+    "facepunch.w_m4a1#60166",
+    "mdlresrc.toolgunshoot#10038"
   ],
   "IsValid": true,
   "__version": 1

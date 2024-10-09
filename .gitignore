@@ -12,6 +12,8 @@ Properties/*
 code/obj/*
 code/Properties/*
 
+.sbox/*
+
 # Auto-generated asset related files
 *.generated.*
 *.*_c

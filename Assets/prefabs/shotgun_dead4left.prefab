@@ -93,9 +93,9 @@
   "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [
-    "facepunch.v_spaghellim4",
-    "facepunch.w_spaghellim4",
-    "mdlresrc.toolgunshoot"
+    "facepunch.v_spaghellim4#64353",
+    "facepunch.w_spaghellim4#58057",
+    "mdlresrc.toolgunshoot#10038"
   ],
   "IsValid": true,
   "__version": 1

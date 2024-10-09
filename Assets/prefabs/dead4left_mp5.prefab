@@ -93,8 +93,8 @@
   "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [
-    "based.guerrilla",
-    "mdlresrc.toolgunshoot"
+    "based.guerrilla#62188",
+    "mdlresrc.toolgunshoot#10038"
   ],
   "IsValid": true,
   "__version": 1

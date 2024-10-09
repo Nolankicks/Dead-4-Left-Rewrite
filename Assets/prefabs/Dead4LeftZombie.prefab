@@ -120,7 +120,7 @@
                     "DstName": "_target"
                   },
                   {
-                    "Id": 29,
+                    "Id": 31,
                     "Value": true,
                     "DstId": 25,
                     "DstName": "start"
@@ -132,7 +132,7 @@
                     "DstName": "_target"
                   },
                   {
-                    "Id": 30,
+                    "Id": 32,
                     "Value": "EnabledInSelf, InParent",
                     "DstId": 26,
                     "DstName": "search"
@@ -196,7 +196,7 @@
                       "_type": "NPC"
                     },
                     "UserData": {
-                      "Position": "528,-0"
+                      "Position": "552,-0"
                     }
                   },
                   {
@@ -249,7 +249,7 @@
                     "DstName": "_target"
                   },
                   {
-                    "Id": 7,
+                    "Id": 9,
                     "Value": 2,
                     "DstId": 3,
                     "DstName": "fireRate"
@@ -261,7 +261,7 @@
                     "DstName": "_target"
                   },
                   {
-                    "Id": 8,
+                    "Id": 10,
                     "Value": "EnabledInSelf, InParent",
                     "DstId": 5,
                     "DstName": "search"
@@ -382,7 +382,7 @@
                     "DstName": "_target"
                   },
                   {
-                    "Id": 7,
+                    "Id": 9,
                     "Value": 2000,
                     "DstId": 3,
                     "DstName": "distance"
@@ -394,7 +394,7 @@
                     "DstName": "_target"
                   },
                   {
-                    "Id": 8,
+                    "Id": 10,
                     "Value": "EnabledInSelf, InParent",
                     "DstId": 5,
                     "DstName": "search"
@@ -450,6 +450,13 @@
             "CreateBoneObjects": false,
             "Model": "models/citizen/citizen.vmdl",
             "Morphs": {},
+            "Parameters": {
+              "bools": {},
+              "ints": {},
+              "floats": {},
+              "vectors": {},
+              "rotations": {}
+            },
             "RenderOptions": {
               "GameLayer": true,
               "OverlayLayer": false,
@@ -509,6 +516,13 @@
                 "CreateBoneObjects": false,
                 "Model": "models/citizen/heads/head_zombie_01/models/head_zombie_01.vmdl",
                 "Morphs": {},
+                "Parameters": {
+                  "bools": {},
+                  "ints": {},
+                  "floats": {},
+                  "vectors": {},
+                  "rotations": {}
+                },
                 "RenderOptions": {
                   "GameLayer": true,
                   "OverlayLayer": false,
@@ -548,7 +562,9 @@
   "MenuIcon": null,
   "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
-  "__references": [],
+  "__references": [
+    "based.guerrilla#62188"
+  ],
   "IsValid": true,
   "__version": 1
 }
