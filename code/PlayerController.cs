@@ -103,26 +103,37 @@ public sealed class PlayerController : Component, IGameEventHandler<DamageEvent>
 		return !tr.Hit;
 	}
 
+	public float EyeHeight { get; set; } = 64;
+
 	public void Crouch()
 	{
-		if ( Input.Down( "duck" ) == IsCrouching )
+		var wishCrouch = Input.Down( "duck" );
+
+		if ( wishCrouch == IsCrouching )
 			return;
 
-		if ( Input.Down( "duck" ) )
+		// crouch
+		if ( wishCrouch )
 		{
 			shrimpleCharacterController.TraceHeight = 36;
+			IsCrouching = wishCrouch;
 
-			IsCrouching = true;
+			if ( !shrimpleCharacterController.IsOnGround )
+			{
+				shrimpleCharacterController.WorldPosition += Vector3.Up * 32;
+				Transform.ClearInterpolation();
+				EyeHeight -= 32;
+			}
 
 			return;
 		}
 
-		if ( !Input.Down( "duck" ) && CanUncrouch() )
+		if ( !wishCrouch )
 		{
-			shrimpleCharacterController.TraceHeight = 72;
+			if ( !CanUncrouch() ) return;
 
-			IsCrouching = false;
-
+			shrimpleCharacterController.TraceHeight = 64;
+			IsCrouching = wishCrouch;
 			return;
 		}
 	}
@@ -199,19 +210,28 @@ public sealed class PlayerController : Component, IGameEventHandler<DamageEvent>
 
 	public void CameraPos()
 	{
-		if ( !Scene?.Camera.IsValid() ?? false )
+		if ( !Scene?.Camera.IsValid() ?? false || !Eye.IsValid() )
 			return;
 
-		var targetPos = Transform.Position + new Vector3( 0, 0, IsCrouching ? 32 : 64 );
+		var camera = Scene.GetAllComponents<CameraComponent>().Where( x => x.IsMainCamera ).FirstOrDefault();
 
-		if ( lastUngrounded > 0.2f )
-			targetPos.z = Scene.Camera.Transform.Position.z.LerpTo( targetPos.z, Time.Delta * 5 );
+		if ( !camera.IsValid() )
+			return;
 
-		Scene.Camera.Transform.Position = targetPos;
+		var targetEyeHeight = IsCrouching ? 28 : 64;
+		EyeHeight = EyeHeight.LerpTo( targetEyeHeight, RealTime.Delta * 10.0f );
 
-		Eye.Transform.Position = Scene.Camera.Transform.Position;
+		var targetCameraPos = WorldPosition + new Vector3( 0, 0, EyeHeight );
 
-		Scene.Camera.Transform.Rotation = EyeAngles.ToRotation();
+		if ( lastUngrounded > 0.1f )
+		{
+			targetCameraPos.z = camera.WorldPosition.z.LerpTo( targetCameraPos.z, RealTime.Delta * 25.0f );
+		}
+
+		Eye.WorldPosition = targetCameraPos;
+		camera.WorldPosition = targetCameraPos;
+		camera.WorldRotation = EyeAngles;
+		camera.FieldOfView = Preferences.FieldOfView;
 	}
 
 	[Broadcast]
