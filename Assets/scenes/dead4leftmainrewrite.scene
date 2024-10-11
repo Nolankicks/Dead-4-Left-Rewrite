@@ -62,6 +62,19 @@
           "Intensity": 8,
           "Quality": "High",
           "Radius": 32
+        },
+        {
+          "__type": "Sandbox.Tonemapping",
+          "__guid": "7d61b0e8-36ab-4920-81b8-0b15a6e592ce",
+          "__version": 1,
+          "AutoExposureEnabled": true,
+          "ExposureBias": 2,
+          "ExposureCompensation": 0,
+          "ExposureMethod": "RGB",
+          "MaximumExposure": 2.65,
+          "MinimumExposure": 1.7,
+          "Mode": "Legacy",
+          "Rate": 8.57
         }
       ]
     },
