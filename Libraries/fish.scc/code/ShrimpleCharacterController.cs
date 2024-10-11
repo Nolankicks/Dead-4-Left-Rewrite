@@ -254,6 +254,7 @@ public class ShrimpleCharacterController : Component
     /// </summary>
     [Sync] public bool IsOnGround { get; set; }
 
+    /// <summary>
     /// The current ground normal you're standing on (Always Vector3.Zero if IsOnGround false)
     /// </summary>
     public Vector3 GroundNormal { get; private set; } = Vector3.Zero;
@@ -392,7 +393,7 @@ public class ShrimpleCharacterController : Component
         // SIMULATE PUSH FORCES //
         if (PushEnabled)
         {
-            var pushTrace = BuildPushTrace(Bounds, Transform.Position, Transform.Position); // Build a trace but using the Push tags instead of the Ignore tags
+            var pushTrace = BuildPushTrace(Bounds, WorldPosition, WorldPosition); // Build a trace but using the Push tags instead of the Ignore tags
 
             if (pushTrace.Hit) // We're inside any of the push tags
             {
@@ -400,8 +401,8 @@ public class ShrimpleCharacterController : Component
                 {
                     if (PushTagsWeight.TryGetValue(tag, out var tagWeight))
                     {
-                        var otherPosition = pushTrace.GameObject.Transform.Position.WithZ(Transform.Position.z); // Only horizontal pushing
-                        var pushDirection = (otherPosition - Transform.Position).Normal;
+                        var otherPosition = pushTrace.GameObject.WorldPosition.WithZ(WorldPosition.z); // Only horizontal pushing
+                        var pushDirection = (otherPosition - WorldPosition).Normal;
                         var pushVelocity = pushDirection * tagWeight * 50f; // I find 50 u/s to be a good amount to push if the weight is 1.0 (!!!)
 
                         goalVelocity -= pushVelocity;
@@ -410,7 +411,7 @@ public class ShrimpleCharacterController : Component
             }
         }
 
-        var moveHelperResult = CollideAndSlide(goalVelocity, Transform.Position, delta); // Simulate the MoveHelper
+        var moveHelperResult = CollideAndSlide(goalVelocity, WorldPosition, delta); // Simulate the MoveHelper
 
         var finalPosition = moveHelperResult.Position;
         var finalVelocity = moveHelperResult.Velocity;
@@ -434,7 +435,7 @@ public class ShrimpleCharacterController : Component
         if (!manualUpdate)
         {
             Velocity = finalVelocity;
-            Transform.Position = finalPosition; // Actually updating the position is "expensive" so we only do it once at the end
+            WorldPosition = finalPosition; // Actually updating the position is "expensive" so we only do it once at the end
         }
 
         return new MoveHelperResult(finalPosition, finalVelocity);
@@ -622,7 +623,7 @@ public class ShrimpleCharacterController : Component
     {
         float goalSpeed;
 
-        var isSameDirection = velocity.IsNearlyZero(1f) || Vector3.Dot(wishVelocity.Normal, velocity.Normal) >= 0f; // Is our wishVelocity roughly moving towards our velocity already?
+        var isSameDirection = velocity.IsNearlyZero(1f) || Vector3.Dot(wishVelocity.WithZ(0f).Normal, velocity.WithZ(0f).Normal) >= 0f; // Is our wishVelocity roughly moving towards our velocity already?
 
         var acceleration = IsOnGround ? GroundAcceleration : AirAcceleration;
         var deceleration = IsOnGround ? GroundDeceleration : AirDeceleration;
@@ -643,13 +644,13 @@ public class ShrimpleCharacterController : Component
     private Vector3 CalculateGoalVelocity(float delta)
     {
         bool shouldIgnoreZ = IgnoreZ || (IgnoreZWhenZero && WishVelocity.z.AlmostEqual(0f));
-        var wishVelocity = shouldIgnoreZ ? WishVelocity.WithZ(Velocity.z).Normal * WishVelocity.Length : WishVelocity;
+        var wishVelocity = shouldIgnoreZ ? (WishVelocity.Normal * WishVelocity.Length).WithZ(Velocity.z) : WishVelocity;
         var isAccelerating = shouldIgnoreZ ? wishVelocity.WithZ(0f).Length >= Velocity.WithZ(0f).Length : wishVelocity.Length >= Velocity.Length;
 
         var goalSpeed = CalculateGoalSpeed(wishVelocity, Velocity, isAccelerating, delta);
         var goalVelocity = Velocity.MoveTowards(wishVelocity, goalSpeed);
 
-        return goalVelocity;
+        return shouldIgnoreZ ? goalVelocity.WithZ(Velocity.z) : goalVelocity;
     }
 
 

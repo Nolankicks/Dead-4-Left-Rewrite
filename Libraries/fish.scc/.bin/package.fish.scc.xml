@@ -1,0 +1,262 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>package.fish.scc</name>
+    </assembly>
+    <members>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.ManuallyUpdate">
+            <summary>
+            Manually update this by calling Move() or let it always be simulated
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.ScaleAgainstWalls">
+            <summary>
+            If pushing against a wall, scale the velocity based on the wall's angle (False is useful for NPCs that get stuck on corners)
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.TraceWidth">
+            <summary>
+            Width of our trace
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.TraceHeight">
+            <summary>
+            Height of our trace
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.IgnoreTags">
+            <summary>
+            Which tags it should ignore
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.MaxBounces">
+            <summary>
+            Max amount of trace calls whenever the simulation doesn't reach its target (Slide and collide bounces)
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.GroundAcceleration">
+            <summary>
+            How fast you accelerate while on the ground (Units per second)
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.GroundDeceleration">
+            <summary>
+            How fast you decelerate while on the ground (Units per second)
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.AirAcceleration">
+            <summary>
+            How fast you accelerate while in the air (Units per second)
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.AirDeceleration">
+            <summary>
+            How fast you decelerate while in the air (Units per second)
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.IgnoreGroundSurface">
+            <summary>
+            Do we ignore the friction of the surface you're standing on or not?
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.IgnoreZ">
+            <summary>
+            Is this MoveHelper meant for horizontal grounded movement? (false = For flying or noclip)
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.IgnoreZWhenZero">
+            <summary>
+            Do we ignore Z when it's near 0 (So that gravity affects you when not moving)
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.GroundStickEnabled">
+            <summary>
+            Stick the MoveHelper to the ground (IsOnGround will default to false if disabled)
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.MaxGroundAngle">
+            <summary>
+            How steep terrain can be for you to stand on without slipping
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.GroundStickDistance">
+            <summary>
+            How far from the ground the MoveHelper is going to stick (Useful for going down stairs!)
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.StepsEnabled">
+            <summary>
+            Enable steps climbing (+1 Trace call)
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.StepHeight">
+            <summary>
+            How high steps can be for you to climb on
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.StepDepth">
+            <summary>
+            How deep it checks for steps (Minimum depth)
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.PushEnabled">
+            <summary>
+            Instead of colliding with these tags the MoveHelper will be pushed away (Make sure the tags are in IgnoreTags as well!)
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.PushTagsWeight">
+            <summary>
+            Which tags will push this MoveHelper away and with how much force (Make sure they are also included in IgnoreTags!) (+1 Trace call)
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.GravityEnabled">
+            <summary>
+            Apply gravity to this MoveHelper when not on the ground
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.UseSceneGravity">
+            <summary>
+            Use the scene's gravity or our own
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.Gravity">
+            <summary>
+            Units per second squared (Default is -850f)
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.UnstuckEnabled">
+            <summary>
+            Check if the MoveHelper is stuck and try to get it to unstuck (+Trace calls if stuck)
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.MaxUnstuckTries">
+            <summary>
+            How many trace calls it will attempt to get the MoveHelper unstuck
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.WishVelocity">
+            <summary>
+            The simulated target velocity for our MoveHelper (Units per second, we apply Time.Delta inside)
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.Velocity">
+            <summary>
+            The resulting velocity after the simulation is done (Units per second)
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.IsOnGround">
+            <summary>
+            Is the MoveHelper currently touching the ground
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.GroundNormal">
+            <summary>
+            The current ground normal you're standing on (Always Vector3.Zero if IsOnGround false)
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.GroundAngle">
+            <summary>
+            The current ground angle you're standing on (Always 0f if IsOnGround false)
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.GroundSurface">
+            <summary>
+            The current surface you're standing on
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.GroundObject">
+            <summary>
+            The gameobject you're currently standing on
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.IsPushingAgainstWall">
+            <summary>
+            Is the MoveHelper currently pushing against a wall
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.WallNormal">
+            <summary>
+            The current wall normal you're pushing against (Always Vector3.Zero if IsPushingAgainstWall false)
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.WallObject">
+            <summary>
+            The gameobject you're currently pushing on
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.IsSlipping">
+            <summary>
+            Is the MoveHelper standing on a terrain too steep to stand on (Always false if IsOnGround false)
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.IsStuck">
+            <summary>
+            The MoveHelper is stuck and we can't get it out
+            </summary>
+        </member>
+        <member name="F:ShrimpleCharacterController.ShrimpleCharacterController.SkinWidth">
+            <summary>
+            To avoid getting stuck due to imprecision we shrink the bounds before checking and compensate for it later
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.Bounds">
+            <summary>
+            The bounds of this MoveHelper generated from the TraceWidth and TraceHeight
+            </summary>
+        </member>
+        <member name="F:ShrimpleCharacterController.ShrimpleCharacterController.UnstuckTarget">
+            <summary>
+            If another MoveHelper moved at the same time and they're stuck, let this one know that the other already unstuck for us
+            </summary>
+        </member>
+        <member name="M:ShrimpleCharacterController.ShrimpleCharacterController.Punch(Vector3@)">
+            <summary>
+            Detach the MoveHelper from the ground and launch it somewhere (Units per second)
+            </summary>
+            <param name="amount"></param>
+        </member>
+        <member name="M:ShrimpleCharacterController.ShrimpleCharacterController.Move(System.Boolean)">
+            <summary>
+            Apply the WishVelocity, update the Velocity and the Position of the GameObject by simulating the MoveHelper
+            </summary>
+            <param name="manualUpdate">Just calculate but don't update position</param>
+        </member>
+        <member name="M:ShrimpleCharacterController.ShrimpleCharacterController.Move(System.Single,System.Boolean)">
+            <summary>
+            Apply the WishVelocity, update the Velocity and the Position of the GameObject by simulating the MoveHelper
+            </summary>
+            <param name="delta">The time step</param>
+            <param name="manualUpdate">Just calculate but don't update position</param>
+        </member>
+        <member name="T:ShrimpleCharacterController.ShrimpleCharacterController.MoveHelperResult">
+            <summary>
+            Sometimes we have to update only the position but not the velocity (Like when climbing steps or getting unstuck) so we can't have Position rely only on Velocity
+            </summary>
+        </member>
+        <member name="M:ShrimpleCharacterController.ShrimpleCharacterController.TestPosition(Vector3,System.String)">
+            <summary>
+            Debug don't use
+            </summary>
+            <param name="position"></param>
+            <param name="title"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ShrimpleCharacterController.Vector3Extensions.MoveTowards(Vector3,Vector3,System.Single)">
+            <summary>
+            Move a vector3 towards a goal by a fixed distance
+            </summary>
+            <param name="value"></param>
+            <param name="target"></param>
+            <param name="travelSpeed"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ShrimpleCharacterController.Vector3Extensions.ProjectAndScale(Vector3,Vector3)">
+            <summary>
+            Project a vector along a plane (normal) and scale it back to its original length
+            </summary>
+            <param name="value"></param>
+            <param name="normal"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

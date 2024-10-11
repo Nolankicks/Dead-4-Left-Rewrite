@@ -24,6 +24,13 @@ MainMenu
         flex-direction: column;
         gap: 16px;
 
+        transition: transform 0.3s ease-in-out;
+
+        &:intro
+        {
+            transform: translateX(-105%);
+        }
+
         .button
         {
             width: 100%;
@@ -64,6 +71,13 @@ MainMenu
         gap: 12px;
 
         color: white;
+
+        transition: transform 0.3s ease-in-out;
+
+        &:intro
+        {
+            transform: translateX(-105%);
+        }
     }
 
     .lobbies
@@ -82,6 +96,14 @@ MainMenu
         padding: 16px;
 
         flex-direction: column;
+
+        transition: opacity 0.2s;
+
+        &:intro
+        {
+            opacity: 0;
+        }
+
 
         >.header
         {
@@ -164,6 +186,13 @@ MainMenu
 
         flex-direction: column;
 
+        transition: opacity 0.2s;
+
+        &:intro
+        {
+            opacity: 0;
+        }
+
         >.header
         {
             width: 100%;
@@ -188,6 +217,7 @@ MainMenu
             padding: 2px;
             overflow-y: scroll;
             overflow-x: hidden;
+            
 
             .info
             {
@@ -295,6 +325,12 @@ MainMenu
         gap: 16px;
 
         flex-direction: column;
+        transition: opacity 0.2s;
+
+        &:intro
+        {
+            opacity: 0;
+        }
 
         .button
         {
