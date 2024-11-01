@@ -1,5 +1,6 @@
 @using Sandbox;
 @using Sandbox.UI;
+@using System;
 @using Sandbox.Network;
 @inherits PanelComponent
 
@@ -12,23 +13,149 @@
 
 	<div class="buttons">
 		<div class="button" onclick=@( () => Visible = false )> Resume </div>
+		<div class="button" onclick=@( () => ShowLeaderboards = !ShowLeaderboards )> Leaderboards </div>
 		<div class="button" onclick=@( () => Game.Overlay.ShowServerList( new Sandbox.Modals.ServerListConfig( Game.Ident ) ) )> Servers </div>
 		<div class="button" onclick=@( () => Game.Overlay.ShowReviewModal( Package.Fetch( Game.Ident, false )?.Result ) )> Review </div>
 		<div class="button" onclick=@Game.Overlay.ShowSettingsModal> Settings </div>
 		<div class="button" onclick=@BackToMenu> Back to Menu </div>
 		<div class="button" onclick=@Game.Close> Exit </div>
 	</div>
+
+	@if ( ShowLeaderboards )
+	{
+		<div class="leaderboard">
+				<div class="header"> Leaderboards </div>
+                 <div class="leaderboard-holder">
+                @if (FetchingLeaderboard)
+                {
+                    <div class="info">Fetching leaderboard...</div>
+                }
+                else
+                {
+               
+					@foreach ( var entry in Leaderboard.Entries )
+					{
+						<div class="entry @( IsMe(entry) ? "me" : "" ) ">
+							<div class="name"> @entry.Rank. @entry.DisplayName </div>
+							<div class="value"> @entry.Value </div>
+						</div>
+					}
+                }
+                </div>
+				<div class="sort">
+					<div class="button" onclick=@ChangeSortBy> @CurrentSortByString() </div>
+				</div>
+			</div>
+	}
 </root>
 
 @code
 {
 	public bool Visible { get; set; } = false;
+	public bool ShowLeaderboards { get; set; } = false;
 	[Property] public SceneFile MenuScene { get; set; }
+	public enum SortBy
+	{
+		Day,
+		Week,
+		Month,
+		Year,
+		AllTime
+	}
+
+	public Sandbox.Services.Leaderboards.Board2 Leaderboard { get; set; }
+	public SortBy CurrentSortBy { get; set; } = SortBy.AllTime;
+	public bool Country { get; set; }
+	public bool Friends { get; set; }
+	public bool FetchingLeaderboard { get; set; }
+
+	protected override void OnStart()
+	{
+		FetchLeaderboard();
+	}
+
+	public async void FetchLeaderboard( SortBy sortBy = SortBy.AllTime, bool country = false, bool friends = false )
+	{
+        FetchingLeaderboard = true;
+
+		Leaderboard = Sandbox.Services.Leaderboards.GetFromStat( "zombieskilled" );
+
+		Leaderboard.SetAggregationMax();
+		Leaderboard.SetSortDescending();
+		Leaderboard.CenterOnMe();
+		Leaderboard.MaxEntries = 100;
+		
+		if ( country )
+			Leaderboard.SetCountryAuto();
+
+		Leaderboard.SetFriendsOnly( friends );
+
+		CurrentSortBy = sortBy;
+		Friends = friends;
+		Country = country;
+
+		switch ( sortBy )
+		{
+			case SortBy.Day:
+				Leaderboard.FilterByDay();
+				break;
+			case SortBy.Week:
+				Leaderboard.FilterByWeek();
+				break;
+			case SortBy.Month:
+				Leaderboard.FilterByMonth();
+				break;
+			case SortBy.Year:
+				Leaderboard.FilterByYear();
+				break;
+			case SortBy.AllTime:
+				break;
+		}
+
+        await Leaderboard.Refresh();
+
+        FetchingLeaderboard = false;
+	}
+
+	public void ChangeSortBy()
+	{
+    	var sortByValues = Enum.GetValues( typeof(SortBy) ).Cast<SortBy>().ToList();
+    	var currentIndex = sortByValues.IndexOf(CurrentSortBy);
+    	var nextIndex = (currentIndex + 1) % sortByValues.Count;
+    	var nextSortBy = sortByValues[nextIndex];
+
+    	FetchLeaderboard(nextSortBy, Country, Friends);
+	}
+
+	public string CurrentSortByString()
+	{
+		switch ( CurrentSortBy )
+		{
+			case SortBy.Day:
+				return "Day";
+			case SortBy.Week:
+				return "Week";
+			case SortBy.Month:
+				return "Month";
+			case SortBy.Year:
+				return "Year";
+			case SortBy.AllTime:
+				return "All Time";
+		}
+
+		return "All Time";
+	}
+
+	public bool IsMe( Sandbox.Services.Leaderboards.Board2.Entry entry )
+	{
+		return entry.SteamId == (long)Sandbox.Utility.Steam.SteamId;
+	}
 
 	protected override void OnUpdate()
 	{
 		if ( Input.EscapePressed )
 		{
+			ShowLeaderboards = false;
 			Visible = !Visible;
 
 			//Can't convince me this is not dumb
@@ -46,5 +173,5 @@
 	/// <summary>
 	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
 	/// </summary>
-	protected override int BuildHash() => System.HashCode.Combine( Input.EscapePressed, Visible );
+	protected override int BuildHash() => System.HashCode.Combine( Input.EscapePressed, Visible, ShowLeaderboards );
 }

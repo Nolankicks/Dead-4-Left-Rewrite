@@ -22,8 +22,8 @@
     "PerMapRanking": false,
     "LeaderboardType": "None",
     "CsProjName": "",
-    "StartupScene": "scenes/dead4leftmenurewrite.scene",
-    "LaunchMode": "Normal",
-    "MapStartupScene": "scenes/dead4leftmainrewrite.scene"
+    "StartupScene": "scenes/maploader.scene",
+    "LaunchMode": "Launcher",
+    "MapStartupScene": "scenes/maploader.scene"
   }
 }

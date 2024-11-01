@@ -23,7 +23,7 @@ public sealed class PlayerController : Component, IGameEventHandler<DamageEvent>
 	public Vector3 WishVelocity { get; set; }
 	[Sync] public Angles EyeAngles { get; set; }
 	[Property, Category( "Refrences" )] public GameObject Eye { get; set; }
-	[Sync, Change( nameof( OnHoldTypeChanged ) )] public CitizenAnimationHelper.HoldTypes HoldType { get; set; }
+	[Sync, Change( nameof( OnChange ) )] public CitizenAnimationHelper.HoldTypes HoldType { get; set; }
 	[Property, Sync] public ModelRenderer HoldRenderer { get; set; }
 	[Property, Sync] public Inventory Inventory { get; set; }
 	[Property, Sync] public int Score { get; set; }
@@ -52,12 +52,12 @@ public sealed class PlayerController : Component, IGameEventHandler<DamageEvent>
 		AnimHelper.HoldType = HoldType;
 	}
 
-	private void OnHoldTypeChanged( CitizenAnimationHelper.HoldTypes oldValue, CitizenAnimationHelper.HoldTypes newValue )
+	public void OnChange( CitizenAnimationHelper.HoldTypes oldValue, CitizenAnimationHelper.HoldTypes newValue )
 	{
 		if ( !AnimHelper.IsValid() )
 			return;
 
-		AnimHelper.HoldType = newValue;
+		AnimHelper.HoldType = HoldType;
 	}
 
 	protected override void OnFixedUpdate()
