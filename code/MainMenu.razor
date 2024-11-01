@@ -8,7 +8,7 @@
 <root>
 	<div class="buttons">
 
-		<div class="button" onclick=@( () => ChangeMenuState( MenuState.Play ) )> Play </div>
+		<div class="button" onclick=@( () => Game.Overlay.ShowPackageSelector( "type:map", OnSelect ))> Play </div>
 
 		<div class="button" onclick=@( () => ChangeMenuState( MenuState.Lobbies ))> Lobbies </div>
 		<div class="button" onclick=@( () => ChangeMenuState( MenuState.Leaderboards ))> Leaderboards</div>

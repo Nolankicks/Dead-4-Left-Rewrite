@@ -48,7 +48,11 @@ public sealed class TransitionLabel : GraphicsItem, IContextMenuSource, IDeletab
 		PrepareGeometryChange();
 
 		Size = new Vector2( iconWidth + textWidth, 24f );
-		Tooltip = Source.Description;
+	}
+
+	protected override void OnHoverEnter( GraphicsHoverEvent e )
+	{
+		ToolTip = Source.Description;
 	}
 
 	protected override void OnSelectionChanged()
