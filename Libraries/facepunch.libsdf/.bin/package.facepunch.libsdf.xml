@@ -1061,7 +1061,6 @@
             <summary>
             Implements updating the render / collision meshes of this chunk.
             </summary>
-            <param name="token">Token to cancel outdated mesh updates</param>
             <returns>Task that completes when the meshes have finished updating.</returns>
         </member>
         <member name="M:Sandbox.Sdf.SdfChunk`6.UpdateCollisionMeshAsync(System.Collections.Generic.List{Vector3},System.Collections.Generic.List{System.Int32})">

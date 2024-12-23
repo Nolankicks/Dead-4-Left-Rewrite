@@ -1,7 +1,4 @@
 [
   "package.base",
-  "package.library.facepunch.playercontroller",
-  "package.library.facepunch.libsdf",
-  "package.library.facepunch.libworlds",
   "package.facepunch.libsdf"
 ]
