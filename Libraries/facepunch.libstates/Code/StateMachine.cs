@@ -116,7 +116,7 @@ public sealed class StateMachineComponent : Component
 		InvokeSafe( CurrentState?.OnUpdateState );
 	}
 
-	[Broadcast( NetPermission.OwnerOnly )]
+	[Rpc.Broadcast( NetFlags.OwnerOnly )]
 	private void BroadcastTransition( int transitionId )
 	{
 		var transition = _transitions!.GetValueOrDefault( transitionId )
