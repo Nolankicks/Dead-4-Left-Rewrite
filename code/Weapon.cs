@@ -112,7 +112,7 @@ public sealed class Weapon : Item
 
             health.TakeDamage( local.GameObject, Damage, tr.EndPosition, tr.Normal );
 
-            SpawnParticleEffect( Cloud.ParticleSystem( "bolt.impactflesh" ), tr.EndPosition );
+            //SpawnParticleEffect( Cloud.ParticleSystem( "bolt.impactflesh" ), tr.EndPosition );
         }
 
         if ( tr.Body.IsValid() )
@@ -146,7 +146,7 @@ public sealed class Weapon : Item
 
     public static void SpawnParticleEffect( ParticleSystem system, Vector3 pos )
     {
-        /*var gb = new GameObject();
+        var gb = new GameObject();
 
         gb.Transform.Position = pos;
 
@@ -156,7 +156,7 @@ public sealed class Weapon : Item
 
         gb.Components.Create<Destoryer>();
 
-        gb.NetworkSpawn( null );*/
+        gb.NetworkSpawn( null );
     }
 }
 
