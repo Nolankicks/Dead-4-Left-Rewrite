@@ -34,7 +34,7 @@ public sealed class HealthComponent : Component
         GameObject.Dispatch( new DamageEvent( damage, Attacker, GameObject, HitPos, normal ) );
     }
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public void BroadcastGlobalDamageEvent( int Amount, GameObject Attacker, GameObject Player )
 	{
 		Scene.Dispatch( new GlobalDamageEvent( Amount, Attacker, Player ) );

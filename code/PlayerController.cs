@@ -171,7 +171,7 @@ public sealed class PlayerController : Component, IGameEventHandler<DamageEvent>
 		shrimpleCharacterController.Move();
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public void BroadcastJump()
 	{
 		if ( !AnimHelper.IsValid() )
@@ -234,7 +234,7 @@ public sealed class PlayerController : Component, IGameEventHandler<DamageEvent>
 		camera.FieldOfView = Preferences.FieldOfView;
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public void BroadcastAttack()
 	{
 		if ( !AnimHelper.IsValid() || !AnimHelper.Target.IsValid() )
@@ -268,7 +268,7 @@ public sealed class PlayerController : Component, IGameEventHandler<DamageEvent>
 		Scene.Dispatch( new PlayerDamage( this, eventArgs ) );
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public void TakeDamage()
 	{
 		if ( !HealthComponent.IsValid() )

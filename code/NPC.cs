@@ -39,7 +39,7 @@ public sealed class NPC : Component, IGameEventHandler<PlayerDeath>, IGameEventH
 		WishMove = true;
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public void ClearDestination()
 	{
 		if ( !Networking.IsHost )
@@ -159,7 +159,7 @@ public sealed class NPC : Component, IGameEventHandler<PlayerDeath>, IGameEventH
 		lastFired = 0;
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public void BroadcastAttack()
 	{
 		if ( AnimationHelper?.Target.IsValid() ?? false )
@@ -179,7 +179,7 @@ public sealed class NPC : Component, IGameEventHandler<PlayerDeath>, IGameEventH
 
 	}
 
-    [Broadcast]
+    [Rpc.Broadcast]
     public void BroadcastMessage()
     {
         if ( Components.TryGet<StateMachineComponent>( out var state, FindMode.EverythingInSelfAndDescendants ) && Networking.IsHost )
@@ -196,7 +196,7 @@ public sealed class NPC : Component, IGameEventHandler<PlayerDeath>, IGameEventH
 		BroadcastDeath( eventArgs.damageNormal );
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public void BroadcastDeath( Vector3 normal )
 	{
 		if ( !HealthComponent.IsValid() )

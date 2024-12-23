@@ -25,7 +25,7 @@ public class Item : Component, IGameEventHandler<OnItemEquipped>
         BroadcastEquip( player );
     }
 
-    [Broadcast]
+    [Rpc.Broadcast]
     public void BroadcastEquip( PlayerController local )
     {
         if ( !local.IsValid() )
@@ -130,7 +130,7 @@ public sealed class Weapon : Item
         }
     }
 
-    [Broadcast]
+    [Rpc.Broadcast]
     public void BroadcastFireSound( Vector3 pos )
     {
         if ( FireSound is null )
