@@ -115,7 +115,7 @@ public sealed class Weapon : Item
 
             health.TakeDamage( local.GameObject, Damage, tr.EndPosition, tr.Normal );
 
-            SpawnParticleEffect( tr.EndPosition );
+            //SpawnParticleEffect( tr.EndPosition );
         }
 
         if ( tr.Body.IsValid() )
@@ -152,7 +152,7 @@ public sealed class Weapon : Item
         if ( BloodPrefab is null )
 			return;
 
-		var blood = BloodPrefab.Clone();
+		var blood = BloodPrefab?.Clone();
 
 		blood.WorldPosition = pos;
 
