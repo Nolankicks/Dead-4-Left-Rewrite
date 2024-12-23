@@ -9,6 +9,10 @@
       {
         "__type": "Weapon",
         "__guid": "4ed6a63a-4d64-4b12-b540-69664f44f101",
+        "BloodPrefab": {
+          "_type": "gameobject",
+          "prefab": "particles/surfaces/impact.flesh.mist.prefab"
+        },
         "Damage": 50,
         "FireRate": 0.4,
         "FireSound": "sounds/toolgun/toolgun-fire.sound",
@@ -45,9 +49,17 @@
           "go": "3ea46653-5563-4dc0-bd2a-adc0e16da330",
           "component_type": "SkinnedModelRenderer"
         },
+        "CreateAttachments": false,
         "CreateBoneObjects": false,
         "Model": "models/first_person/first_person_arms.vmdl",
         "Morphs": {},
+        "Parameters": {
+          "bools": {},
+          "ints": {},
+          "floats": {},
+          "vectors": {},
+          "rotations": {}
+        },
         "RenderOptions": {
           "GameLayer": false,
           "OverlayLayer": true,
@@ -55,6 +67,9 @@
           "AfterUILayer": false
         },
         "RenderType": "Off",
+        "Sequence": {
+          "Name": null
+        },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
       }
@@ -70,9 +85,17 @@
             "__type": "Sandbox.SkinnedModelRenderer",
             "__guid": "20cad830-998a-47a0-8071-c0ea20413f2d",
             "BodyGroups": 107811,
+            "CreateAttachments": false,
             "CreateBoneObjects": false,
             "Model": "models/weapons/sbox_assault_m4a1/v_m4a1.vmdl",
             "Morphs": {},
+            "Parameters": {
+              "bools": {},
+              "ints": {},
+              "floats": {},
+              "vectors": {},
+              "rotations": {}
+            },
             "RenderOptions": {
               "GameLayer": false,
               "OverlayLayer": true,
@@ -80,13 +103,39 @@
               "AfterUILayer": false
             },
             "RenderType": "Off",
+            "Sequence": {
+              "Name": null
+            },
             "Tint": "1,1,1,1",
             "UseAnimGraph": true
           }
         ]
       }
     ],
-    "__variables": []
+    "__variables": [],
+    "__properties": {
+      "FixedUpdateFrequency": 50,
+      "MaxFixedUpdates": 5,
+      "NetworkFrequency": 30,
+      "NetworkInterpolation": true,
+      "PhysicsSubSteps": 1,
+      "ThreadedAnimation": true,
+      "TimeScale": 1,
+      "UseFixedUpdate": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    }
   },
   "ShowInMenu": false,
   "MenuPath": null,
@@ -94,10 +143,10 @@
   "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [
+    "facepunch.impactfleshmist#76364",
     "facepunch.v_m4a1#68031",
     "facepunch.w_m4a1#60166",
     "mdlresrc.toolgunshoot#10038"
   ],
-  "IsValid": true,
   "__version": 1
 }

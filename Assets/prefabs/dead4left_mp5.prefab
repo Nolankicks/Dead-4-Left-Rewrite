@@ -25,9 +25,17 @@
           "go": "24d1d70a-cc96-40ab-9782-15552669c94b",
           "component_type": "SkinnedModelRenderer"
         },
+        "CreateAttachments": false,
         "CreateBoneObjects": false,
         "Model": "models/first_person/first_person_arms.vmdl",
         "Morphs": {},
+        "Parameters": {
+          "bools": {},
+          "ints": {},
+          "floats": {},
+          "vectors": {},
+          "rotations": {}
+        },
         "RenderOptions": {
           "GameLayer": false,
           "OverlayLayer": true,
@@ -35,12 +43,19 @@
           "AfterUILayer": false
         },
         "RenderType": "Off",
+        "Sequence": {
+          "Name": null
+        },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
       },
       {
         "__type": "Weapon",
         "__guid": "4ed6a63a-4d64-4b12-b540-69664f44f101",
+        "BloodPrefab": {
+          "_type": "gameobject",
+          "prefab": "particles/surfaces/impact.flesh.mist.prefab"
+        },
         "Damage": 25,
         "FireRate": 0.1,
         "FireSound": "sounds/toolgun/toolgun-fire.sound",
@@ -69,9 +84,17 @@
             "__type": "Sandbox.SkinnedModelRenderer",
             "__guid": "89dbbad1-2aec-42c3-9713-98c5072ab6d4",
             "BodyGroups": 131,
+            "CreateAttachments": false,
             "CreateBoneObjects": false,
             "Model": "models/weapons/sbox_smg_mp5/v_mp5.vmdl",
             "Morphs": {},
+            "Parameters": {
+              "bools": {},
+              "ints": {},
+              "floats": {},
+              "vectors": {},
+              "rotations": {}
+            },
             "RenderOptions": {
               "GameLayer": false,
               "OverlayLayer": true,
@@ -79,13 +102,39 @@
               "AfterUILayer": false
             },
             "RenderType": "Off",
+            "Sequence": {
+              "Name": null
+            },
             "Tint": "1,1,1,1",
             "UseAnimGraph": true
           }
         ]
       }
     ],
-    "__variables": []
+    "__variables": [],
+    "__properties": {
+      "FixedUpdateFrequency": 50,
+      "MaxFixedUpdates": 5,
+      "NetworkFrequency": 30,
+      "NetworkInterpolation": true,
+      "PhysicsSubSteps": 1,
+      "ThreadedAnimation": true,
+      "TimeScale": 1,
+      "UseFixedUpdate": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    }
   },
   "ShowInMenu": false,
   "MenuPath": null,
@@ -93,9 +142,9 @@
   "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [
-    "based.guerrilla#62188",
+    "facepunch.impactfleshmist#76364",
+    "facepunch.v_mp5#64494",
     "mdlresrc.toolgunshoot#10038"
   ],
-  "IsValid": true,
   "__version": 1
 }

@@ -111,8 +111,10 @@
             "__type": "Sandbox.Bloom",
             "__guid": "e964573a-b3db-4339-813a-5635f59caeff",
             "BloomColor": {
+              "blend": "Linear",
               "color": [
                 {
+                  "t": 0,
                   "c": "1,1,1,1"
                 },
                 {
@@ -124,11 +126,18 @@
             },
             "BloomCurve": [
               {
-                "y": 0.5
+                "x": 0,
+                "y": 0.5,
+                "in": 0,
+                "out": 0,
+                "mode": "Mirrored"
               },
               {
                 "x": 1,
-                "y": 1
+                "y": 1,
+                "in": 0,
+                "out": 0,
+                "mode": "Mirrored"
               }
             ],
             "Mode": "Blur",
@@ -139,10 +148,14 @@
           {
             "__type": "Sandbox.AmbientOcclusion",
             "__guid": "5be3b4a9-b2e8-4ef9-86ee-5bc4f733c227",
-            "FalloffDistance": 1,
-            "Intensity": 8,
+            "__version": 1,
+            "__enabled": false,
+            "DenoiseMode": "Temporal",
+            "FalloffRange": 0.75,
+            "Intensity": 0.15,
             "Quality": "High",
-            "Radius": 32
+            "Radius": 128,
+            "ThinCompensation": 0
           },
           {
             "__type": "Sandbox.Tonemapping",

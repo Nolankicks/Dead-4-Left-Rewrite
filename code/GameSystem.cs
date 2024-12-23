@@ -20,7 +20,7 @@ public sealed class GameSystem : Component, Component.INetworkListener, IGameEve
 		{
 			LoadingScreen.Title = "Creating Lobby...";
 			await Task.DelaySeconds( 0.1f );
-			Networking.CreateLobby();
+			Networking.CreateLobby( new() );
 		}
 	}
 

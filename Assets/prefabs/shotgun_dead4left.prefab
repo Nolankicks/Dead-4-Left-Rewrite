@@ -8,6 +8,10 @@
       {
         "__type": "Weapon",
         "__guid": "db0a5184-ee6e-4bd0-a83a-a1c14ef7f60b",
+        "BloodPrefab": {
+          "_type": "gameobject",
+          "prefab": "particles/surfaces/impact.flesh.mist.prefab"
+        },
         "Damage": 15,
         "FireRate": 1.5,
         "FireSound": "sounds/toolgun/toolgun-fire.sound",
@@ -34,9 +38,17 @@
           "go": "05010af5-08de-47a8-baaf-c91149b77d70",
           "component_type": "SkinnedModelRenderer"
         },
+        "CreateAttachments": false,
         "CreateBoneObjects": false,
         "Model": "models/first_person/first_person_arms.vmdl",
         "Morphs": {},
+        "Parameters": {
+          "bools": {},
+          "ints": {},
+          "floats": {},
+          "vectors": {},
+          "rotations": {}
+        },
         "RenderOptions": {
           "GameLayer": false,
           "OverlayLayer": true,
@@ -44,6 +56,9 @@
           "AfterUILayer": false
         },
         "RenderType": "Off",
+        "Sequence": {
+          "Name": null
+        },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
       },
@@ -69,9 +84,17 @@
             "__type": "Sandbox.SkinnedModelRenderer",
             "__guid": "a7cf544d-a931-468c-942a-5a8e51373720",
             "BodyGroups": 95,
+            "CreateAttachments": false,
             "CreateBoneObjects": false,
             "Model": "models/weapons/sbox_shotgun_spaghellim4/v_spaghellim4.vmdl",
             "Morphs": {},
+            "Parameters": {
+              "bools": {},
+              "ints": {},
+              "floats": {},
+              "vectors": {},
+              "rotations": {}
+            },
             "RenderOptions": {
               "GameLayer": false,
               "OverlayLayer": true,
@@ -79,13 +102,39 @@
               "AfterUILayer": false
             },
             "RenderType": "Off",
+            "Sequence": {
+              "Name": null
+            },
             "Tint": "1,1,1,1",
             "UseAnimGraph": true
           }
         ]
       }
     ],
-    "__variables": []
+    "__variables": [],
+    "__properties": {
+      "FixedUpdateFrequency": 50,
+      "MaxFixedUpdates": 5,
+      "NetworkFrequency": 30,
+      "NetworkInterpolation": true,
+      "PhysicsSubSteps": 1,
+      "ThreadedAnimation": true,
+      "TimeScale": 1,
+      "UseFixedUpdate": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    }
   },
   "ShowInMenu": false,
   "MenuPath": null,
@@ -93,10 +142,10 @@
   "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [
+    "facepunch.impactfleshmist#76364",
     "facepunch.v_spaghellim4#64353",
     "facepunch.w_spaghellim4#58057",
     "mdlresrc.toolgunshoot#10038"
   ],
-  "IsValid": true,
   "__version": 1
 }

@@ -6,9 +6,10 @@ public sealed class Destoryer : Component
 
 	public TimeUntil DestroyTime { get; set; } = 0;
 
-	protected override void OnAwake()
+	protected override void OnStart()
 	{
-		DestroyTime = Time;
+		if ( Networking.IsHost )
+			DestroyTime = Time;
 	}
 
 	protected override void OnUpdate()

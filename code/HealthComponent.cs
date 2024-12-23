@@ -12,7 +12,7 @@ public sealed class HealthComponent : Component
     [Property] public int MaxHealth { get; set; } = 100;
     [Property, Sync] public bool IsDead { get; set; } = false;
 
-    [Authority]
+    [Rpc.Owner]
     public void TakeDamage( GameObject Attacker, int damage = 1, Vector3 HitPos = default, Vector3 normal = default )
     {
         if ( IsDead )

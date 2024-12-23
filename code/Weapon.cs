@@ -22,6 +22,8 @@ public class Item : Component, IGameEventHandler<OnItemEquipped>
 
         player.HoldType = HoldType;
 
+		player.ChangeHoldType( player.AnimHelper, HoldType );
+
         BroadcastEquip( player );
     }
 
@@ -47,6 +49,7 @@ public sealed class Weapon : Item
     [Property] public float Spread { get; set; } = 0.03f;
     [Property] public int TraceTimes { get; set; } = 1;
     [Property] public SoundEvent FireSound { get; set; }
+	[Property] public GameObject BloodPrefab { get; set; }
 
     public override void OnEquip( OnItemEquipped onItemEquipped )
     {
@@ -112,7 +115,7 @@ public sealed class Weapon : Item
 
             health.TakeDamage( local.GameObject, Damage, tr.EndPosition, tr.Normal );
 
-            //SpawnParticleEffect( Cloud.ParticleSystem( "bolt.impactflesh" ), tr.EndPosition );
+            SpawnParticleEffect( tr.EndPosition );
         }
 
         if ( tr.Body.IsValid() )
@@ -144,19 +147,17 @@ public sealed class Weapon : Item
         sound.Volume *= 5f;
     }
 
-    public static void SpawnParticleEffect( ParticleSystem system, Vector3 pos )
+    public void SpawnParticleEffect( Vector3 pos )
     {
-        var gb = new GameObject();
+        if ( BloodPrefab is null )
+			return;
 
-        gb.Transform.Position = pos;
+		var blood = BloodPrefab.Clone();
 
-        var particle = gb.Components.Create<LegacyParticleSystem>();
+		blood.WorldPosition = pos;
 
-        particle.Particles = system;
-
-        gb.Components.Create<Destoryer>();
-
-        gb.NetworkSpawn( null );
+		var destroyer = blood.Components.Create<Destoryer>();
+		destroyer.Time = 1;
     }
 }
 
