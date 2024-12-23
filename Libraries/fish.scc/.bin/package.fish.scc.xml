@@ -69,6 +69,16 @@
             Do we ignore Z when it's near 0 (So that gravity affects you when not moving)
             </summary>
         </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.WallTolerance">
+            <summary>
+            Tolerance from a 90° surface before it's considered a wall (Ex. Tolerance 1 = Between 89° and 91° can be a wall, 0.1 = 89.9° to 90.1°)
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.GripFactorReduction">
+            <summary>
+            Player feels like it's gripping walls too much? Try more Grip Factor Reduction!
+            </summary>
+        </member>
         <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.GroundStickEnabled">
             <summary>
             Stick the MoveHelper to the ground (IsOnGround will default to false if disabled)
@@ -97,6 +107,16 @@
         <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.StepDepth">
             <summary>
             How deep it checks for steps (Minimum depth)
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.StepTolerance">
+            <summary>
+            Tolerance from a 90° surface before it's considered a valid step (Ex. Tolerance 1 = Between 89° and 91° can be a step, 0.1 = 89.9° to 90.1°)
+            </summary>
+        </member>
+        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.PseudoStepsEnabled">
+            <summary>
+            Enable to ability to walk on a surface that's too steep if it's equal or smaller than a step (+1 Trace call when on steep terrain)
             </summary>
         </member>
         <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.PushEnabled">
@@ -149,11 +169,7 @@
             Is the MoveHelper currently touching the ground
             </summary>
         </member>
-        <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.GroundNormal">
-            <summary>
-            The current ground normal you're standing on (Always Vector3.Zero if IsOnGround false)
-            </summary>
-        </member>
+        <!-- Badly formed XML comment ignored for member "P:ShrimpleCharacterController.ShrimpleCharacterController.GroundNormal" -->
         <member name="P:ShrimpleCharacterController.ShrimpleCharacterController.GroundAngle">
             <summary>
             The current ground angle you're standing on (Always 0f if IsOnGround false)
@@ -208,6 +224,15 @@
             <summary>
             If another MoveHelper moved at the same time and they're stuck, let this one know that the other already unstuck for us
             </summary>
+        </member>
+        <member name="M:ShrimpleCharacterController.ShrimpleCharacterController.BuildTrace(BBox,Vector3,Vector3)">
+            <summary>
+            Casts the current bounds from to and returns the scene trace result
+            </summary>
+            <param name="bounds"></param>
+            <param name="from"></param>
+            <param name="to"></param>
+            <returns></returns>
         </member>
         <member name="M:ShrimpleCharacterController.ShrimpleCharacterController.Punch(Vector3@)">
             <summary>
