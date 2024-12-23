@@ -1,0 +1,195 @@
+{
+  "RootObject": {
+    "__guid": "26882729-c688-43d4-94c5-9fc238d6114c",
+    "Flags": 0,
+    "Name": "core",
+    "Enabled": true,
+    "Children": [
+      {
+        "__guid": "a589cc3d-4151-4c2d-9f14-1cb8b0d9f1e0",
+        "Flags": 0,
+        "Name": "Manager",
+        "Enabled": true,
+        "NetworkMode": 1,
+        "Components": [
+          {
+            "__type": "GameSystem",
+            "__guid": "12d5ef64-a1be-42f6-b416-d57e267d855c",
+            "PlayerPrefab": {
+              "_type": "gameobject",
+              "prefab": "prefabs/playerdead4left.prefab"
+            },
+            "SpawnPlayer": true,
+            "StartServer": true
+          }
+        ]
+      },
+      {
+        "__guid": "b3d3b87b-f787-4893-96a5-f0e5235dd23a",
+        "Flags": 0,
+        "Name": "NPC Spawner",
+        "Enabled": true,
+        "NetworkMode": 1,
+        "Components": [
+          {
+            "__type": "NPCSpawner",
+            "__guid": "05efec49-de11-4162-be40-0ce532742c02",
+            "NPCPrefab": {
+              "_type": "gameobject",
+              "prefab": "prefabs/dead4leftzombie.prefab"
+            }
+          }
+        ]
+      },
+      {
+        "__guid": "94a54250-a39b-48eb-bdbd-18b4d4fb6e4c",
+        "Flags": 0,
+        "Name": "Screen",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.ScreenPanel",
+            "__guid": "608bb0ad-ca56-47eb-b01f-b1ccf220f19d",
+            "AutoScreenScale": true,
+            "Opacity": 1,
+            "Scale": 1,
+            "ScaleStrategy": "ConsistentHeight",
+            "ZIndex": 100
+          },
+          {
+            "__type": "HUD",
+            "__guid": "a7cbc777-1bc5-4c2d-9e3a-1085dce8d52e"
+          },
+          {
+            "__type": "PauseMenu",
+            "__guid": "66147575-04de-4185-9171-980247d3214a",
+            "MenuScene": "scenes/dead4leftmenurewrite.scene"
+          }
+        ],
+        "Children": [
+          {
+            "__guid": "1ea6656c-30a5-4ca6-a38f-fdc58d5e0a62",
+            "Flags": 0,
+            "Name": "Chat",
+            "Enabled": true,
+            "NetworkMode": 1,
+            "Components": [
+              {
+                "__type": "Chat",
+                "__guid": "62d29541-3d32-425c-819b-720fcbaa049e"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "__guid": "bfff8419-3d13-4820-a410-54e1585f9bee",
+        "Flags": 0,
+        "Name": "Camera",
+        "Position": "-203.3618,-203.3618,287.478",
+        "Tags": "maincamera",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.CameraComponent",
+            "__guid": "04b2be1c-ff1d-4575-bc6e-ef230920dbec",
+            "BackgroundColor": "0.33333,0.46275,0.52157,1",
+            "ClearFlags": "All",
+            "FieldOfView": 90,
+            "IsMainCamera": true,
+            "Orthographic": false,
+            "OrthographicHeight": 1204,
+            "Priority": 1,
+            "RenderExcludeTags": "",
+            "RenderTags": "",
+            "TargetEye": "None",
+            "Viewport": "0,0,1,1",
+            "ZFar": 10000,
+            "ZNear": 5
+          },
+          {
+            "__type": "Sandbox.Bloom",
+            "__guid": "e964573a-b3db-4339-813a-5635f59caeff",
+            "BloomColor": {
+              "color": [
+                {
+                  "c": "1,1,1,1"
+                },
+                {
+                  "t": 1,
+                  "c": "1,1,1,1"
+                }
+              ],
+              "alpha": []
+            },
+            "BloomCurve": [
+              {
+                "y": 0.5
+              },
+              {
+                "x": 1,
+                "y": 1
+              }
+            ],
+            "Mode": "Blur",
+            "Strength": 0.15,
+            "Threshold": 0.5,
+            "ThresholdWidth": 0
+          },
+          {
+            "__type": "Sandbox.AmbientOcclusion",
+            "__guid": "5be3b4a9-b2e8-4ef9-86ee-5bc4f733c227",
+            "FalloffDistance": 1,
+            "Intensity": 8,
+            "Quality": "High",
+            "Radius": 32
+          },
+          {
+            "__type": "Sandbox.Tonemapping",
+            "__guid": "52c9f8a3-c1c6-4103-8d62-42fe87a1d6f7",
+            "__version": 1,
+            "AutoExposureEnabled": true,
+            "ExposureBias": 2,
+            "ExposureCompensation": 0,
+            "ExposureMethod": "RGB",
+            "MaximumExposure": 2.65,
+            "MinimumExposure": 1.7,
+            "Mode": "Legacy",
+            "Rate": 8.57
+          }
+        ]
+      }
+    ],
+    "__variables": [],
+    "__properties": {
+      "FixedUpdateFrequency": 50,
+      "MaxFixedUpdates": 5,
+      "NetworkFrequency": 30,
+      "NetworkInterpolation": true,
+      "PhysicsSubSteps": 1,
+      "ThreadedAnimation": true,
+      "TimeScale": 1,
+      "UseFixedUpdate": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    }
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "DontBreakAsTemplate": false,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

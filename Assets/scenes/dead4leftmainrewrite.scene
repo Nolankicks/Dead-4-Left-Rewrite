@@ -2,79 +2,17 @@
   "__guid": "6462cb3d-1e47-48c0-980f-7868a845d1f5",
   "GameObjects": [
     {
-      "__guid": "9f999039-4bf8-4945-82dd-6a7bf02c0a5c",
+      "__guid": "9f139413-5bcc-4c2a-bfdb-bb4dfe8cb273",
       "Flags": 0,
-      "Name": "Camera",
-      "Position": "-203.3618,-203.3618,287.478",
-      "Tags": "maincamera",
+      "Name": "Scene Information",
       "Enabled": true,
       "Components": [
         {
-          "__type": "Sandbox.CameraComponent",
-          "__guid": "2ced20cc-e333-4d4f-b22a-a902e02d9d9b",
-          "BackgroundColor": "0.33333,0.46275,0.52157,1",
-          "ClearFlags": "All",
-          "FieldOfView": 90,
-          "IsMainCamera": true,
-          "Orthographic": false,
-          "OrthographicHeight": 1204,
-          "Priority": 1,
-          "RenderExcludeTags": "",
-          "RenderTags": "",
-          "TargetEye": "None",
-          "Viewport": "0,0,1,1",
-          "ZFar": 10000,
-          "ZNear": 5
-        },
-        {
-          "__type": "Sandbox.Bloom",
-          "__guid": "26b899ea-47a8-44f3-a7a8-9ed32f9053cd",
-          "BloomColor": {
-            "color": [
-              {
-                "c": "1,1,1,1"
-              },
-              {
-                "t": 1,
-                "c": "1,1,1,1"
-              }
-            ],
-            "alpha": []
-          },
-          "BloomCurve": [
-            {
-              "y": 0.5
-            },
-            {
-              "x": 1,
-              "y": 1
-            }
-          ],
-          "Mode": "Blur",
-          "Strength": 0.15,
-          "Threshold": 0.5,
-          "ThresholdWidth": 0
-        },
-        {
-          "__type": "Sandbox.AmbientOcclusion",
-          "__guid": "1c089b08-3b0b-47b1-b023-815dcd493aac",
-          "FalloffDistance": 1,
-          "Intensity": 8,
-          "Quality": "High",
-          "Radius": 32
-        },
-        {
-          "__type": "Sandbox.Tonemapping",
-          "__guid": "7d61b0e8-36ab-4920-81b8-0b15a6e592ce",
-          "__version": 1,
-          "AutoExposureEnabled": true,
-          "ExposureBias": 2,
-          "ExposureCompensation": 0,
-          "ExposureMethod": "RGB",
-          "MaximumExposure": 2.65,
-          "MinimumExposure": 1.7,
-          "Mode": "Legacy",
-          "Rate": 8.57
+          "__type": "Sandbox.SceneInformation",
+          "__guid": "6ff9c80c-3278-4f51-838d-0ad966eefbfa",
+          "Description": "",
+          "SceneTags": "",
+          "Title": "dead4leftmainrewrite"
         }
       ]
     },
@@ -98,83 +36,6 @@
         }
       ],
       "Children": []
-    },
-    {
-      "__guid": "370b46fc-d71f-4c32-985f-8e7c8de46441",
-      "Flags": 0,
-      "Name": "Manager",
-      "Enabled": true,
-      "NetworkMode": 1,
-      "Components": [
-        {
-          "__type": "GameSystem",
-          "__guid": "636af314-35f2-4a97-9dbb-bd94e367aece",
-          "PlayerPrefab": {
-            "_type": "gameobject",
-            "prefab": "prefabs/playerdead4left.prefab"
-          },
-          "SpawnPlayer": true,
-          "StartServer": true
-        }
-      ]
-    },
-    {
-      "__guid": "c14b0277-b3f8-4c93-9053-f40517c832f4",
-      "Flags": 0,
-      "Name": "NPC Spawner",
-      "Enabled": true,
-      "NetworkMode": 1,
-      "Components": [
-        {
-          "__type": "NPCSpawner",
-          "__guid": "9e6616e8-afef-4b9f-8e3e-33774a591e30",
-          "NPCPrefab": {
-            "_type": "gameobject",
-            "prefab": "prefabs/dead4leftzombie.prefab"
-          }
-        }
-      ]
-    },
-    {
-      "__guid": "59feaca6-fc52-4c39-84f2-7869b77b59da",
-      "Flags": 0,
-      "Name": "Screen",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.ScreenPanel",
-          "__guid": "8fa73357-1e8f-42ea-99ea-b96efa93f021",
-          "AutoScreenScale": true,
-          "Opacity": 1,
-          "Scale": 1,
-          "ScaleStrategy": "ConsistentHeight",
-          "ZIndex": 100
-        },
-        {
-          "__type": "HUD",
-          "__guid": "94e1ccd7-9b13-47da-8268-4c4f97416d5e"
-        },
-        {
-          "__type": "PauseMenu",
-          "__guid": "6507b932-898a-4877-9d85-de05e310ed0c",
-          "MenuScene": "scenes/dead4leftmenurewrite.scene"
-        }
-      ],
-      "Children": [
-        {
-          "__guid": "1f5c7aa6-9d46-481e-b0c1-bc3986bb0faa",
-          "Flags": 0,
-          "Name": "Chat",
-          "Enabled": true,
-          "NetworkMode": 1,
-          "Components": [
-            {
-              "__type": "Chat",
-              "__guid": "6755efce-72f9-42a8-89af-1e5183e054c6"
-            }
-          ]
-        }
-      ]
     }
   ],
   "SceneProperties": {
@@ -186,6 +47,9 @@
     "ThreadedAnimation": true,
     "TimeScale": 1,
     "UseFixedUpdate": true,
+    "Metadata": {
+      "Title": "dead4leftmainrewrite"
+    },
     "NavMesh": {
       "Enabled": true,
       "IncludeStaticBodies": true,
@@ -199,9 +63,9 @@
       "IncludedBodies": ""
     }
   },
+  "ResourceVersion": 2,
   "Title": "dead4leftmainrewrite",
-  "Description": "",
-  "ResourceVersion": 1,
+  "Description": null,
   "__references": [],
-  "__version": 1
+  "__version": 2
 }

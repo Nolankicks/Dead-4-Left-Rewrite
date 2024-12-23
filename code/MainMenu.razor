@@ -244,11 +244,43 @@
 		return CurrentSortBy == sortBy;
 	}
 
-	public void OnSelect( Package package )
+	public async void OnSelect( Package package )
 	{
-		LaunchArguments.Map = package.FullIdent;
+		if ( package is null )
+			return;
 
-		Game.ActiveScene?.Load( MainScene );
+		Log.Info( $"Loading package {package?.FullIdent}" );
+
+		//I have to fetch it again?
+		var pkg = await Package.Fetch( package?.FullIdent, false );
+
+		if ( pkg is null )
+		{
+			Scene?.LoadFromFile( "scenes/dead4leftmainrewrite.scene" );
+			Log.Info( $"Failed to load package {package?.FullIdent}" );
+			return;
+		}
+
+		await pkg?.MountAsync();
+
+		if ( pkg?.GetMeta<string>( "PrimaryAsset" )?.EndsWith( ".scene" ) ?? false )
+		{
+			var sceneFile = pkg?.GetMeta<SceneFile>( "PrimaryAsset" );
+
+			if ( sceneFile is null )
+			{
+				Scene?.LoadFromFile( "scenes/dead4leftmainrewrite.scene" );
+				return;
+			}
+
+			Scene?.Load( sceneFile );
+		}
+		else if ( pkg?.GetMeta<string>( "PrimaryAsset" )?.EndsWith( ".vmap" ) ?? false )
+		{
+			LaunchArguments.Map = pkg?.FullIdent;
+
+			Scene?.LoadFromFile( "scenes/dead4leftmainrewrite.scene" );
+		}
 	}
 
 	public void JoinLobby( LobbyInformation lobby )
