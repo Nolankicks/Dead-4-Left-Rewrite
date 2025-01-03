@@ -128,10 +128,7 @@ public sealed class NPC : Component, IGameEventHandler<PlayerDeath>, IGameEventH
 		if ( IsMoving || !Agent.IsValid() || WishMove || Stop )
 			return;
 
-		var randomPoint = Scene.NavMesh.GetRandomPoint().GetValueOrDefault();
-
-		if ( randomPoint == Vector3.Zero )
-			return;
+		var randomPoint = Scene.NavMesh?.GetRandomPoint() ?? Vector3.Zero;
 
 		MoveTo( randomPoint );
 	}
