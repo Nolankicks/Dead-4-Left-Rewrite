@@ -23,7 +23,7 @@ public sealed class NPCSpawner : Component
 		if ( Scene.NavMesh is null )
 			return;
 
-		var randomPoint = Scene.NavMesh?.GetRandomPoint();
+		var randomPoint = Scene?.NavMesh?.GetRandomPoint();
 
 		if ( randomPoint is null )
 			return;
